@@ -750,6 +750,39 @@
   }
   footer .footer-links a:hover { color: white; }
 
+  /* ── LANGUAGE TOGGLE ── */
+  .lang-toggle {
+    position: fixed; top: 20px; right: 5%;
+    background: rgba(13,31,60,0.95);
+    border: 1px solid rgba(74,148,255,0.3);
+    border-radius: 50px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.65);
+    z-index: 200;
+    display: flex; gap: 0.5rem;
+  }
+
+  .lang-toggle button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: all var(--transition);
+  }
+
+  .lang-toggle button.active {
+    background: var(--blue);
+    color: white;
+  }
+
+  .lang-toggle button:hover:not(.active) {
+    color: white;
+  }
+
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
@@ -782,15 +815,21 @@
 </head>
 <body>
 
+<!-- LANGUAGE TOGGLE -->
+<div class="lang-toggle">
+  <button class="lang-btn active" data-lang="en">EN</button>
+  <button class="lang-btn" data-lang="es">ES</button>
+</div>
+
 <!-- NAV -->
 <nav>
   <div class="nav-logo"><svg width="38" height="38" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="40" height="40" rx="8" fill="#1a6ff0"/><rect x="14" y="14" width="32" height="32" rx="5" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><line x1="30" y1="10" x2="30" y2="4" stroke="#4a94ff" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="50" x2="30" y2="56" stroke="#4a94ff" stroke-width="2.5" stroke-linecap="round"/><line x1="10" y1="30" x2="4" y2="30" stroke="#4a94ff" stroke-width="2.5" stroke-linecap="round"/><line x1="50" y1="30" x2="56" y2="30" stroke="#4a94ff" stroke-width="2.5" stroke-linecap="round"/><circle cx="30" cy="4" r="3" fill="#4a94ff"/><circle cx="30" cy="56" r="3" fill="#4a94ff"/><circle cx="4" cy="30" r="3" fill="#4a94ff"/><circle cx="56" cy="30" r="3" fill="#4a94ff"/><text x="30" y="37" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="22" fill="white">S</text></svg><span class="wordmark">Sebby<span>IT</span> Consulting</span></div>"
   <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#portfolio">Work</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    <li><a href="#services" data-i18n="navServices">Services</a></li>
+    <li><a href="#about" data-i18n="navAbout">About</a></li>
+    <li><a href="#portfolio" data-i18n="navWork">Work</a></li>
+    <li><a href="#faq" data-i18n="navFaq">FAQ</a></li>
+    <li><a href="#contact" class="nav-cta" data-i18n="navGetInTouch">Get in Touch</a></li>
   </ul>
 </nav>
 
@@ -798,12 +837,12 @@
 <section class="hero">
   <div class="hero-dots"></div>
   <div class="hero-inner">
-    <div class="hero-badge">Miami-Based · Available Locally & Remotely</div>
-    <h1>Tech Made <em>Simple.</em><br>Results Made Real.</h1>
-    <p>Whether you're a small business owner, a creative, a professional, or just someone who needs tech to actually work — Sebby's got you covered.</p>
+    <div class="hero-badge" data-i18n="heroBadge">Miami-Based · Available Locally & Remotely</div>
+    <h1 data-i18n="heroH1">Tech Made <em>Simple.</em><br>Results Made Real.</h1>
+    <p data-i18n="heroP">Whether you're a small business owner, a creative, a professional, or just someone who needs tech to actually work — Sebby's got you covered.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Get a Free Consultation <span>→</span></a>
-      <a href="#services" class="btn-secondary">See what I do</a>
+      <a href="#contact" class="btn-primary"><span data-i18n="heroBtn">Get a Free Consultation</span> <span>→</span></a>
+      <a href="#services" class="btn-secondary" data-i18n="heroBtn2">See what I do</a>
     </div>
     <div class="hero-stats">
       <div class="stat-item">
@@ -825,46 +864,46 @@
 <!-- SERVICES -->
 <section class="services" id="services">
   <div class="services-header fade-up">
-    <span class="section-label">What I Can Help With</span>
-    <h2 class="section-title">One person. Four superpowers.</h2>
-    <p class="section-sub">No long onboarding, no confusing quotes. Just straightforward help from someone who knows what they're doing.</p>
+    <span class="section-label" data-i18n="servicesLabel">What I Can Help With</span>
+    <h2 class="section-title" data-i18n="servicesTitle">One person. Four superpowers.</h2>
+    <p class="section-sub" data-i18n="servicesSub">No long onboarding, no confusing quotes. Just straightforward help from someone who knows what they're doing.</p>
   </div>
   <div class="services-grid">
     <div class="service-card fade-up">
       <div class="service-icon">🖥️</div>
-      <h3>IT Support & Troubleshooting</h3>
-      <p>Tech acting up? I'll fix it. From setting up new devices and securing your network to solving the random issues that slow your day down — I make sure your tech works the way it's supposed to.</p>
-      <span class="service-tag">Homes · Offices · Small Businesses</span>
+      <h3 data-i18n="service1Title">IT Support & Troubleshooting</h3>
+      <p data-i18n="service1Desc">Tech acting up? I'll fix it. From setting up new devices and securing your network to solving the random issues that slow your day down — I make sure your tech works the way it's supposed to.</p>
+      <span class="service-tag" data-i18n="service1Tag">Homes · Offices · Small Businesses</span>
     </div>
     <div class="service-card fade-up">
       <div class="service-icon">🎬</div>
-      <h3>Content Production</h3>
-      <p>Got something to say? I'll help you say it well. From recording and editing to post-production and publishing, I handle the full pipeline so you can focus on your message.</p>
-      <span class="service-tag">YouTube · Podcasts · Social Media</span>
+      <h3 data-i18n="service2Title">Content Production</h3>
+      <p data-i18n="service2Desc">Got something to say? I'll help you say it well. From recording and editing to post-production and publishing, I handle the full pipeline so you can focus on your message.</p>
+      <span class="service-tag" data-i18n="service2Tag">YouTube · Podcasts · Social Media</span>
     </div>
     <div class="service-card fade-up">
       <div class="service-icon">🌐</div>
-      <h3>Website Design & Support</h3>
-      <p>Your website is your first impression — make it count. I build clean, professional, easy-to-navigate websites and provide ongoing support from small tweaks to full overhauls.</p>
-      <span class="service-tag">Businesses · Freelancers · Professionals</span>
+      <h3 data-i18n="service3Title">Website Design & Support</h3>
+      <p data-i18n="service3Desc">Your website is your first impression — make it count. I build clean, professional, easy-to-navigate websites and provide ongoing support from small tweaks to full overhauls.</p>
+      <span class="service-tag" data-i18n="service3Tag">Businesses · Freelancers · Professionals</span>
     </div>
     <div class="service-card fade-up">
       <div class="service-icon">📊</div>
-      <h3>Business Consulting & Strategy</h3>
-      <p>Not sure where your business is headed? Let's figure it out together. I help you plan, organize, and grow — from competitor analysis and action plans to systems that keep things running smoothly.</p>
-      <span class="service-tag">Small Businesses · Professional Services</span>
+      <h3 data-i18n="service4Title">Business Consulting & Strategy</h3>
+      <p data-i18n="service4Desc">Not sure where your business is headed? Let's figure it out together. I help you plan, organize, and grow — from competitor analysis and action plans to systems that keep things running smoothly.</p>
+      <span class="service-tag" data-i18n="service4Tag">Small Businesses · Professional Services</span>
     </div>
     <div class="service-card fade-up">
       <div class="service-icon">🏠</div>
-      <h3>Smart Home Installation</h3>
-      <p>Upgrade your home with seamless smart tech integration. From security systems to automated lighting and entertainment — I set it all up so it just works.</p>
-      <span class="service-tag">Homeowners · Families · Renters</span>
+      <h3 data-i18n="service5Title">Smart Home Installation</h3>
+      <p data-i18n="service5Desc">Upgrade your home with seamless smart tech integration. From security systems to automated lighting and entertainment — I set it all up so it just works.</p>
+      <span class="service-tag" data-i18n="service5Tag">Homeowners · Families · Renters</span>
     </div>
     <div class="service-card fade-up">
       <div class="service-icon">📼</div>
-      <h3>Analog Media Conversion</h3>
-      <p>Got old VHS tapes, CDs, or legacy media collecting dust? I'll convert them to digital formats so your memories are preserved and easy to access for years to come.</p>
-      <span class="service-tag">Families · Businesses · Archives</span>
+      <h3 data-i18n="service6Title">Analog Media Conversion</h3>
+      <p data-i18n="service6Desc">Got old VHS tapes, CDs, or legacy media collecting dust? I'll convert them to digital formats so your memories are preserved and easy to access for years to come.</p>
+      <span class="service-tag" data-i18n="service6Tag">Families · Businesses · Archives</span>
     </div>
   </div>
 </section>
@@ -907,12 +946,12 @@
       </div>
     </div>
     <div class="about-content fade-up">
-      <span class="section-label">About Me</span>
-      <h2 class="section-title">Hey, I'm Sebby.</h2>
-      <p>I'm a Miami-based tech consultant who genuinely loves helping people solve problems. Whether it's untangling a tech headache, building a YouTube channel from scratch, designing a website, or mapping out a business growth plan — I bring the same energy to every project: <strong>practical, personal, and results-focused.</strong></p>
-      <p>I've worked with law firms, content creators, healthcare professionals, and everyday families. No matter the client, my goal is always the same: make things work better for <strong>you</strong>, without making it complicated.</p>
-      <p>I'm not a big agency. I'm one person who's genuinely invested in seeing you succeed — and that means you always know exactly who you're working with.</p>
-      <div class="about-location">
+      <span class="section-label" data-i18n="aboutLabel">About Me</span>
+      <h2 class="section-title" data-i18n="aboutTitle">Hey, I'm Sebby.</h2>
+      <p data-i18n="aboutP1">I'm a Miami-based tech consultant who genuinely loves helping people solve problems. Whether it's untangling a tech headache, building a YouTube channel from scratch, designing a website, or mapping out a business growth plan — I bring the same energy to every project: <strong>practical, personal, and results-focused.</strong></p>
+      <p data-i18n="aboutP2">I've worked with law firms, content creators, healthcare professionals, and everyday families. No matter the client, my goal is always the same: make things work better for <strong>you</strong>, without making it complicated.</p>
+      <p data-i18n="aboutP3">I'm not a big agency. I'm one person who's genuinely invested in seeing you succeed — and that means you always know exactly who you're working with.</p>
+      <div class="about-location" data-i18n="aboutLocation">
         📍 Miami, FL · Local & Remote
       </div>
     </div>
@@ -922,9 +961,9 @@
 <!-- PORTFOLIO -->
 <section class="portfolio" id="portfolio">
   <div class="portfolio-header fade-up">
-    <span class="section-label">Past Work</span>
-    <h2 class="section-title">A few things I've built.</h2>
-    <p class="section-sub">Real projects for real clients. Here's a taste of what working with me looks like.</p>
+    <span class="section-label" data-i18n="portfolioLabel">Past Work</span>
+    <h2 class="section-title" data-i18n="portfolioTitle">A few things I've built.</h2>
+    <p class="section-sub" data-i18n="portfolioSub">Real projects for real clients. Here's a taste of what working with me looks like.</p>
   </div>
   <div class="portfolio-grid">
     <div class="portfolio-card fade-up">
@@ -958,57 +997,57 @@
 <!-- FAQ -->
 <section class="faq" id="faq">
   <div class="faq-header fade-up">
-    <span class="section-label">Common Questions</span>
-    <h2 class="section-title">Got questions? I've got answers.</h2>
+    <span class="section-label" data-i18n="faqLabel">Common Questions</span>
+    <h2 class="section-title" data-i18n="faqTitle">Got questions? I've got answers.</h2>
   </div>
   <div class="faq-list">
     <div class="faq-item fade-up">
       <div class="faq-question">
-        <span>How quickly will you respond to my inquiry?</span>
+        <span data-i18n="faq1Q">How quickly will you respond to my inquiry?</span>
         <span class="faq-toggle">▼</span>
       </div>
       <div class="faq-answer">
-        <p>I aim to get back to you within 1-2 business days. Since I work with each client personally, I make sure to give your inquiry the attention it deserves.</p>
+        <p data-i18n="faq1A">I aim to get back to you within 1-2 business days. Since I work with each client personally, I make sure to give your inquiry the attention it deserves.</p>
       </div>
     </div>
 
     <div class="faq-item fade-up">
       <div class="faq-question">
-        <span>How long will my project take?</span>
+        <span data-i18n="faq2Q">How long will my project take?</span>
         <span class="faq-toggle">▼</span>
       </div>
       <div class="faq-answer">
-        <p>Timeline depends entirely on the scope of your project. A simple website tweak might take days, while a full content production pipeline could take weeks. During our initial consultation, I'll give you a realistic estimate based on what you need.</p>
+        <p data-i18n="faq2A">Timeline depends entirely on the scope of your project. A simple website tweak might take days, while a full content production pipeline could take weeks. During our initial consultation, I'll give you a realistic estimate based on what you need.</p>
       </div>
     </div>
 
     <div class="faq-item fade-up">
       <div class="faq-question">
-        <span>Do you work remotely or locally in Miami?</span>
+        <span data-i18n="faq3Q">Do you work remotely or locally in Miami?</span>
         <span class="faq-toggle">▼</span>
       </div>
       <div class="faq-answer">
-        <p>I work both ways. Right now, I'm primarily taking on remote clients, but I'm available for local projects in the Miami area when needed. Either way, you get the same level of personal attention and quality work.</p>
+        <p data-i18n="faq3A">I work both ways. Right now, I'm primarily taking on remote clients, but I'm available for local projects in the Miami area when needed. Either way, you get the same level of personal attention and quality work.</p>
       </div>
     </div>
 
     <div class="faq-item fade-up">
       <div class="faq-question">
-        <span>How is pricing structured?</span>
+        <span data-i18n="faq4Q">How is pricing structured?</span>
         <span class="faq-toggle">▼</span>
       </div>
       <div class="faq-answer">
-        <p>Pricing depends on the specific service and scope of work. Some projects are flat-rate, others are hourly. The best way to find out what your project will cost is to reach out and tell me what you're working on — I'll give you a clear, no-surprise quote.</p>
+        <p data-i18n="faq4A">Pricing depends on the specific service and scope of work. Some projects are flat-rate, others are hourly. The best way to find out what your project will cost is to reach out and tell me what you're working on — I'll give you a clear, no-surprise quote.</p>
       </div>
     </div>
 
     <div class="faq-item fade-up">
       <div class="faq-question">
-        <span>How do I get started?</span>
+        <span data-i18n="faq5Q">How do I get started?</span>
         <span class="faq-toggle">▼</span>
       </div>
       <div class="faq-answer">
-        <p>Just fill out the form at the bottom of this page or send me an email at <a href="mailto:info@sebbyservices.com" style="color: var(--blue); text-decoration: underline;">info@sebbyservices.com</a>. Tell me what you're working on, and we'll set up a time to chat about how I can help.</p>
+        <p data-i18n="faq5A">Just fill out the form at the bottom of this page or send me an email at <a href="mailto:info@sebbyservices.com" style="color: var(--blue); text-decoration: underline;">info@sebbyservices.com</a>. Tell me what you're working on, and we'll set up a time to chat about how I can help.</p>
       </div>
     </div>
   </div>
@@ -1018,40 +1057,40 @@
 <section class="contact" id="contact">
   <div class="contact-inner">
     <div class="contact-header fade-up">
-      <span class="section-label">Get In Touch</span>
-      <h2 class="section-title">Ready to get started?</h2>
-      <p class="section-sub">Fill out the form below or message me directly on WhatsApp. I'll get back to you within one business day.</p>
+      <span class="section-label" data-i18n="contactLabel">Get In Touch</span>
+      <h2 class="section-title" data-i18n="contactTitle">Ready to get started?</h2>
+      <p class="section-sub" data-i18n="contactSub">Fill out the form below or message me directly on WhatsApp. I'll get back to you within one business day.</p>
       <div class="contact-methods fade-up" style="margin-top: 1.5rem;">
-        <a href="https://wa.me/17865431417?text=Hi%20Sebby%21%20I%20need%20help%20with..." class="contact-method-btn">💬 Message on WhatsApp</a>
+        <a href="https://wa.me/17865431417?text=Hi%20Sebby%21%20I%20need%20help%20with..." class="contact-method-btn" data-i18n="contactBtn">💬 Message on WhatsApp</a>
       </div>
     </div>
     <form class="contact-form fade-up" id="contactForm" method="POST" action="https://formspree.io/f/mdayzeek">
       <div class="form-row">
         <div class="form-field">
-          <label>Your Name</label>
-          <input type="text" name="name" placeholder="First Last" required />
+          <label data-i18n="formNameLabel">Your Name</label>
+          <input type="text" name="name" data-i18n-placeholder="formNamePlaceholder" placeholder="First Last" required />
         </div>
         <div class="form-field">
-          <label>Email Address</label>
-          <input type="email" name="email" placeholder="you@example.com" required />
+          <label data-i18n="formEmailLabel">Email Address</label>
+          <input type="email" name="email" data-i18n-placeholder="formEmailPlaceholder" placeholder="you@example.com" required />
         </div>
       </div>
       <div class="form-field">
-        <label>What do you need help with?</label>
+        <label data-i18n="formServiceLabel">What do you need help with?</label>
         <select name="service" required>
-          <option value="">Select a service...</option>
-          <option>IT Support / Troubleshooting</option>
-          <option>Content Production (Video/Audio)</option>
-          <option>Website Design</option>
-          <option>Business Consulting & Strategy</option>
-          <option>Something else</option>
+          <option data-i18n-value="formServiceSelect">Select a service...</option>
+          <option data-i18n-value="formService1">IT Support / Troubleshooting</option>
+          <option data-i18n-value="formService2">Content Production (Video/Audio)</option>
+          <option data-i18n-value="formService3">Website Design</option>
+          <option data-i18n-value="formService4">Business Consulting & Strategy</option>
+          <option data-i18n-value="formService5">Something else</option>
         </select>
       </div>
       <div class="form-field">
-        <label>Tell me more</label>
-        <textarea name="message" placeholder="What are you working on? What's the challenge you're facing?" required></textarea>
+        <label data-i18n="formMessageLabel">Tell me more</label>
+        <textarea name="message" data-i18n-placeholder="formMessagePlaceholder" placeholder="What are you working on? What's the challenge you're facing?" required></textarea>
       </div>
-      <button type="submit" class="btn-submit">Send It Over →</button>
+      <button type="submit" class="btn-submit" data-i18n="formSubmit">Send It Over →</button>
     </form>
   </div>
 </section>
@@ -1074,15 +1113,213 @@
     </svg>Sebby<span>IT</span> Consulting
   </div>
   <ul class="footer-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#portfolio">Work</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#services" data-i18n="navServices">Services</a></li>
+    <li><a href="#about" data-i18n="navAbout">About</a></li>
+    <li><a href="#portfolio" data-i18n="navWork">Work</a></li>
+    <li><a href="#contact" data-i18n="navGetInTouch">Contact</a></li>
   </ul>
-  <p>© 2026 SebbyIT Consulting, Corp. · <a href="mailto:info@sebbyservices.com" style="color:rgba(255,255,255,0.45);">info@sebbyservices.com</a> · Miami, FL</p>
+  <p><span data-i18n="footerCopyright">© 2026 SebbyIT Consulting, Corp.</span> · <a href="mailto:info@sebbyservices.com" style="color:rgba(255,255,255,0.45);">info@sebbyservices.com</a> · Miami, FL</p>
 </footer>
 
 <script>
+  const translations = {
+    en: {
+      navServices: "Services",
+      navAbout: "About",
+      navWork: "Work",
+      navFaq: "FAQ",
+      navGetInTouch: "Get in Touch",
+      heroBadge: "Miami-Based · Available Locally & Remotely",
+      heroH1: "Tech Made Simple. Results Made Real.",
+      heroP: "Whether you're a small business owner, a creative, a professional, or just someone who needs tech to actually work — Sebby's got you covered.",
+      heroBtn: "Get a Free Consultation",
+      heroBtn2: "See what I do",
+      servicesLabel: "What I Can Help With",
+      servicesTitle: "One person. Four superpowers.",
+      servicesSub: "No long onboarding, no confusing quotes. Just straightforward help from someone who knows what they're doing.",
+      service1Title: "IT Support & Troubleshooting",
+      service1Desc: "Tech acting up? I'll fix it. From setting up new devices and securing your network to solving the random issues that slow your day down — I make sure your tech works the way it's supposed to.",
+      service1Tag: "Homes · Offices · Small Businesses",
+      service2Title: "Content Production",
+      service2Desc: "Got something to say? I'll help you say it well. From recording and editing to post-production and publishing, I handle the full pipeline so you can focus on your message.",
+      service2Tag: "YouTube · Podcasts · Social Media",
+      service3Title: "Website Design & Support",
+      service3Desc: "Your website is your first impression — make it count. I build clean, professional, easy-to-navigate websites and provide ongoing support from small tweaks to full overhauls.",
+      service3Tag: "Businesses · Freelancers · Professionals",
+      service4Title: "Business Consulting & Strategy",
+      service4Desc: "Not sure where your business is headed? Let's figure it out together. I help you plan, organize, and grow — from competitor analysis and action plans to systems that keep things running smoothly.",
+      service4Tag: "Small Businesses · Professional Services",
+      service5Title: "Smart Home Installation",
+      service5Desc: "Upgrade your home with seamless smart tech integration. From security systems to automated lighting and entertainment — I set it all up so it just works.",
+      service5Tag: "Homeowners · Families · Renters",
+      service6Title: "Analog Media Conversion",
+      service6Desc: "Got old VHS tapes, CDs, or legacy media collecting dust? I'll convert them to digital formats so your memories are preserved and easy to access for years to come.",
+      service6Tag: "Families · Businesses · Archives",
+      aboutLabel: "About Me",
+      aboutTitle: "Hey, I'm Sebby.",
+      aboutP1: "I'm a Miami-based tech consultant who genuinely loves helping people solve problems. Whether it's untangling a tech headache, building a YouTube channel from scratch, designing a website, or mapping out a business growth plan — I bring the same energy to every project: practical, personal, and results-focused.",
+      aboutP2: "I've worked with law firms, content creators, healthcare professionals, and everyday families. No matter the client, my goal is always the same: make things work better for you, without making it complicated.",
+      aboutP3: "I'm not a big agency. I'm one person who's genuinely invested in seeing you succeed — and that means you always know exactly who you're working with.",
+      aboutLocation: "📍 Miami, FL · Local & Remote",
+      aboutRole: "IT Consultant & Tech Problem-Solver",
+      portfolioLabel: "Past Work",
+      portfolioTitle: "A few things I've built.",
+      portfolioSub: "Real projects for real clients. Here's a taste of what working with me looks like.",
+      faqLabel: "Common Questions",
+      faqTitle: "Got questions? I've got answers.",
+      faq1Q: "How quickly will you respond to my inquiry?",
+      faq1A: "I aim to get back to you within 1-2 business days. Since I work with each client personally, I make sure to give your inquiry the attention it deserves.",
+      faq2Q: "How long will my project take?",
+      faq2A: "Timeline depends entirely on the scope of your project. A simple website tweak might take days, while a full content production pipeline could take weeks. During our initial consultation, I'll give you a realistic estimate based on what you need.",
+      faq3Q: "Do you work remotely or locally in Miami?",
+      faq3A: "I work both ways. Right now, I'm primarily taking on remote clients, but I'm available for local projects in the Miami area when needed. Either way, you get the same level of personal attention and quality work.",
+      faq4Q: "How is pricing structured?",
+      faq4A: "Pricing depends on the specific service and scope of work. Some projects are flat-rate, others are hourly. The best way to find out what your project will cost is to reach out and tell me what you're working on — I'll give you a clear, no-surprise quote.",
+      faq5Q: "How do I get started?",
+      faq5A: "Just fill out the form at the bottom of this page or send me an email at info@sebbyservices.com. Tell me what you're working on, and we'll set up a time to chat about how I can help.",
+      contactLabel: "Get In Touch",
+      contactTitle: "Ready to get started?",
+      contactSub: "Fill out the form below or message me directly on WhatsApp. I'll get back to you within one business day.",
+      contactBtn: "Message on WhatsApp",
+      formNameLabel: "Your Name",
+      formNamePlaceholder: "First Last",
+      formEmailLabel: "Email Address",
+      formEmailPlaceholder: "you@example.com",
+      formServiceLabel: "What do you need help with?",
+      formServiceSelect: "Select a service...",
+      formService1: "IT Support / Troubleshooting",
+      formService2: "Content Production (Video/Audio)",
+      formService3: "Website Design",
+      formService4: "Business Consulting & Strategy",
+      formService5: "Something else",
+      formMessageLabel: "Tell me more",
+      formMessagePlaceholder: "What are you working on? What's the challenge you're facing?",
+      formSubmit: "Send It Over →",
+      footerEmail: "info@sebbyservices.com",
+      footerCopyright: "© 2026 SebbyIT Consulting, Corp.",
+      skillsLabel: "IT Support",
+    },
+    es: {
+      navServices: "Servicios",
+      navAbout: "Acerca de",
+      navWork: "Trabajos",
+      navFaq: "Preguntas",
+      navGetInTouch: "Contacto",
+      heroBadge: "Basado en Miami · Disponible Local y Remotamente",
+      heroH1: "Tecnología Simple. Resultados Reales.",
+      heroP: "Ya seas dueño de un pequeño negocio, creativo, profesional, o simplemente alguien que necesita que la tecnología funcione — Sebby te tiene cubierto.",
+      heroBtn: "Obtén una Consulta Gratis",
+      heroBtn2: "Ver qué hago",
+      servicesLabel: "¿En Qué Puedo Ayudarte?",
+      servicesTitle: "Una persona. Cuatro superpoderes.",
+      servicesSub: "Sin incorporación larga, sin cotizaciones confusas. Solo ayuda directa de alguien que sabe lo que está haciendo.",
+      service1Title: "Soporte de TI y Solución de Problemas",
+      service1Desc: "¿La tecnología actuando de forma extraña? La arreglaré. Desde configurar nuevos dispositivos y asegurar tu red hasta resolver los problemas aleatorios que ralentizan tu día — me aseguro de que tu tecnología funcione como se supone.",
+      service1Tag: "Hogares · Oficinas · Pequeños Negocios",
+      service2Title: "Producción de Contenido",
+      service2Desc: "¿Tienes algo que decir? Te ayudaré a decirlo bien. Desde grabar y editar hasta postproducción y publicación, manejo todo el proceso para que te enfoques en tu mensaje.",
+      service2Tag: "YouTube · Podcasts · Redes Sociales",
+      service3Title: "Diseño de Sitios Web y Soporte",
+      service3Desc: "Tu sitio web es tu primera impresión — que sea importante. Construyo sitios web limpios, profesionales y fáciles de navegar y proporciono apoyo continuo desde pequeños ajustes hasta overhauls completos.",
+      service3Tag: "Negocios · Freelancers · Profesionales",
+      service4Title: "Consultoría Empresarial y Estrategia",
+      service4Desc: "¿No estás seguro de hacia dónde se dirige tu negocio? Averigüémoslo juntos. Te ayudo a planificar, organizar y crecer — desde análisis de competencia y planes de acción hasta sistemas que mantienen las cosas funcionando sin problemas.",
+      service4Tag: "Pequeños Negocios · Servicios Profesionales",
+      service5Title: "Instalación de Hogares Inteligentes",
+      service5Desc: "Actualiza tu hogar con integración de tecnología inteligente sin fisuras. Desde sistemas de seguridad hasta iluminación automatizada y entretenimiento — lo configuro todo para que simplemente funcione.",
+      service5Tag: "Propietarios · Familias · Inquilinos",
+      service6Title: "Conversión de Medios Analógicos",
+      service6Desc: "¿Tienes cintas VHS viejas, CDs o medios heredados acumulando polvo? Las convertiré a formatos digitales para que tus recuerdos se conserven y sean fáciles de acceder durante años.",
+      service6Tag: "Familias · Negocios · Archivos",
+      aboutLabel: "Acerca de Mí",
+      aboutTitle: "Hola, soy Sebby.",
+      aboutP1: "Soy un consultor de tecnología basado en Miami que genuinamente ama ayudar a las personas a resolver problemas. Ya sea desentrañar un dolor de cabeza tecnológico, construir un canal de YouTube desde cero, diseñar un sitio web o mapear un plan de crecimiento empresarial — traigo la misma energía a cada proyecto: práctico, personal y enfocado en resultados.",
+      aboutP2: "He trabajado con bufetes de abogados, creadores de contenido, profesionales de la salud y familias cotidianas. No importa el cliente, mi objetivo es siempre el mismo: hacer que las cosas funcionen mejor para ti, sin complicaciones.",
+      aboutP3: "No soy una gran agencia. Soy una persona genuinamente invertida en verte tener éxito — y eso significa que siempre sabes exactamente con quién estás trabajando.",
+      aboutLocation: "📍 Miami, FL · Local y Remoto",
+      aboutRole: "Consultor de TI y Solucionador de Problemas Tecnológicos",
+      portfolioLabel: "Trabajos Anteriores",
+      portfolioTitle: "Algunas cosas que he construido.",
+      portfolioSub: "Proyectos reales para clientes reales. Aquí hay una muestra de cómo es trabajar conmigo.",
+      faqLabel: "Preguntas Frecuentes",
+      faqTitle: "¿Tienes preguntas? Tengo respuestas.",
+      faq1Q: "¿Qué tan rápido responderás a mi consulta?",
+      faq1A: "Intento responder dentro de 1-2 días hábiles. Como trabajo con cada cliente personalmente, me aseguro de darle a tu consulta la atención que merece.",
+      faq2Q: "¿Cuánto tiempo tomará mi proyecto?",
+      faq2A: "El cronograma depende completamente del alcance de tu proyecto. Un ajuste simple de sitio web podría tomar días, mientras que un pipeline completo de producción de contenido podría tomar semanas. Durante nuestra consulta inicial, te daré una estimación realista basada en lo que necesitas.",
+      faq3Q: "¿Trabajas remotamente o localmente en Miami?",
+      faq3A: "Trabajo de ambas maneras. En este momento, principalmente estoy tomando clientes remotos, pero estoy disponible para proyectos locales en el área de Miami cuando sea necesario. De cualquier manera, obtienes el mismo nivel de atención personal y trabajo de calidad.",
+      faq4Q: "¿Cómo se estructura el precio?",
+      faq4A: "El precio depende del servicio específico y el alcance del trabajo. Algunos proyectos tienen tarifa plana, otros son por hora. La mejor manera de saber qué costará tu proyecto es comunicarte conmigo y decirme en qué estás trabajando — te daré una cotización clara y sin sorpresas.",
+      faq5Q: "¿Cómo empiezo?",
+      faq5A: "Simplemente completa el formulario al final de esta página o envíame un correo electrónico a info@sebbyservices.com. Cuéntame en qué estás trabajando y estableceremos un tiempo para hablar sobre cómo puedo ayudarte.",
+      contactLabel: "Ponte en Contacto",
+      contactTitle: "¿Listo para empezar?",
+      contactSub: "Completa el formulario a continuación o envíame un mensaje directo en WhatsApp. Te responderé en uno o dos días hábiles.",
+      contactBtn: "Mensaje en WhatsApp",
+      formNameLabel: "Tu Nombre",
+      formNamePlaceholder: "Nombre y Apellido",
+      formEmailLabel: "Dirección de Correo",
+      formEmailPlaceholder: "tu@ejemplo.com",
+      formServiceLabel: "¿Con qué necesitas ayuda?",
+      formServiceSelect: "Selecciona un servicio...",
+      formService1: "Soporte de TI / Solución de Problemas",
+      formService2: "Producción de Contenido (Video/Audio)",
+      formService3: "Diseño de Sitios Web",
+      formService4: "Consultoría Empresarial y Estrategia",
+      formService5: "Algo más",
+      formMessageLabel: "Cuéntame más",
+      formMessagePlaceholder: "¿En qué estás trabajando? ¿Cuál es el desafío al que te enfrentas?",
+      formSubmit: "Envíalo →",
+      footerEmail: "info@sebbyservices.com",
+      footerCopyright: "© 2026 SebbyIT Consulting, Corp.",
+      skillsLabel: "Soporte de TI",
+    }
+  };
+
+  let currentLang = localStorage.getItem('siteLang') || 'en';
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('siteLang', lang);
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (translations[lang][key]) {
+        el.placeholder = translations[lang][key];
+      }
+    });
+
+    document.querySelectorAll('[data-i18n-value]').forEach(el => {
+      const key = el.getAttribute('data-i18n-value');
+      if (translations[lang][key]) {
+        el.value = translations[lang][key];
+      }
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.getAttribute('data-lang') === lang) {
+        btn.classList.add('active');
+      }
+    });
+
+    document.documentElement.lang = lang;
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+  });
+
+  setLanguage(currentLang);
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
