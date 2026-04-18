@@ -623,6 +623,73 @@
 
   .btn-submit:hover { background: #1259cc; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,111,240,0.4); }
 
+  /* ── FAQ ── */
+  .faq {
+    padding: 90px 5%;
+    background: var(--off-white);
+  }
+
+  .faq-header {
+    margin-bottom: 3rem;
+  }
+
+  .faq-list {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: var(--navy);
+    transition: all var(--transition);
+    user-select: none;
+  }
+
+  .faq-item:hover .faq-question {
+    background: var(--section-alt);
+  }
+
+  .faq-toggle {
+    font-size: 1.5rem;
+    transition: transform var(--transition);
+    display: inline-block;
+  }
+
+  .faq-item.open .faq-toggle {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition);
+    background: var(--section-alt);
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 500px;
+  }
+
+  .faq-answer p {
+    padding: 0 2rem 1.5rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
   /* ── FOOTER ── */
   footer {
     background: var(--navy-deep);
@@ -699,6 +766,7 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#portfolio">Work</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
   </ul>
 </nav>
@@ -864,6 +932,65 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq-header fade-up">
+    <span class="section-label">Common Questions</span>
+    <h2 class="section-title">Got questions? I've got answers.</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item fade-up">
+      <div class="faq-question">
+        <span>How quickly will you respond to my inquiry?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>I aim to get back to you within 1-2 business days. Since I work with each client personally, I make sure to give your inquiry the attention it deserves.</p>
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question">
+        <span>How long will my project take?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>Timeline depends entirely on the scope of your project. A simple website tweak might take days, while a full content production pipeline could take weeks. During our initial consultation, I'll give you a realistic estimate based on what you need.</p>
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question">
+        <span>Do you work remotely or locally in Miami?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>I work both ways. Right now, I'm primarily taking on remote clients, but I'm available for local projects in the Miami area when needed. Either way, you get the same level of personal attention and quality work.</p>
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question">
+        <span>How is pricing structured?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>Pricing depends on the specific service and scope of work. Some projects are flat-rate, others are hourly. The best way to find out what your project will cost is to reach out and tell me what you're working on — I'll give you a clear, no-surprise quote.</p>
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question">
+        <span>How do I get started?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>Just fill out the form at the bottom of this page or send me an email at <a href="mailto:info@sebbyservices.com" style="color: var(--blue); text-decoration: underline;">info@sebbyservices.com</a>. Tell me what you're working on, and we'll set up a time to chat about how I can help.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-inner">
@@ -940,6 +1067,13 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+      const item = question.parentElement;
+      item.classList.toggle('open');
+    });
+  });
 
   const form = document.getElementById('contactForm');
   if (form) {
