@@ -872,20 +872,20 @@
       <h2 class="section-title">Ready to get started?</h2>
       <p class="section-sub">Tell me what you're working on and I'll get back to you within one business day.</p>
     </div>
-    <form class="contact-form fade-up" onsubmit="handleSubmit(event)">
+    <form class="contact-form fade-up" id="contactForm" method="POST" action="https://formspree.io/f/mdayzeek">
       <div class="form-row">
         <div class="form-field">
           <label>Your Name</label>
-          <input type="text" placeholder="First Last" required />
+          <input type="text" name="name" placeholder="First Last" required />
         </div>
         <div class="form-field">
           <label>Email Address</label>
-          <input type="email" placeholder="you@example.com" required />
+          <input type="email" name="email" placeholder="you@example.com" required />
         </div>
       </div>
       <div class="form-field">
         <label>What do you need help with?</label>
-        <select>
+        <select name="service" required>
           <option value="">Select a service...</option>
           <option>IT Support / Troubleshooting</option>
           <option>Content Production (Video/Audio)</option>
@@ -896,7 +896,7 @@
       </div>
       <div class="form-field">
         <label>Tell me more</label>
-        <textarea placeholder="What are you working on? What's the challenge you're facing?"></textarea>
+        <textarea name="message" placeholder="What are you working on? What's the challenge you're facing?" required></textarea>
       </div>
       <button type="submit" class="btn-submit">Send It Over →</button>
     </form>
@@ -941,12 +941,36 @@
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('.btn-submit');
-    btn.textContent = 'Message sent! ✓';
-    btn.style.background = '#22c55e';
-    btn.disabled = true;
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = form.querySelector('.btn-submit');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          btn.textContent = 'Message sent! ✓';
+          btn.style.background = '#22c55e';
+          form.reset();
+        } else {
+          btn.textContent = 'Error sending message';
+          btn.style.background = '#ef4444';
+          btn.disabled = false;
+        }
+      })
+      .catch(error => {
+        btn.textContent = 'Error sending message';
+        btn.style.background = '#ef4444';
+        btn.disabled = false;
+      });
+    });
   }
 </script>
 
