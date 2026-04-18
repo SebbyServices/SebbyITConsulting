@@ -557,6 +557,29 @@
 
   .contact-header { margin-bottom: 2.5rem; }
 
+  .contact-methods {
+    display: flex; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap;
+  }
+
+  .contact-method-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 0.65rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all var(--transition);
+    display: inline-flex; align-items: center; gap: 8px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .contact-method-btn:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.3);
+  }
+
   .contact-form {
     display: flex; flex-direction: column; gap: 1rem;
   }
@@ -767,6 +790,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#portfolio">Work</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li><a href="tel:+17865431417" style="color: rgba(255,255,255,0.65); transition: color var(--transition);">+1 (786) 543-1417</a></li>
     <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
   </ul>
 </nav>
@@ -997,7 +1021,11 @@
     <div class="contact-header fade-up">
       <span class="section-label">Get In Touch</span>
       <h2 class="section-title">Ready to get started?</h2>
-      <p class="section-sub">Tell me what you're working on and I'll get back to you within one business day.</p>
+      <p class="section-sub">Tell me what you're working on and I'll get back to you within one business day. Or reach out directly:</p>
+      <div class="contact-methods fade-up" style="margin-top: 1.5rem;">
+        <a href="tel:+17865431417" class="contact-method-btn">📞 Call: +1 (786) 543-1417</a>
+        <a href="https://wa.me/17865431417?text=Hi%20Sebby%21%20I%20need%20help%20with..." class="contact-method-btn">💬 WhatsApp</a>
+      </div>
     </div>
     <form class="contact-form fade-up" id="contactForm" method="POST" action="https://formspree.io/f/mdayzeek">
       <div class="form-row">
