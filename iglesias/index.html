@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sebby IT Consulting, Corp. | Presencia Digital para Iglesias Católicas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>SebbyIT Church Solutions - Presencia Digital para Iglesias Católicas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,101 +12,22 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #1A1A1A;
-            --dark-char: #2C2C2C;
-            --accent: #00D4FF;
-            --accent-dark: #00A8CC;
-            --secondary: #F8F8F8;
-            --light: #F5F5F5;
-            --text-dark: #1A1A1A;
-            --text-light: #666666;
-            --cream: #FFF8F3;
-        }
-
         body {
-            font-family: 'Lora', serif;
-            background: var(--secondary);
-            color: var(--text-dark);
-            line-height: 1.7;
+            font-family: 'Montserrat', sans-serif;
+            background: #f8f6f1;
+            color: #2c2c2c;
+            line-height: 1.6;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
-        /* ===== SCROLL ANIMATIONS ===== */
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes glow-teal {
-            0%, 100% { 
-                box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-                border-color: var(--accent);
-            }
-            50% { 
-                box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
-                border-color: var(--accent);
-            }
-        }
-
-        /* ===== HEADER HERO ===== */
+        /* ===== HEADER ===== */
         header {
-            position: relative;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--dark-char) 50%, #0F0F0F 100%);
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
             color: white;
-            padding: 120px 40px;
+            padding: 60px 20px;
             text-align: center;
+            position: relative;
             overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
 
         header::before {
@@ -117,358 +38,296 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 168, 204, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 50%);
             pointer-events: none;
         }
 
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 20px auto;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.5px;
         }
 
         .cross-icon {
-            font-size: 4rem;
-            margin-bottom: 30px;
-            animation: float 3s ease-in-out infinite;
-            filter: drop-shadow(0 10px 20px rgba(0, 212, 255, 0.4));
-            position: relative;
-            z-index: 1;
-        }
-
-        header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            letter-spacing: -2px;
-            text-shadow: 2px 4px 12px rgba(0, 212, 255, 0.3);
-            animation: slideInLeft 0.8s ease-out;
-            background: linear-gradient(135deg, white, rgba(0, 212, 255, 0.8));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        header .tagline {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 300;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-            animation: slideInRight 0.8s ease-out;
-        }
-
-        header > p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 30px auto;
-            position: relative;
-            z-index: 1;
-            font-weight: 300;
-            line-height: 1.8;
-            animation: fadeInUp 1s ease-out 0.2s backwards;
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        .header-cta {
-            margin-top: 50px;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1s ease-out 0.4s backwards;
-        }
-
-        /* ===== BUTTONS ===== */
-        .btn {
-            display: inline-block;
-            padding: 18px 50px;
-            border-radius: 0;
-            text-decoration: none;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: left 0.4s ease;
-            z-index: -1;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: var(--primary);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4);
-            background: var(--accent-dark);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: var(--primary);
-            transform: translateY(-3px);
-            border-color: var(--accent);
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
         }
 
         /* ===== PROBLEM SECTION ===== */
         .problem-section {
-            padding: 100px 40px;
             background: white;
-            position: relative;
-        }
-
-        .problem-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
-
-        .section-header {
+            padding: 80px 20px;
             text-align: center;
-            margin-bottom: 80px;
+            border-top: 3px solid #d4a574;
         }
 
-        .section-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.2rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .section-header p {
-            font-size: 1.15rem;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-            font-weight: 300;
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        .problem-section h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #1a472a;
         }
 
         .problem-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .problem-card {
-            padding: 50px 40px;
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--light) 100%);
-            border-left: 4px solid var(--accent);
-            position: relative;
-            transition: all 0.4s ease;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .problem-card:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-
-        .problem-card:nth-child(3) {
-            animation-delay: 0.2s;
+            padding: 30px;
+            background: #f8f6f1;
+            border-left: 4px solid #c41e3a;
+            text-align: left;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
         }
 
         .problem-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15);
-            background: linear-gradient(135deg, white 0%, var(--secondary) 100%);
-            border-left-color: var(--accent-dark);
+            transform: translateY(-5px);
         }
 
         .problem-card h3 {
-            color: var(--accent);
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            font-family: 'Playfair Display', serif;
+            color: #c41e3a;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
         }
 
         .problem-card p {
-            color: var(--text-light);
-            font-size: 1rem;
-            line-height: 1.8;
+            color: #555;
+            font-size: 0.95rem;
         }
 
-        /* ===== PRICING SECTION ===== */
+        /* ===== SOLUTION SECTION ===== */
+        .solution-intro {
+            background: linear-gradient(135deg, #f8f6f1 0%, #f0ebe3 100%);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .solution-intro h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            color: #1a472a;
+            margin-bottom: 30px;
+        }
+
+        /* ===== PRICING TIERS ===== */
         .pricing-section {
-            padding: 100px 40px;
-            background: var(--light);
-            position: relative;
+            padding: 80px 20px;
+            background: white;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .pricing-section h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1a472a;
         }
 
         .pricing-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 30px;
             align-items: start;
         }
 
         .pricing-card {
             background: white;
-            padding: 50px 40px;
+            border: 2px solid #e0ddd5;
+            border-radius: 8px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
             position: relative;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: scaleIn 0.6s ease-out;
-            border-top: 6px solid var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
         }
 
-        .pricing-card:nth-child(2) {
-            animation-delay: 0.1s;
-            border-top-color: var(--accent);
-            transform: scale(1.05);
-        }
-
-        .pricing-card:nth-child(3) {
-            animation-delay: 0.2s;
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1a472a 0%, #d4a574 100%);
+            transition: height 0.3s ease;
         }
 
         .pricing-card:hover {
-            box-shadow: 0 30px 60px rgba(0, 212, 255, 0.2);
-            transform: translateY(-12px);
+            border-color: #1a472a;
+            box-shadow: 0 10px 40px rgba(26, 71, 42, 0.1);
+            transform: translateY(-10px);
         }
 
-        .pricing-card:nth-child(2):hover {
-            transform: scale(1.05) translateY(-12px);
+        .pricing-card:hover::before {
+            height: 8px;
+        }
+
+        .pricing-card.featured {
+            border-color: #c41e3a;
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(196, 30, 58, 0.15);
+        }
+
+        .pricing-card.featured::before {
+            background: #c41e3a;
         }
 
         .tier-badge {
             display: inline-block;
-            background: var(--primary);
+            background: #1a472a;
             color: white;
-            padding: 10px 25px;
-            border-radius: 0;
+            padding: 8px 20px;
+            border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
+            margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            font-family: 'Poppins', sans-serif;
+            letter-spacing: 1px;
         }
 
-        .pricing-card:nth-child(2) .tier-badge {
-            background: var(--accent);
-            color: var(--primary);
+        .pricing-card.featured .tier-badge {
+            background: #c41e3a;
         }
 
         .tier-name {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Crimson Text', serif;
             font-size: 1.8rem;
-            color: var(--primary);
+            color: #1a472a;
             margin-bottom: 15px;
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .tier-price {
-            font-size: 3rem;
-            color: var(--accent);
+            font-size: 2.5rem;
+            color: #c41e3a;
             font-weight: 700;
-            margin: 25px 0;
-            font-family: 'Poppins', sans-serif;
+            margin: 20px 0;
         }
 
         .tier-price .currency {
-            font-size: 1.3rem;
-            margin-right: 5px;
+            font-size: 1.2rem;
         }
 
         .tier-period {
-            color: var(--text-light);
-            font-size: 0.95rem;
+            color: #888;
+            font-size: 0.9rem;
             margin-bottom: 30px;
-            font-family: 'Poppins', sans-serif;
         }
 
         .feature-list {
+            text-align: left;
+            margin: 30px 0;
             list-style: none;
-            margin: 35px 0;
         }
 
         .feature-list li {
-            padding: 15px 0;
-            border-bottom: 1px solid #EEEEEE;
-            color: var(--text-light);
+            padding: 12px 0;
+            border-bottom: 1px solid #f0ebe3;
             font-size: 0.95rem;
+            color: #555;
             display: flex;
             align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .feature-list li:hover {
-            color: var(--primary);
-            padding-left: 10px;
         }
 
         .feature-list li::before {
-            content: '✦';
+            content: '✓';
             display: inline-block;
             width: 24px;
-            color: var(--accent);
-            font-size: 1.2rem;
-            margin-right: 15px;
+            height: 24px;
+            background: #1a472a;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 12px;
+            font-size: 0.8rem;
             flex-shrink: 0;
         }
 
-        /* ===== COMPARISON TABLE ===== */
+        .pricing-card.featured .feature-list li::before {
+            background: #c41e3a;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a472a;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 30px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #1a472a;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: #1a472a;
+        }
+
+        .pricing-card.featured .cta-button {
+            background: #c41e3a;
+            border-color: #c41e3a;
+        }
+
+        .pricing-card.featured .cta-button:hover {
+            background: transparent;
+            color: #c41e3a;
+        }
+
+        /* ===== FEATURES COMPARISON ===== */
         .comparison-section {
-            padding: 100px 40px;
-            background: white;
-            position: relative;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #f8f6f1 0%, #f0ebe3 100%);
+        }
+
+        .comparison-section h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1a472a;
         }
 
         .comparison-table {
             max-width: 1100px;
             margin: 0 auto;
             background: white;
-            border-radius: 0;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
         .comparison-table table {
@@ -476,155 +335,125 @@
             border-collapse: collapse;
         }
 
-        .comparison-table thead {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--dark-char) 100%);
-            color: white;
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #f0ebe3;
         }
 
         .comparison-table th {
-            padding: 25px 20px;
-            text-align: left;
-            font-family: 'Poppins', sans-serif;
+            background: #1a472a;
+            color: white;
             font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .comparison-table th:not(:first-child) {
             text-align: center;
         }
 
-        .comparison-table td {
-            padding: 20px;
-            border-bottom: 1px solid #F0F0F0;
-            color: var(--text-light);
-            transition: background 0.3s ease;
+        .comparison-table th:first-child {
+            text-align: left;
         }
 
-        .comparison-table tbody tr:hover td {
-            background: var(--light);
-        }
-
-        .comparison-table td:not(:first-child) {
+        .comparison-table td:not(:first-child),
+        .comparison-table th:not(:first-child) {
             text-align: center;
         }
 
         .feature-name {
             font-weight: 600;
-            color: var(--primary);
-            font-family: 'Poppins', sans-serif;
+            color: #1a472a;
         }
 
         .check-mark {
-            color: var(--accent);
+            color: #1a472a;
             font-weight: bold;
-            font-size: 1.3rem;
-            display: inline-block;
-            animation: scaleIn 0.5s ease-out;
+            font-size: 1.2rem;
         }
 
         /* ===== EXAMPLES SECTION ===== */
         .examples-section {
-            padding: 100px 40px;
-            background: var(--light);
-            position: relative;
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .examples-section h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1a472a;
         }
 
         .examples-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .example-card {
-            background: white;
-            border-radius: 0;
+            border: 1px solid #e0ddd5;
+            border-radius: 8px;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .example-card:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-
-        .example-card:nth-child(3) {
-            animation-delay: 0.2s;
+            transition: all 0.3s ease;
+            background: #f8f6f1;
         }
 
         .example-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 30px 60px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(26, 71, 42, 0.15);
+            transform: translateY(-8px);
         }
 
         .example-image {
             width: 100%;
             height: 200px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--dark-char) 100%);
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 4rem;
+            font-size: 3rem;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .example-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 70%, rgba(0, 212, 255, 0.2) 0%, transparent 50%);
+            padding: 20px;
         }
 
         .example-content {
-            padding: 35px 30px;
+            padding: 30px;
         }
 
         .example-content h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            color: #1a472a;
+            margin-bottom: 12px;
         }
 
         .example-content p {
-            color: var(--text-light);
+            color: #555;
             font-size: 0.95rem;
-            margin-bottom: 20px;
-            line-height: 1.8;
+            margin-bottom: 15px;
         }
 
         .example-feature {
             display: flex;
             align-items: center;
-            margin: 10px 0;
+            margin: 8px 0;
             font-size: 0.9rem;
-            color: var(--text-light);
-            font-family: 'Poppins', sans-serif;
+            color: #555;
         }
 
         .example-feature::before {
-            content: '▸';
-            margin-right: 12px;
-            color: var(--accent);
-            font-size: 1.2rem;
+            content: '→';
+            margin-right: 10px;
+            color: #1a472a;
             font-weight: bold;
         }
 
         /* ===== CTA FOOTER ===== */
         .cta-footer {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--dark-char) 100%);
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
             color: white;
-            padding: 120px 40px;
+            padding: 80px 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -638,79 +467,73 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(212, 165, 116, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
             pointer-events: none;
         }
 
         .cta-footer h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            margin-bottom: 25px;
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
             position: relative;
             z-index: 1;
-            animation: slideInLeft 0.8s ease-out;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, white, rgba(0, 212, 255, 0.8));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .cta-footer > p {
+        .cta-footer p {
             font-size: 1.2rem;
-            margin-bottom: 50px;
-            max-width: 700px;
+            margin-bottom: 40px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             position: relative;
             z-index: 1;
-            font-weight: 300;
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
-            line-height: 1.8;
         }
 
-        .cta-footer .btn {
-            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        .cta-footer .cta-button {
+            background: #c41e3a;
+            border-color: #c41e3a;
+            font-size: 1.1rem;
+            padding: 16px 50px;
+        }
+
+        .cta-footer .cta-button:hover {
+            background: transparent;
+            color: white;
         }
 
         .whatsapp-info {
-            margin-top: 50px;
-            padding-top: 40px;
-            border-top: 2px solid rgba(0, 212, 255, 0.3);
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(255,255,255,0.2);
             position: relative;
             z-index: 1;
-            animation: fadeInUp 0.8s ease-out 0.6s backwards;
         }
 
         .whatsapp-info p {
-            margin: 0 0 15px 0;
+            margin: 0;
             font-size: 1rem;
-            font-weight: 300;
         }
 
         .whatsapp-number {
-            font-weight: 600;
-            font-size: 1.5rem;
+            font-weight: 700;
+            font-size: 1.3rem;
             display: block;
-            margin-top: 15px;
-            letter-spacing: 2px;
-            font-family: 'Poppins', sans-serif;
-            color: var(--accent);
+            margin-top: 10px;
+            letter-spacing: 1px;
         }
 
         /* ===== FOOTER ===== */
         footer {
-            background: #0A0A0A;
+            background: #0d2617;
             color: rgba(255,255,255,0.7);
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             font-size: 0.9rem;
-            font-family: 'Poppins', sans-serif;
         }
 
         footer a {
-            color: var(--accent);
+            color: #d4a574;
             text-decoration: none;
             transition: color 0.3s;
         }
@@ -720,110 +543,76 @@
         }
 
         /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            header h1 {
-                font-size: 3.5rem;
-            }
-
-            .section-header h2 {
-                font-size: 2.5rem;
-            }
-
-            .pricing-card:nth-child(2) {
-                transform: scale(1);
-            }
-
-            .pricing-card:nth-child(2):hover {
-                transform: translateY(-12px);
-            }
-
-            .cta-footer h2 {
-                font-size: 2.5rem;
-            }
-        }
-
         @media (max-width: 768px) {
-            header {
-                padding: 80px 25px;
-                min-height: auto;
-            }
-
             header h1 {
                 font-size: 2.2rem;
             }
 
-            header > p {
-                font-size: 1.05rem;
+            header p {
+                font-size: 1rem;
             }
 
-            .section-header h2 {
+            .problem-section h2,
+            .solution-intro h2,
+            .pricing-section h2,
+            .comparison-section h2,
+            .examples-section h2,
+            .cta-footer h2 {
                 font-size: 1.8rem;
-            }
-
-            .problem-section,
-            .pricing-section,
-            .comparison-section,
-            .examples-section,
-            .cta-footer {
-                padding: 60px 20px;
             }
 
             .pricing-container {
-                gap: 20px;
+                grid-template-columns: 1fr;
             }
 
-            .btn {
-                padding: 15px 35px;
-                font-size: 0.9rem;
+            .pricing-card.featured {
+                transform: scale(1);
             }
 
             .tier-price {
-                font-size: 2.2rem;
-            }
-
-            .cta-footer h2 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
 
             .comparison-table th,
             .comparison-table td {
-                padding: 15px 10px;
-                font-size: 0.8rem;
+                padding: 12px;
+                font-size: 0.85rem;
             }
         }
 
-        /* ===== SCROLL REVEAL ANIMATION ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        .pricing-card {
+            animation: fadeInUp 0.6s ease-out backwards;
         }
+
+        .pricing-card:nth-child(1) { animation-delay: 0.1s; }
+        .pricing-card:nth-child(2) { animation-delay: 0.2s; }
+        .pricing-card:nth-child(3) { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
     <!-- HEADER -->
     <header>
         <div class="cross-icon">✝️</div>
-        <h1>Sebby IT Consulting, Corp.</h1>
-        <p class="tagline">Presencia Digital para Iglesias</p>
-        <p>Moderniza tu comunidad católica. Conecta con estudiantes, aumenta donaciones, gestiona tu parroquia desde un único lugar.</p>
-        
-        <div class="header-cta">
-            <a href="#contact" class="btn btn-primary">Consulta Gratuita</a>
-        </div>
+        <h1>SebbyIT Soluciones para Iglesias</h1>
+        <p>Presencia Digital Profesional para tu Parroquia</p>
+        <p style="font-size: 1rem; margin-top: 30px; font-weight: 400;">Sitios web modernos, directorios de misas claros, y gestión de redes sociales — todo en un solo lugar</p>
     </header>
 
     <!-- PROBLEM SECTION -->
     <section class="problem-section">
-        <div class="section-header">
-            <h2>¿Cuál es el Problema?</h2>
-            <p>Iglesias en Santo Domingo enfrentan desafíos reales que nuestros clientes resuelven hoy.</p>
-        </div>
+        <h2>¿Cuál es el Problema?</h2>
         <div class="problem-grid">
             <div class="problem-card">
                 <h3>📍 Información Desactualizada</h3>
@@ -834,92 +623,117 @@
                 <p>La mayoría de iglesias en el país no tienen sitios web o redes sociales profesionales. Los estudiantes extranjeros especialmente luchan para encontrar información de misas.</p>
             </div>
             <div class="problem-card">
-                <h3>💰 Pérdida de Ingresos</h3>
-                <p>Sin forma centralizada de dar limosnas online, muchas iglesias pierden RD$100-300/mes en donaciones digitales que sus feligreses quieren hacer pero no pueden.</p>
+                <h3>📧 Comunicación Inconsistente</h3>
+                <p>No hay forma centralizada de compartir anuncios, eventos, actividades parroquiales. La información se pierde en conversaciones de WhatsApp desorganizadas.</p>
             </div>
         </div>
     </section>
 
+    <!-- SOLUTION INTRO -->
+    <section class="solution-intro">
+        <h2>Nuestra Solución: Presencia Digital Completa para tu Iglesia</h2>
+        <p style="max-width: 700px; margin: 0 auto; font-size: 1.1rem;">Ofrecemos tres niveles de servicios, cada uno diseñado para las necesidades específicas de tu parroquia. Desde sitios básicos hasta plataformas completas con transmisiones en vivo, tenemos una solución que se ajusta a tu presupuesto.</p>
+    </section>
+
     <!-- PRICING SECTION -->
     <section class="pricing-section">
-        <div class="section-header">
-            <h2>Nuestros Paquetes</h2>
-            <p>Soluciones diseñadas para iglesias de todos los tamaños</p>
-        </div>
+        <h2>Nuestros Paquetes</h2>
         <div class="pricing-container">
-            <!-- TIER 1 -->
+            <!-- TIER 1: BASIC -->
             <div class="pricing-card">
                 <div class="tier-badge">Básico</div>
                 <h3 class="tier-name">Presencia Esencial</h3>
                 <div class="tier-price"><span class="currency">RD$</span>60,000</div>
-                <div class="tier-period">Sitio web completo</div>
+                <div class="tier-period">Sitio web (único) + Configuración</div>
                 
                 <ul class="feature-list">
-                    <li>5 páginas profesionales</li>
+                    <li>Sitio web profesional (hasta 5 páginas)</li>
                     <li>Directorio de horarios de misa</li>
                     <li>Información de ubicación y contacto</li>
                     <li>Galería de fotos</li>
-                    <li>Formulario de contacto</li>
-                    <li>Optimizado para móvil</li>
+                    <li>Formulario de contacto básico</li>
+                    <li>Optimizado para móvil (responsive)</li>
+                    <li>SSL seguro incluido</li>
                 </ul>
                 
-                <a href="https://wa.me/17865431417?text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20el%20paquete%20B%C3%A1sico%20de%20Sebby%20IT%20Consulting%20para%20iglesias.%20%C2%BFPuedes%20ayudarme%3F" class="btn btn-secondary">Contáctanos</a>
+                <a href="https://wa.me/c/1809XXXXXXX" class="cta-button">Consultar por WhatsApp</a>
             </div>
 
-            <!-- TIER 2 FEATURED -->
-            <div class="pricing-card">
+            <!-- TIER 2: PROFESSIONAL (FEATURED) -->
+            <div class="pricing-card featured">
                 <div class="tier-badge">Profesional</div>
-                <h3 class="tier-name">Solución Completa</h3>
+                <h3 class="tier-name">Sitio Web + Mantenimiento</h3>
                 <div class="tier-price"><span class="currency">RD$</span>150,000</div>
-                <div class="tier-period">Más popular • 3 meses soporte</div>
+                <div class="tier-period">Sitio web + 3 meses de actualizaciones</div>
                 
                 <ul class="feature-list">
-                    <li>10 páginas personalizadas</li>
-                    <li>Sistema de anuncios y noticias</li>
+                    <li>Todo del paquete Básico</li>
+                    <li>Hasta 10 páginas personalizadas</li>
+                    <li>Sistema de anuncios y noticias (Blog)</li>
                     <li>Calendario de eventos interactivo</li>
                     <li>Integración con redes sociales</li>
-                    <li>Sistema de newsletters</li>
-                    <li>3 meses soporte técnico 24/7</li>
+                    <li>Email para newsletters (plantillas)</li>
+                    <li>Soporte técnico 24/7 por 3 meses</li>
                     <li>Copias de seguridad automáticas</li>
                 </ul>
                 
-                <a href="https://wa.me/17865431417?text=Hola%2C%20me%20interesa%20el%20paquete%20Profesional%20de%20RD%24150%2C000%20de%20Sebby%20IT%20Consulting.%20%C2%BFPodr%C3%ADas%20enviarme%20m%C3%A1s%20informaci%C3%B3n%3F" class="btn btn-primary">Seleccionar Paquete</a>
+                <a href="https://wa.me/c/1809XXXXXXX" class="cta-button">Consultar por WhatsApp</a>
             </div>
 
-            <!-- TIER 3 -->
+            <!-- TIER 3: PREMIUM -->
             <div class="pricing-card">
                 <div class="tier-badge">Premium</div>
-                <h3 class="tier-name">Experiencia Premium</h3>
+                <h3 class="tier-name">Solución Completa</h3>
                 <div class="tier-price"><span class="currency">RD$</span>330,000</div>
-                <div class="tier-period">Servicio completo • 6 meses soporte</div>
+                <div class="tier-period">Sitio web + 6 meses mantenimiento</div>
                 
                 <ul class="feature-list">
                     <li>Todo del paquete Profesional</li>
-                    <li>Transmisión en vivo de misas (YouTube)</li>
+                    <li>Transmisión en vivo de misas (YouTube Live)</li>
                     <li>Sistema de donaciones/diezmos online</li>
-                    <li>Gestión de eventos avanzada</li>
-                    <li>Directorio parroquial completo</li>
-                    <li>Gestión de redes sociales</li>
-                    <li>Análisis y reportes mensuales</li>
-                    <li>Soporte prioritario 6 meses</li>
+                    <li>Gestor de eventos con registro de asistentes</li>
+                    <li>Directorio parroquial (sacerdotes, personal)</li>
+                    <li>Gestión de redes sociales (Facebook/Instagram)</li>
+                    <li>Publicación automática de anuncios</li>
+                    <li>Análisis y reportes mensales</li>
+                    <li>Soporte prioritario por 6 meses</li>
                 </ul>
                 
-                <a href="https://wa.me/17865431417?text=Hola%2C%20me%20interesa%20conocer%20sobre%20el%20paquete%20Premium%20de%20Sebby%20IT%20Consulting%20con%20transmisi%C3%B3n%20en%20vivo.%20%C2%BFCuando%20podemos%20hablar%3F" class="btn btn-secondary">Consultar</a>
+                <a href="https://wa.me/c/1809XXXXXXX" class="cta-button">Consultar por WhatsApp</a>
             </div>
         </div>
 
-        <!-- RETAINER SECTION -->
-        <div style="text-align: center; margin-top: 100px; padding-top: 60px; border-top: 2px solid rgba(0, 212, 255, 0.2);">
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary); margin-bottom: 30px;">Mantenimiento Mensual</h3>
-            <p style="max-width: 700px; margin: 0 auto 40px; color: var(--text-light); font-size: 1.05rem;">Después del lanzamiento, recomendamos mantenimiento continuo para mantener tu sitio actualizado, seguro y optimizado.</p>
-            <div style="background: var(--secondary); padding: 40px; border-left: 6px solid var(--accent); display: inline-block;">
-                <p style="font-size: 1.2rem; font-weight: 600; color: var(--primary); margin-bottom: 20px; font-family: 'Poppins', sans-serif;">RD$18,000 - RD$36,000/mes</p>
-                <div style="text-align: left;">
-                    <p style="margin-bottom: 10px; color: var(--text-light);">✦ Actualización de horarios de misa</p>
-                    <p style="margin-bottom: 10px; color: var(--text-light);">✦ Publicación de anuncios y eventos</p>
-                    <p style="margin-bottom: 10px; color: var(--text-light);">✦ Gestión de redes sociales</p>
-                    <p style="margin-bottom: 10px; color: var(--text-light);">✦ Backup automático y seguridad</p>
-                    <p style="color: var(--text-light);">✦ Soporte técnico por WhatsApp/Email</p>
+        <!-- RECURRING SERVICE -->
+        <div style="text-align: center; margin-top: 80px; padding-top: 60px; border-top: 2px solid #e0ddd5;">
+            <h3 style="font-family: 'Crimson Text', serif; font-size: 1.8rem; color: #1a472a; margin-bottom: 30px;">Servicio de Mantenimiento Mensual</h3>
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <p style="font-size: 1.1rem; margin-bottom: 40px; color: #555;">Después de tu sitio web inicial, recomendamos mantenimiento continuo. Elige el nivel que mejor se ajusta a tus necesidades:</p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+                    <!-- BASIC RETAINER -->
+                    <div style="background: #f8f6f1; padding: 30px; border-left: 4px solid #1a472a; border-radius: 4px;">
+                        <p style="font-size: 1.3rem; font-weight: 600; color: #1a472a; margin-bottom: 20px;">RD$20,000/mes</p>
+                        <p style="font-size: 0.95rem; color: #888; margin-bottom: 20px; font-style: italic;">Mantenimiento Esencial</p>
+                        <ul style="text-align: left; list-style: none; margin: 0;">
+                            <li style="padding: 10px 0; color: #555;">✓ Actualización de horarios de misa</li>
+                            <li style="padding: 10px 0; color: #555;">✓ Publicación de anuncios y noticias</li>
+                            <li style="padding: 10px 0; color: #555;">✓ Backup automático y actualizaciones de seguridad</li>
+                            <li style="padding: 10px 0; color: #555;">✓ Soporte técnico por email/WhatsApp</li>
+                        </ul>
+                    </div>
+
+                    <!-- ENHANCED RETAINER -->
+                    <div style="background: #f8f6f1; padding: 30px; border-left: 4px solid #c41e3a; border-radius: 4px; border: 2px solid #c41e3a; border-left: 4px solid #c41e3a;">
+                        <p style="font-size: 1.3rem; font-weight: 600; color: #c41e3a; margin-bottom: 20px;">RD$35,000/mes</p>
+                        <p style="font-size: 0.95rem; color: #888; margin-bottom: 20px; font-style: italic;">Mantenimiento + Gestión de Redes</p>
+                        <ul style="text-align: left; list-style: none; margin: 0;">
+                            <li style="padding: 10px 0; color: #555;">✓ Actualización de horarios de misa</li>
+                            <li style="padding: 10px 0; color: #555;">✓ Publicación de anuncios y noticias</li>
+                            <li style="padding: 10px 0; color: #555;">✓ <strong>Gestión activa de redes sociales</strong></li>
+                            <li style="padding: 10px 0; color: #555;">✓ Backup automático y actualizaciones de seguridad</li>
+                            <li style="padding: 10px 0; color: #555;">✓ Soporte técnico por email/WhatsApp</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -927,9 +741,7 @@
 
     <!-- COMPARISON TABLE -->
     <section class="comparison-section">
-        <div class="section-header">
-            <h2>Comparativa de Características</h2>
-        </div>
+        <h2>Comparativa de Características</h2>
         <div class="comparison-table">
             <table>
                 <thead>
@@ -942,10 +754,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="feature-name">Sitio Web (páginas)</td>
-                        <td><span class="check-mark">5</span></td>
-                        <td><span class="check-mark">10</span></td>
-                        <td><span class="check-mark">12+</span></td>
+                        <td class="feature-name">Sitio Web (5-10 páginas)</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
                     </tr>
                     <tr>
                         <td class="feature-name">Directorio de Misas</td>
@@ -954,7 +766,7 @@
                         <td><span class="check-mark">✓</span></td>
                     </tr>
                     <tr>
-                        <td class="feature-name">Blog/Noticias</td>
+                        <td class="feature-name">Blog/Anuncios</td>
                         <td>—</td>
                         <td><span class="check-mark">✓</span></td>
                         <td><span class="check-mark">✓</span></td>
@@ -966,273 +778,125 @@
                         <td><span class="check-mark">✓</span></td>
                     </tr>
                     <tr>
-                        <td class="feature-name">Redes Sociales Integradas</td>
-                        <td>—</td>
-                        <td><span class="check-mark">✓</span></td>
-                        <td><span class="check-mark">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td class="feature-name">Transmisión en Vivo</td>
+                        <td class="feature-name">Transmisión en Vivo (YouTube)</td>
                         <td>—</td>
                         <td>—</td>
                         <td><span class="check-mark">✓</span></td>
                     </tr>
                     <tr>
-                        <td class="feature-name">Donaciones Online</td>
+                        <td class="feature-name">Sistema de Donaciones Online</td>
                         <td>—</td>
                         <td>—</td>
                         <td><span class="check-mark">✓</span></td>
                     </tr>
                     <tr>
-                        <td class="feature-name">Soporte Incluido</td>
-                        <td><span class="check-mark">30 días</span></td>
-                        <td><span class="check-mark">3 meses</span></td>
-                        <td><span class="check-mark">6 meses</span></td>
+                        <td class="feature-name">Gestión de Redes Sociales</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td><span class="check-mark">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Análisis y Reportes</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td><span class="check-mark">✓</span></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </section>
 
-    <!-- TIMELINE SECTION -->
-    <section style="padding: 100px 40px; background: white; position: relative;">
-        <div class="section-header">
-            <h2>De Idea a En Vivo (Paso a Paso)</h2>
-            <p>Proceso transparente, sin sorpresas</p>
-        </div>
-
-        <div style="max-width: 1000px; margin: 0 auto;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem;">
-                <div style="text-align: center; padding: 2rem; background: var(--light); border-radius: 0.5rem;">
-                    <div style="font-size: 2.5rem; color: var(--accent); font-weight: 700; margin-bottom: 1rem;">1</div>
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem;">Consulta</h4>
-                    <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 0.75rem;">Hablamos de tu iglesia y necesidades</p>
-                    <p style="color: var(--accent); font-size: 0.8rem; font-weight: 600;">~30 min</p>
-                </div>
-
-                <div style="text-align: center; padding: 2rem; background: var(--light); border-radius: 0.5rem;">
-                    <div style="font-size: 2.5rem; color: var(--accent); font-weight: 700; margin-bottom: 1rem;">2</div>
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem;">Propuesta</h4>
-                    <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 0.75rem;">Te envío precio y timeline</p>
-                    <p style="color: var(--accent); font-size: 0.8rem; font-weight: 600;">1-2 días</p>
-                </div>
-
-                <div style="text-align: center; padding: 2rem; background: var(--light); border-radius: 0.5rem;">
-                    <div style="font-size: 2.5rem; color: var(--accent); font-weight: 700; margin-bottom: 1rem;">3</div>
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem;">Info</h4>
-                    <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 0.75rem;">Tú das horarios, fotos, texto</p>
-                    <p style="color: var(--accent); font-size: 0.8rem; font-weight: 600;">3-5 días</p>
-                </div>
-
-                <div style="text-align: center; padding: 2rem; background: var(--light); border-radius: 0.5rem;">
-                    <div style="font-size: 2.5rem; color: var(--accent); font-weight: 700; margin-bottom: 1rem;">4</div>
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem;">Build</h4>
-                    <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 0.75rem;">Yo construyo y te muestro</p>
-                    <p style="color: var(--accent); font-size: 0.8rem; font-weight: 600;">7-10 días</p>
-                </div>
-
-                <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, transparent 100%); border: 2px solid var(--accent); border-radius: 0.5rem;">
-                    <div style="font-size: 2.5rem; color: var(--accent); font-weight: 700; margin-bottom: 1rem;">5</div>
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem;">✅ En Vivo</h4>
-                    <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 0.75rem;">Sitio activo + capacitación</p>
-                    <p style="color: var(--accent); font-size: 0.8rem; font-weight: 600;">Listo</p>
-                </div>
-            </div>
-
-            <div style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, transparent 100%); border-left: 4px solid var(--accent); border-radius: 0.5rem; text-align: center;">
-                <p style="color: var(--primary); font-size: 1.1rem;"><strong>⏱️ Total: 2-3 semanas</strong> desde el primer WhatsApp hasta tu sitio web en vivo</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SUPPORT & GUARANTEES SECTION -->
-    <section style="padding: 100px 40px; background: var(--light);">
-        <div class="section-header">
-            <h2>Garantías & Soporte</h2>
-            <p>Aquí está lo que comes despues del lanzamiento</p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
-            <div style="padding: 2rem; background: white; border-radius: 0.5rem; border-left: 4px solid var(--accent); box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">🛡️</div>
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">100% Tuyo</h3>
-                <p style="color: var(--text-light); font-size: 0.9rem;">Tu dominio, tus archivos, tu sitio. Si mañana decides trabajar con otro developer, el sitio es completamente tuyo. Cero dependencia.</p>
-            </div>
-
-            <div style="padding: 2rem; background: white; border-radius: 0.5rem; border-left: 4px solid var(--accent); box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">📞</div>
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">Soporte 24/7</h3>
-                <p style="color: var(--text-light); font-size: 0.9rem;">Algo no funciona? Me contactas por WhatsApp/email. Respondo en máximo 24 horas. Soporte gratis incluido por 3-6 meses.</p>
-            </div>
-
-            <div style="padding: 2rem; background: white; border-radius: 0.5rem; border-left: 4px solid var(--accent); box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">👥</div>
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">Capacitación Completa</h3>
-                <p style="color: var(--text-light); font-size: 0.9rem;">Te muestro cómo actualizar horarios, publicar anuncios, manejar donaciones online, y gestionar redes sociales. Sesión en vivo incluida.</p>
-            </div>
-
-            <div style="padding: 2rem; background: white; border-radius: 0.5rem; border-left: 4px solid var(--accent); box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">🔄</div>
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">Cambios Incluidos</h3>
-                <p style="color: var(--text-light); font-size: 0.9rem;">Cambios menores (actualizar horarios, agregar fotos, cambiar texto) están incluidos durante el soporte inicial. Sin costo adicional.</p>
-            </div>
-
-            <div style="padding: 2rem; background: white; border-radius: 0.5rem; border-left: 4px solid var(--accent); box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">🔒</div>
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">Seguridad Certificada</h3>
-                <p style="color: var(--text-light); font-size: 0.9rem;">SSL encryption, backups diarios automáticos, protección contra hackers. Tu sitio y datos de donaciones están 100% seguros.</p>
-            </div>
-
-            <div style="padding: 2rem; background: white; border-radius: 0.5rem; border-left: 4px solid var(--accent); box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">📱</div>
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">Funciona en Todo</h3>
-                <p style="color: var(--text-light); font-size: 0.9rem;">Celular, tablet, computadora. Tus feligreses ven perfectamente en cualquier dispositivo. No es versión separada, es un sitio responsivo.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ SECTION -->
-    <section style="padding: 100px 40px; background: white;">
-        <div class="section-header">
-            <h2>Preguntas que Siempre Me Hacen</h2>
-            <p>Respuestas directas a tus preocupaciones</p>
-        </div>
-
-        <div style="max-width: 900px; margin: 0 auto;">
-            <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--light); padding-bottom: 2rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">¿Qué pasa si algo no funciona después?</h3>
-                <p style="color: var(--text-light);">Me contactas por WhatsApp o email. Respondo dentro de 24 horas y lo arreglo. El soporte técnico está incluido en los primeros 3-6 meses.</p>
-            </div>
-
-            <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--light); padding-bottom: 2rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">¿Nuestras donaciones van directamente a nosotros?</h3>
-                <p style="color: var(--text-light);">Completamente. El dinero va directo a la cuenta bancaria de tu iglesia. Yo no toco nada. Wave (la plataforma) solo cobra 2.9% + RD$36 por procesar el pago.</p>
-            </div>
-
-            <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--light); padding-bottom: 2rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">¿Si decidimos ir con otro developer, nos llevamos el sitio?</h3>
-                <p style="color: var(--text-light);">Sí. Ustedes son dueños 100%. El dominio, los archivos, todo. Puedo exportar todo y transferirlo a cualquiera que ustedes elijan. Cero problema.</p>
-            </div>
-
-            <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--light); padding-bottom: 2rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">¿Necesitamos ser técnicos para usar esto?</h3>
-                <p style="color: var(--text-light);">No. Si pueden enviar un email, pueden actualizar el sitio. Te doy capacitación paso-a-paso. Además, puedo configurar un panel simple donde ustedes actualizan horarios sin tocar código.</p>
-            </div>
-
-            <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--light); padding-bottom: 2rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">¿Cómo funciona la transmisión en vivo de misas?</h3>
-                <p style="color: var(--text-light);">Muy simple. Tu iglesia crea un canal de YouTube (gratis). Yo configuro todo para que transmitas en vivo cada domingo. Los videos quedan guardados para que otros vean después. Es 100% gratuito.</p>
-            </div>
-
-            <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--light); padding-bottom: 2rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">¿Cuánto cuesta el mantenimiento mensual?</h3>
-                <p style="color: var(--text-light);">Depende del nivel: Silver (RD$18,000), Gold (RD$30,000), Platinum (RD$36,000-60,000). Incluye actualizaciones, redes sociales, y soporte. Sin sorpresas, todo transparente desde el inicio.</p>
-            </div>
-
-            <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--light); padding-bottom: 2rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">¿Qué si ustedes desaparecen o cambio de negocio?</h3>
-                <p style="color: var(--text-light);">Buena pregunta. Mi respuesta: Ustedes son dueños de todo. Si mañana me voy del negocio, tu sitio sigue viviendo. Nadie puede quitártelo. Además, te doy acceso a todos los archivos y contraseñas.</p>
-            </div>
-
-            <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--light); padding-bottom: 2rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">¿Por qué ustedes y no otro developer?</h3>
-                <p style="color: var(--text-light);">Porque: 1) Entiendo a iglesias (soy católico), 2) Trabajo localmente en Santo Domingo, 3) Hago precios justos para iglesias (no cobro como agencia grande), 4) Soporte personal — tú hablas conmigo, no con un chatbot.</p>
-            </div>
-        </div>
-    </section>
-
     <!-- EXAMPLES SECTION -->
     <section class="examples-section">
-        <div class="section-header">
-            <h2>Lo Que Podemos Lograr</h2>
-            <p>Ejemplos de funcionalidades que transforman iglesias</p>
-        </div>
+        <h2>Ejemplos de Iglesias Exitosas</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 60px; color: #555; font-size: 1.05rem;">Estos son ejemplos de iglesias en Miami que ya tienen presencia digital fuerte. Nosotros traemos este mismo nivel de profesionalismo a iglesias en República Dominicana.</p>
         
         <div class="examples-grid">
             <div class="example-card">
                 <div class="example-image">🎥</div>
                 <div class="example-content">
-                    <h3>Transmisión en Vivo</h3>
-                    <p>Transmite tus misas en vivo a través de YouTube. Feligreses pueden asistir desde casa, y tus videos quedan guardados para que otros vean después.</p>
-                    <div class="example-feature">Alcanza a más fieles</div>
-                    <div class="example-feature">Crea archivo de misas</div>
-                    <div class="example-feature">Aumenta participación</div>
+                    <h3>Transmisión en Vivo de Misas</h3>
+                    <p>St. Augustine Church transmite su misa dominical del 8am en vivo a través de YouTube, permitiendo que fieles de todo el mundo participen.</p>
+                    <div class="example-feature">Acceso global a la comunidad</div>
+                    <div class="example-feature">Feligreses pueden asistir desde casa</div>
+                    <div class="example-feature">Archivo de misas antiguas disponible</div>
                 </div>
             </div>
 
             <div class="example-card">
-                <div class="example-image">💰</div>
+                <div class="example-image">📧</div>
                 <div class="example-content">
-                    <h3>Donaciones Online</h3>
-                    <p>Sistema integrado de donaciones. Feligreses pueden dar diezmos, limosnas, u ofrenda directamente por tu sitio web en segundos.</p>
-                    <div class="example-feature">+RD$100-300/mes</div>
-                    <div class="example-feature">Transacciones seguras</div>
-                    <div class="example-feature">Reportes automáticos</div>
+                    <h3>Boletín y Listas de Email</h3>
+                    <p>Todas las iglesias modernas ofrecen newsletters donde comparten anuncios, actividades, oportunidades de voluntariado y eventos especiales.</p>
+                    <div class="example-feature">Mantener a feligreses informados</div>
+                    <div class="example-feature">Comunicación directa y regular</div>
+                    <div class="example-feature">Promoción de eventos y actividades</div>
                 </div>
             </div>
 
             <div class="example-card">
-                <div class="example-image">📱</div>
+                <div class="example-image">🗓️</div>
                 <div class="example-content">
-                    <h3>Redes Sociales Integradas</h3>
-                    <p>Conecta con jóvenes y estudiantes en Facebook, Instagram y TikTok. Automatiza publicaciones de anuncios y eventos directamente desde tu sitio.</p>
-                    <div class="example-feature">Alcance juventud</div>
-                    <div class="example-feature">Automatización</div>
-                    <div class="example-feature">Engagement aumentado</div>
+                    <h3>Horarios Claros y Actualizados</h3>
+                    <p>Directorio completo de horarios de misas (entre semana, fines de semana, días festivos) en un lugar fácil de encontrar.</p>
+                    <div class="example-feature">Buscar por horario preferido</div>
+                    <div class="example-feature">Misas en diferentes idiomas</div>
+                    <div class="example-feature">Información de confecciones</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA FOOTER -->
-    <section class="cta-footer" id="contact">
-        <h2>Transforma tu Iglesia Hoy</h2>
-        <p>Cientos de iglesias en Santo Domingo ya están alcanzando a más feligreses, aumentando donaciones y modernizando su comunicación. ¿Será la tuya la próxima?</p>
+    <section class="cta-footer">
+        <h2>¿Listo para Modernizar tu Iglesia?</h2>
+        <p>Contacta con nosotros por WhatsApp para una consulta gratuita. Entendemos las necesidades específicas de las iglesias católicas en República Dominicana.</p>
         
-        <a href="https://wa.me/17865431417?text=Hola%20Sebby%2C%20me%20interesa%20conocer%20sobre%20los%20servicios%20de%20Sebby%20IT%20Consulting%20para%20iglesias%20católicas.%20%C2%BFPodr%C3%ADas%20ayudarme%3F" class="btn btn-primary">💬 Contáctame por WhatsApp</a>
+        <a href="https://wa.me/c/1809XXXXXXX" class="cta-button">📱 Contáctanos por WhatsApp</a>
         
         <div class="whatsapp-info">
-            <p>O contacta directamente:</p>
-            <span class="whatsapp-number">+1 (786) 543-1417</span>
-            <p>Disponible: Lunes - Viernes, 9am - 6pm</p>
+            <p>O escríbenos directamente:</p>
+            <span class="whatsapp-number">+1 (809) XXX-XXXX</span>
+            <p style="font-size: 0.9rem; margin-top: 10px;">Disponible de Lunes a Viernes, 9am - 6pm</p>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 Sebby IT Consulting, Corp. • Presencia Digital para Iglesias Católicas</p>
-        <p style="margin-top: 10px; font-size: 0.8rem;">Servicio especializado en sitios web para comunidades religiosas • Registrado en Miami, Florida, Estados Unidos</p>
+        <p>&copy; 2026 SebbyIT Soluciones. Presencia Digital para Iglesias Católicas en República Dominicana.</p>
+        <p><a href="#">Política de Privacidad</a> | <a href="#">Términos de Servicio</a></p>
     </footer>
 
     <script>
-        // Scroll reveal animation
+        // WhatsApp integration - update with actual number
+        const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+        const whatsappNumber = '+18099999999'; // Replace with actual number
+        const whatsappMessage = encodeURIComponent('Hola, me interesa conocer más sobre los servicios de sitios web para iglesias. ¿Podrían enviarme información sobre los paquetes disponibles?');
+        
+        whatsappLinks.forEach(link => {
+            link.href = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+        });
+
+        // Scroll animation
         const observerOptions = {
-            threshold: 0.15,
+            threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
         };
 
         const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.problem-card, .pricing-card, .example-card').forEach(el => {
-            el.classList.add('reveal');
+        document.querySelectorAll('.pricing-card, .example-card, .problem-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
         });
     </script>
 </body>
