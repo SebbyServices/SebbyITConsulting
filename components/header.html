@@ -1,7 +1,11 @@
 <nav>
   <div class="nav-container">
-    <a href="/" class="logo">
-      <img src="/assets/images/logo-light.png" alt="Sebby IT Consulting" style="height:100%; width:auto;">
+    <a href="/" class="logo" title="Sebby IT Consulting">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="32" height="32" rx="5" fill="#2B65BB"/>
+        <text x="18" y="19" font-family="Inter, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="central">S</text>
+      </svg>
+      <span>Sebby <span class="logo-it">IT</span> Consulting</span>
     </a>
 
     <ul class="nav-menu">
@@ -12,42 +16,10 @@
       <li><a href="/tools/" class="nav-link">Tools</a></li>
     </ul>
 
-    <button class="hamburger-btn" id="hamburger" aria-label="Toggle menu">
+    <button class="hamburger-btn" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
   </div>
 </nav>
-
-<script>
-  // Set active nav link based on current page
-  function initNav() {
-    const pathname = window.location.pathname;
-    document.querySelectorAll('.nav-link').forEach(link => {
-      const href = link.getAttribute('href');
-      // Handle root path
-      if ((href === '/' && pathname === '/') ||
-          (href !== '/' && pathname.includes(href))) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
-    });
-
-    // Mobile menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const menu = document.querySelector('.nav-menu');
-    if (hamburger && menu) {
-      hamburger.addEventListener('click', () => {
-        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-      });
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initNav);
-  } else {
-    initNav();
-  }
-</script>

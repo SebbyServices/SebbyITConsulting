@@ -113,19 +113,29 @@ function setupParallax() {
   });
 }
 
-// ========== NAV BLUR ON SCROLL ==========
-// Apply blur effect to nav when scrolling
+// ========== NAV SCROLL STATE ==========
+// Manage nav transparency over hero sections and blur on scroll
 function setupNavScroll() {
   const nav = document.querySelector('nav');
   if (!nav) return;
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  });
+  const hero = document.querySelector('.hero');
+  if (hero) nav.classList.add('nav-transparent');
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      const threshold = hero ? Math.min(hero.offsetHeight * 0.1, 80) : 20;
+      if (window.scrollY > threshold) {
+        nav.classList.add('scrolled');
+        nav.classList.remove('nav-transparent');
+      } else {
+        nav.classList.remove('scrolled');
+        if (hero) nav.classList.add('nav-transparent');
+      }
+    },
+    { passive: true }
+  );
 }
 
 // ========== COMPONENT LOADING ==========
@@ -144,9 +154,11 @@ async function loadComponents() {
       const html = await response.text();
       slot.innerHTML = html;
 
-      // Re-init component-specific scripts
-      if (component === 'header' && typeof initNav === 'function') {
-        initNav();
+      // Initialize nav after header is injected
+      if (component === 'header') {
+        initNavLinks(slot);
+        initMobileMenu(slot);
+        setupNavScroll(); // Re-run after nav is in DOM
       }
     } catch (error) {
       console.warn(`Could not load ${component} component:`, error);
@@ -154,25 +166,61 @@ async function loadComponents() {
   }
 }
 
-// ========== MOBILE MENU ==========
-// Toggle mobile menu visibility
-function setupMobileMenu() {
-  const hamburger = document.getElementById('hamburger');
-  const menu = document.querySelector('.nav-menu');
+// ========== NAV LINK ACTIVE STATE ==========
+// Set .active class on nav link matching current page
+function initNavLinks(headerSlot) {
+  const pathname = window.location.pathname;
+  headerSlot.querySelectorAll('.nav-link').forEach(link => {
+    const href = link.getAttribute('href');
+    const isActive =
+      (href === '/' && pathname === '/') ||
+      (href !== '/' && pathname.startsWith(href));
+    link.classList.toggle('active', isActive);
+  });
+}
 
-  if (hamburger && menu) {
-    hamburger.addEventListener('click', () => {
-      const isOpen = menu.style.display === 'flex';
-      menu.style.display = isOpen ? 'none' : 'flex';
-    });
+// ========== MOBILE MENU INITIALIZATION ==========
+// Class-based toggle with multiple close behaviors
+function initMobileMenu(headerSlot) {
+  const hamburger = headerSlot.querySelector('#hamburger');
+  const menu = headerSlot.querySelector('.nav-menu');
+  if (!hamburger || !menu) return;
 
-    // Close menu on link click
-    menu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.style.display = 'none';
-      });
-    });
+  function openMenu() {
+    menu.classList.add('open');
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
   }
+
+  function closeMenu() {
+    menu.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  // Toggle on hamburger click
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  // Close on nav link click
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close on outside click
+  document.addEventListener('click', e => {
+    if (!headerSlot.contains(e.target)) closeMenu();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) {
+      closeMenu();
+      hamburger.focus();
+    }
+  });
 }
 
 // ========== INITIALIZATION ==========
@@ -185,8 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupStatCounters();
   setupParallax();
   setupPageTransitions();
-  setupMobileMenu();
-  setupNavScroll();
 
   // Add enter animation to page
   document.body.classList.add('page-enter');
