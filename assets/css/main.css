@@ -582,12 +582,12 @@ nav.nav-transparent .nav-link.active {
   color: #ffffff;
 }
 
-nav.nav-transparent .logo span {
-  color: rgba(255, 255, 255, 0.95);
+nav.nav-transparent .logo-img--dark {
+  display: none;
 }
 
-nav.nav-transparent .logo-it {
-  color: #7EC8E3;
+nav.nav-transparent .logo-img--light {
+  display: block;
 }
 
 nav.nav-transparent .hamburger-btn span {
@@ -619,19 +619,14 @@ nav.scrolled {
   gap: 8px;
 }
 
-.logo svg {
-  flex-shrink: 0;
+.logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
 }
 
-.logo span {
-  color: var(--text);
-  font-weight: 600;
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-.logo-it {
-  color: #4EA8DE;
+.logo-img--light {
+  display: none;
 }
 
 .nav-menu {
@@ -678,6 +673,13 @@ nav.scrolled {
   background: none;
   border: none;
   cursor: pointer;
+  padding: 10px 8px;
+  min-height: 44px;
+  min-width: 44px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  touch-action: manipulation;
 }
 
 .hamburger-btn span {
