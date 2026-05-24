@@ -327,6 +327,71 @@
           </div>
         </div>
 
+        <!-- Monthly Cumulative Impact Graph -->
+        <div style="background: var(--bg-subtle); padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 2rem;">
+          <h4 style="color: var(--text); margin-bottom: 1.5rem; font-size: 1.1rem;">Cumulative Monthly Savings</h4>
+          <svg viewBox="0 0 800 350" style="width: 100%; max-width: 800px; height: auto;">
+            <!-- Grid lines -->
+            <line x1="60" y1="280" x2="760" y2="280" stroke="#E2E8F0" stroke-width="1"/>
+            <line x1="60" y1="210" x2="760" y2="210" stroke="#E2E8F0" stroke-width="1"/>
+            <line x1="60" y1="140" x2="760" y2="140" stroke="#E2E8F0" stroke-width="1"/>
+            <line x1="60" y1="70" x2="760" y2="70" stroke="#E2E8F0" stroke-width="1"/>
+
+            <!-- Y-axis labels -->
+            <text x="40" y="285" font-size="12" fill="#475569" text-anchor="end">$0</text>
+            <text x="40" y="215" font-size="12" fill="#475569" text-anchor="end">$30K</text>
+            <text x="40" y="145" font-size="12" fill="#475569" text-anchor="end">$60K</text>
+            <text x="40" y="75" font-size="12" fill="#475569" text-anchor="end">$90K</text>
+
+            <!-- Axes -->
+            <line x1="60" y1="20" x2="60" y2="290" stroke="#0F172A" stroke-width="2"/>
+            <line x1="60" y1="290" x2="760" y2="290" stroke="#0F172A" stroke-width="2"/>
+
+            <!-- Filled area under curve -->
+            <path d="M 60 290 L 120 263 L 180 236 L 240 209 L 300 182 L 360 155 L 420 128 L 480 101 L 540 74 L 600 73 L 660 72 L 720 71 L 760 70 L 760 290 Z" fill="rgba(99, 102, 241, 0.15)"/>
+
+            <!-- Line graph -->
+            <polyline points="60,290 120,263 180,236 240,209 300,182 360,155 420,128 480,101 540,74 600,73 660,72 720,71 760,70"
+                      fill="none" stroke="#6366F1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- Data points -->
+            <circle cx="60" cy="290" r="4" fill="#6366F1"/>
+            <circle cx="120" cy="263" r="4" fill="#6366F1"/>
+            <circle cx="180" cy="236" r="4" fill="#6366F1"/>
+            <circle cx="240" cy="209" r="4" fill="#6366F1"/>
+            <circle cx="300" cy="182" r="4" fill="#6366F1"/>
+            <circle cx="360" cy="155" r="4" fill="#6366F1"/>
+            <circle cx="420" cy="128" r="4" fill="#6366F1"/>
+            <circle cx="480" cy="101" r="4" fill="#6366F1"/>
+            <circle cx="540" cy="74" r="4" fill="#6366F1"/>
+            <circle cx="600" cy="73" r="4" fill="#6366F1"/>
+            <circle cx="660" cy="72" r="4" fill="#6366F1"/>
+            <circle cx="720" cy="71" r="4" fill="#6366F1"/>
+            <circle cx="760" cy="70" r="4" fill="#6366F1"/>
+
+            <!-- X-axis labels (months) -->
+            <text x="60" y="315" font-size="12" fill="#475569" text-anchor="middle">1</text>
+            <text x="120" y="315" font-size="12" fill="#475569" text-anchor="middle">2</text>
+            <text x="180" y="315" font-size="12" fill="#475569" text-anchor="middle">3</text>
+            <text x="240" y="315" font-size="12" fill="#475569" text-anchor="middle">4</text>
+            <text x="300" y="315" font-size="12" fill="#475569" text-anchor="middle">5</text>
+            <text x="360" y="315" font-size="12" fill="#475569" text-anchor="middle">6</text>
+            <text x="420" y="315" font-size="12" fill="#475569" text-anchor="middle">7</text>
+            <text x="480" y="315" font-size="12" fill="#475569" text-anchor="middle">8</text>
+            <text x="540" y="315" font-size="12" fill="#475569" text-anchor="middle">9</text>
+            <text x="600" y="315" font-size="12" fill="#475569" text-anchor="middle">10</text>
+            <text x="660" y="315" font-size="12" fill="#475569" text-anchor="middle">11</text>
+            <text x="720" y="315" font-size="12" fill="#475569" text-anchor="middle">12</text>
+
+            <!-- Axis labels -->
+            <text x="400" y="345" font-size="12" fill="#475569" text-anchor="middle">Month</text>
+            <text x="20" y="160" font-size="12" fill="#475569" text-anchor="middle" transform="rotate(-90 20 160)">Cumulative Savings</text>
+          </svg>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 1rem; text-align: center;">
+            Chart shows cumulative monthly savings from $5.1K–8.4K per month, reaching $61K–100K by month 12.
+          </p>
+        </div>
+
         <div style="background: var(--bg-dark); color: white; padding: 3rem; border-radius: var(--radius-lg); text-align: center;">
           <div style="font-size: var(--text-sm); color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Annual Impact</div>
           <div style="font-size: 4rem; font-weight: 800; color: var(--indigo); margin-bottom: 1rem;">$61K–100K</div>
