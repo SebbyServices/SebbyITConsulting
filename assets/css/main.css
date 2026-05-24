@@ -23,6 +23,13 @@
   --indigo-mid: #818CF8;
   --indigo-dim: #EEF2FF;
 
+  /* Semantic Colors (used in case studies & portfolio) */
+  --navy:       #0F172A;
+  --navy-mid:   #1E293B;
+  --cream:      #F8F6F0;
+  --gold:       #D97706;
+  --gold-light: #FEF3C7;
+
   /* Borders */
   --border:     #E2E8F0;
   --border-dark:rgba(255,255,255,0.08);
