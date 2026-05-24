@@ -157,7 +157,6 @@ async function loadComponents() {
       // Initialize nav after header is injected
       if (component === 'header') {
         initNavLinks(slot);
-        initMobileMenu(slot);
         setupNavScroll(); // Re-run after nav is in DOM
       }
     } catch (error) {
@@ -179,45 +178,45 @@ function initNavLinks(headerSlot) {
   });
 }
 
-// ========== MOBILE MENU INITIALIZATION ==========
-// Class-based toggle with multiple close behaviors
-function initMobileMenu(headerSlot) {
-  const hamburger = headerSlot.querySelector('#hamburger');
-  const menu = headerSlot.querySelector('.nav-menu');
-  if (!hamburger || !menu) return;
+// ========== MOBILE MENU DELEGATION ==========
+// Event delegation for mobile menu — works regardless of when header component loads
+function setupMobileMenuDelegation() {
+  document.addEventListener('click', (e) => {
+    const nav = document.querySelector('nav');
+    const menu = nav?.querySelector('.nav-menu');
+    const hamburger = nav?.querySelector('.hamburger-btn');
+    if (!nav || !menu || !hamburger) return;
 
-  function openMenu() {
-    menu.classList.add('open');
-    hamburger.classList.add('open');
-    hamburger.setAttribute('aria-expanded', 'true');
-  }
-
-  function closeMenu() {
-    menu.classList.remove('open');
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-  }
-
-  // Toggle on hamburger click
-  hamburger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    menu.classList.contains('open') ? closeMenu() : openMenu();
+    // Hamburger click — toggle menu
+    if (e.target.closest('.hamburger-btn')) {
+      const isOpen = menu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    }
+    // Nav link click — close menu
+    else if (e.target.closest('.nav-menu a')) {
+      menu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+    // Outside click — close menu
+    else if (!nav.contains(e.target)) {
+      menu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
   });
 
-  // Close on nav link click
-  menu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  // Close on outside click
-  document.addEventListener('click', e => {
-    if (!headerSlot.contains(e.target)) closeMenu();
-  });
-
-  // Close on Escape key
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && menu.classList.contains('open')) {
-      closeMenu();
+  // Escape key — close menu
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const nav = document.querySelector('nav');
+    const menu = nav?.querySelector('.nav-menu');
+    const hamburger = nav?.querySelector('.hamburger-btn');
+    if (menu?.classList.contains('open')) {
+      menu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
       hamburger.focus();
     }
   });
@@ -233,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupStatCounters();
   setupParallax();
   setupPageTransitions();
+  setupMobileMenuDelegation();
 
   // Add enter animation to page
   document.body.classList.add('page-enter');
