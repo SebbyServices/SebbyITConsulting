@@ -113,6 +113,21 @@ function setupParallax() {
   });
 }
 
+// ========== NAV BLUR ON SCROLL ==========
+// Apply blur effect to nav when scrolling
+function setupNavScroll() {
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+}
+
 // ========== COMPONENT LOADING ==========
 // Load header and footer components via fetch
 async function loadComponents() {
@@ -171,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupParallax();
   setupPageTransitions();
   setupMobileMenu();
+  setupNavScroll();
 
   // Add enter animation to page
   document.body.classList.add('page-enter');
