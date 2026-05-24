@@ -1,1371 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sebby IT Consulting — Tech Made Simple. Results Made Real.</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --navy: #0d1f3c;
-    --navy-mid: #132a50;
-    --navy-deep: #071020;
-    --blue: #1a6ff0;
-    --blue-light: #4a94ff;
-    --blue-glow: rgba(26,111,240,0.18);
-    --sky: #e8f1ff;
-    --accent: #f97316;
-    --accent-light: #fff4ed;
-    --white: #ffffff;
-    --off-white: #f6f9ff;
-    --text-muted: #6b7a99;
-    --text-body: #1e2d4a;
-    --border: #d8e4f5;
-    --card-bg: #ffffff;
-    --section-alt: #f2f6ff;
-    --radius: 16px;
-    --radius-sm: 10px;
-    --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: var(--text-body);
-    background: var(--white);
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-
-  h1, h2, h3, h4 {
-    font-family: 'Sora', sans-serif;
-    color: var(--navy);
-    line-height: 1.2;
-  }
-
-  a { text-decoration: none; color: inherit; }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(13,31,60,0.97);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(74,148,255,0.15);
-    padding: 0 5%;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 68px;
-  }
-
-  .nav-logo {
-    display: flex; align-items: center; gap: 10px;
-    font-family: 'Sora', sans-serif;
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: #ffffff;
-    letter-spacing: -0.03em;
-  }
-
-  .nav-logo .wordmark {
-    letter-spacing: -0.03em;
-    line-height: 1;
-  }
-
-  .nav-logo .wordmark span { color: var(--blue-light); }
-
-  .nav-links {
-    display: flex; gap: 2rem; list-style: none;
-    font-size: 0.9rem; font-weight: 500;
-  }
-
-  .nav-links a {
-    color: rgba(255,255,255,0.65);
-    transition: color var(--transition);
-  }
-  .nav-links a:hover { color: #ffffff; }
-
-  .nav-cta {
-    background: var(--blue);
-    color: white !important;
-    padding: 0.5rem 1.25rem;
-    border-radius: 50px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    transition: background var(--transition), transform var(--transition);
-    border: 1px solid rgba(74,148,255,0.4);
-  }
-  .nav-cta:hover { background: #1259cc; transform: translateY(-1px); }
-
-  /* ── HERO ── */
-  .hero {
-    padding: 140px 5% 100px;
-    background: linear-gradient(160deg, #e8f1ff 0%, #f6f9ff 50%, #ffffff 100%);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(26,111,240,0.1) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -100px; left: -100px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(249,115,22,0.06) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-
-  /* circuit dot pattern overlay */
-  .hero-dots {
-    position: absolute; inset: 0; z-index: 0;
-    background-image: radial-gradient(circle, rgba(26,111,240,0.12) 1px, transparent 1px);
-    background-size: 32px 32px;
-    mask-image: radial-gradient(ellipse 80% 60% at 80% 40%, black 0%, transparent 70%);
-  }
-
-  .hero-inner {
-    max-width: 680px;
-    position: relative; z-index: 1;
-    animation: fadeUp 0.8s ease both;
-  }
-
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--navy);
-    color: var(--blue-light);
-    border: 1px solid rgba(74,148,255,0.3);
-    border-radius: 50px;
-    padding: 0.35rem 1rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.01em;
-  }
-
-  .hero-badge::before {
-    content: '';
-    width: 7px; height: 7px;
-    background: var(--blue-light);
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 6px var(--blue-light);
-  }
-
-  .hero h1 {
-    font-size: clamp(2.4rem, 5vw, 3.4rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.25rem;
-    color: var(--navy);
-  }
-
-  .hero h1 em {
-    font-style: normal;
-    color: var(--blue);
-  }
-
-  .hero p {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    max-width: 520px;
-    margin-bottom: 2rem;
-    font-weight: 300;
-  }
-
-  .hero-actions {
-    display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
-  }
-
-  .btn-primary {
-    background: var(--blue);
-    color: white;
-    padding: 0.85rem 2rem;
-    border-radius: 50px;
-    font-family: 'Sora', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all var(--transition);
-    display: inline-flex; align-items: center; gap: 8px;
-    border: none; cursor: pointer;
-  }
-  .btn-primary:hover { background: #1259cc; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,111,240,0.3); }
-
-  .btn-secondary {
-    color: var(--navy);
-    font-weight: 500;
-    font-size: 0.95rem;
-    display: inline-flex; align-items: center; gap: 6px;
-    transition: gap var(--transition);
-  }
-  .btn-secondary:hover { gap: 10px; }
-  .btn-secondary::after { content: '→'; }
-
-  .hero-stats {
-    display: flex; gap: 2.5rem; margin-top: 3.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .stat-item {}
-  .stat-number {
-    font-family: 'Sora', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--navy);
-    display: block;
-  }
-  .stat-label {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    font-weight: 400;
-  }
-
-  /* ── SECTION HEADERS ── */
-  .section-label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-
-  .section-title {
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--navy);
-    margin-bottom: 1rem;
-  }
-
-  .section-sub {
-    font-size: 1rem;
-    color: var(--text-muted);
-    max-width: 500px;
-    font-weight: 300;
-  }
-
-  /* ── SERVICES ── */
-  .services {
-    padding: 90px 5%;
-    background: var(--off-white);
-  }
-
-  .services-header {
-    margin-bottom: 3rem;
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.25rem;
-  }
-
-  .service-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 2rem;
-    transition: all var(--transition);
-    cursor: default;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--blue);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--transition);
-  }
-
-  .service-card:hover {
-    box-shadow: 0 12px 40px rgba(26,111,240,0.1);
-    transform: translateY(-4px);
-    border-color: rgba(26,111,240,0.25);
-  }
-
-  .service-card:hover::before { transform: scaleX(1); }
-
-  .service-icon {
-    width: 52px; height: 52px;
-    border-radius: var(--radius-sm);
-    background: var(--sky);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1.25rem;
-    font-size: 1.4rem;
-  }
-
-  .service-card h3 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin-bottom: 0.6rem;
-    color: var(--navy);
-  }
-
-  .service-card p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.65;
-    margin-bottom: 1rem;
-  }
-
-  .service-tag {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--blue);
-    background: var(--sky);
-    padding: 0.2rem 0.65rem;
-    border-radius: 50px;
-    display: inline-block;
-  }
-
-  /* ── ABOUT ── */
-  .about {
-    padding: 90px 5%;
-    background: var(--white);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .about-visual {
-    position: relative;
-  }
-
-  .about-card {
-    background: var(--navy);
-    border-radius: var(--radius);
-    padding: 3rem;
-    color: white;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(74,148,255,0.2);
-  }
-
-  .about-card::before {
-    content: '';
-    position: absolute;
-    top: -80px; right: -80px;
-    width: 250px; height: 250px;
-    background: rgba(26,111,240,0.15);
-    border-radius: 50%;
-  }
-
-  /* circuit grid on about card */
-  .about-card::after {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(74,148,255,0.15) 1px, transparent 1px);
-    background-size: 24px 24px;
-    mask-image: radial-gradient(ellipse 70% 60% at 90% 10%, black 0%, transparent 65%);
-  }
-
-  .about-avatar {
-    width: 80px; height: 80px;
-    border-radius: 14px;
-    background: var(--blue);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1.5rem;
-    position: relative; z-index: 1;
-    border: 2px solid rgba(255,255,255,0.15);
-  }
-
-  .about-card h3 {
-    color: white;
-    font-size: 1.2rem;
-    margin-bottom: 0.25rem;
-    position: relative; z-index: 1;
-  }
-
-  .about-card .role {
-    color: rgba(255,255,255,0.55);
-    font-size: 0.85rem;
-    margin-bottom: 1.5rem;
-    position: relative; z-index: 1;
-  }
-
-  .about-skills {
-    display: flex; flex-wrap: wrap; gap: 0.5rem;
-    position: relative; z-index: 1;
-  }
-
-  .skill-pill {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.85);
-    padding: 0.25rem 0.75rem;
-    border-radius: 50px;
-    font-size: 0.78rem;
-    font-weight: 500;
-  }
-
-  .about-floating {
-    position: absolute;
-    bottom: -1rem; right: -1rem;
-    background: white;
-    border-radius: var(--radius-sm);
-    padding: 1rem 1.25rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-    border: 1px solid var(--border);
-    display: flex; align-items: center; gap: 0.75rem;
-  }
-
-  .about-floating .dot {
-    width: 10px; height: 10px;
-    background: #22c55e;
-    border-radius: 50%;
-  }
-
-  .about-floating span {
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--navy);
-    white-space: nowrap;
-  }
-
-  .about-content {}
-
-  .about-content p {
-    font-size: 1rem;
-    color: var(--text-muted);
-    margin-bottom: 1rem;
-    font-weight: 300;
-    line-height: 1.8;
-  }
-
-  .about-content strong { color: var(--text-body); font-weight: 500; }
-
-  .about-location {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-top: 1rem;
-    background: var(--section-alt);
-    padding: 0.4rem 1rem;
-    border-radius: 50px;
-    border: 1px solid var(--border);
-  }
-
-  /* ── PORTFOLIO ── */
-  .portfolio {
-    padding: 90px 5%;
-    background: var(--section-alt);
-  }
-
-  .portfolio-header {
-    margin-bottom: 3rem;
-  }
-
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.25rem;
-  }
-
-  .portfolio-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.75rem;
-    transition: all var(--transition);
-  }
-
-  .portfolio-card:hover {
-    box-shadow: 0 8px 32px rgba(26,111,240,0.08);
-    transform: translateY(-3px);
-  }
-
-  .p-tag {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: var(--accent-light);
-    padding: 0.2rem 0.65rem;
-    border-radius: 50px;
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
-
-  .portfolio-card h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--navy);
-  }
-
-  .portfolio-card p {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    line-height: 1.65;
-  }
-
-  /* ── CONTACT ── */
-  .contact {
-    padding: 90px 5%;
-    background: var(--navy);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .contact::before {
-    content: '';
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(26,111,240,0.12) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-
-  .contact::after {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(74,148,255,0.1) 1px, transparent 1px);
-    background-size: 28px 28px;
-    mask-image: radial-gradient(ellipse 60% 80% at 10% 90%, black 0%, transparent 60%);
-  }
-
-  .contact-inner {
-    max-width: 640px;
-    margin: 0 auto;
-    position: relative; z-index: 1;
-  }
-
-  .contact .section-label { color: var(--blue-light); }
-  .contact .section-title { color: white; }
-  .contact .section-sub { color: rgba(255,255,255,0.55); }
-
-  .contact-header { margin-bottom: 2.5rem; }
-
-  .contact-methods {
-    display: flex; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap;
-  }
-
-  .contact-method-btn {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: white;
-    padding: 0.65rem 1.5rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all var(--transition);
-    display: inline-flex; align-items: center; gap: 8px;
-    cursor: pointer;
-    text-decoration: none;
-  }
-
-  .contact-method-btn:hover {
-    background: rgba(255,255,255,0.15);
-    border-color: rgba(255,255,255,0.3);
-  }
-
-  .contact-form {
-    display: flex; flex-direction: column; gap: 1rem;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .form-field {
-    display: flex; flex-direction: column; gap: 0.4rem;
-  }
-
-  .form-field label {
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: rgba(255,255,255,0.65);
-  }
-
-  .form-field input,
-  .form-field select,
-  .form-field textarea {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: var(--radius-sm);
-    padding: 0.75rem 1rem;
-    color: white;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.92rem;
-    transition: border-color var(--transition), background var(--transition);
-    outline: none;
-    width: 100%;
-  }
-
-  .form-field select option { background: var(--navy); color: white; }
-
-  .form-field input::placeholder,
-  .form-field textarea::placeholder { color: rgba(255,255,255,0.3); }
-
-  .form-field input:focus,
-  .form-field select:focus,
-  .form-field textarea:focus {
-    border-color: var(--blue-light);
-    background: rgba(255,255,255,0.1);
-  }
-
-  .form-field textarea { resize: vertical; min-height: 120px; }
-
-  .btn-submit {
-    background: var(--blue);
-    color: white;
-    padding: 0.9rem 2rem;
-    border-radius: 50px;
-    font-family: 'Sora', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    border: none;
-    cursor: pointer;
-    transition: all var(--transition);
-    align-self: flex-start;
-    display: flex; align-items: center; gap: 8px;
-  }
-
-  .btn-submit:hover { background: #1259cc; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,111,240,0.4); }
-
-  /* ── FAQ ── */
-  .faq {
-    padding: 90px 5%;
-    background: var(--off-white);
-  }
-
-  .faq-header {
-    margin-bottom: 3rem;
-  }
-
-  .faq-list {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .faq-item {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 1rem;
-    overflow: hidden;
-  }
-
-  .faq-question {
-    padding: 1.5rem 2rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    color: var(--navy);
-    transition: all var(--transition);
-    user-select: none;
-  }
-
-  .faq-item:hover .faq-question {
-    background: var(--section-alt);
-  }
-
-  .faq-toggle {
-    font-size: 1.5rem;
-    transition: transform var(--transition);
-    display: inline-block;
-  }
-
-  .faq-item.open .faq-toggle {
-    transform: rotate(180deg);
-  }
-
-  .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height var(--transition);
-    background: var(--section-alt);
-  }
-
-  .faq-item.open .faq-answer {
-    max-height: 500px;
-  }
-
-  .faq-answer p {
-    padding: 0 2rem 1.5rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    font-weight: 300;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--navy-deep);
-    padding: 2rem 5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    border-top: 1px solid rgba(74,148,255,0.15);
-  }
-
-  footer .logo {
-    font-family: 'Sora', sans-serif;
-    font-weight: 700;
-    color: white;
-    font-size: 0.95rem;
-  }
-
-  footer .logo span { color: var(--blue-light); }
-
-  footer p {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.35);
-  }
-
-  footer .footer-links {
-    display: flex; gap: 1.5rem; list-style: none;
-  }
-
-  footer .footer-links a {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.45);
-    transition: color var(--transition);
-  }
-  footer .footer-links a:hover { color: white; }
-
-  /* ── LANGUAGE TOGGLE ── */
-  .lang-toggle {
-    display: flex; gap: 0.25rem;
-  }
-
-  .lang-toggle button {
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.65);
-    cursor: pointer;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    transition: all var(--transition);
-  }
-
-  .lang-toggle button.active {
-    background: rgba(74,148,255,0.3);
-    color: white;
-  }
-
-  .lang-toggle button:hover:not(.active) {
-    color: white;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .fade-up {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .about {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-      padding: 60px 5%;
-    }
-    .form-row { grid-template-columns: 1fr; }
-    .hero-stats { gap: 1.5rem; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Enterprise security &amp; boutique consulting. IAM, DevOps, WordPress &amp; video pipeline engineering for ambitious businesses. $2M+ in client revenue built.">
+  <meta name="keywords" content="IAM, DevOps, WordPress, cybersecurity, digital transformation, consulting">
+  <meta name="author" content="Sebby IT Consulting">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sebby IT Consulting — Enterprise Security, Boutique Attention">
+  <meta property="og:description" content="Premium consulting for IAM, DevOps, web development, and video automation. Trusted by law firms, nonprofits, and startups.">
+  <meta property="og:image" content="/assets/images/og-image.jpg">
+  <meta property="og:url" content="https://sebbyservices.com/">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sebby IT Consulting">
+  <meta name="twitter:description" content="Enterprise security &amp; boutique consulting. $2M+ client revenue built.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://sebbyservices.com/">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+  <title>Sebby IT Consulting — Enterprise Security, Boutique Attention</title>
 </head>
 <body>
+  <!-- Header (loaded via JS) -->
+  <div id="header-slot"></div>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo"><svg width="38" height="38" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="40" height="40" rx="8" fill="#1a6ff0"/><rect x="14" y="14" width="32" height="32" rx="5" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><line x1="30" y1="10" x2="30" y2="4" stroke="#4a94ff" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="50" x2="30" y2="56" stroke="#4a94ff" stroke-width="2.5" stroke-linecap="round"/><line x1="10" y1="30" x2="4" y2="30" stroke="#4a94ff" stroke-width="2.5" stroke-linecap="round"/><line x1="50" y1="30" x2="56" y2="30" stroke="#4a94ff" stroke-width="2.5" stroke-linecap="round"/><circle cx="30" cy="4" r="3" fill="#4a94ff"/><circle cx="30" cy="56" r="3" fill="#4a94ff"/><circle cx="4" cy="30" r="3" fill="#4a94ff"/><circle cx="56" cy="30" r="3" fill="#4a94ff"/><text x="30" y="37" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="22" fill="white">S</text></svg><span class="wordmark">Sebby <span>IT</span>&nbsp;Consulting</span></div>"
-  <ul class="nav-links">
-    <li><a href="#services" data-i18n="navServices">Services</a></li>
-    <li><a href="#about" data-i18n="navAbout">About</a></li>
-    <li><a href="#portfolio" data-i18n="navWork">Work</a></li>
-    <li><a href="#faq" data-i18n="navFaq">FAQ</a></li>
-    <li>
-      <div class="lang-toggle">
-        <button class="lang-btn active" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="es">ES</button>
-      </div>
-    </li>
-    <li><a href="#contact" class="nav-cta" data-i18n="navGetInTouch">Get in Touch</a></li>
-  </ul>
-</nav>
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Enterprise. Boutique. Trusted.</div>
+      <h1 class="hero-h1">Security &amp; Transformation for Ambitious Businesses</h1>
+      <p class="hero-sub">IAM strategy, DevOps automation, WordPress excellence, and video pipeline engineering. We build defensible digital businesses.</p>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-dots"></div>
-  <div class="hero-inner">
-    <div class="hero-badge" data-i18n="heroBadge">Miami-Based · Available Locally & Remotely</div>
-    <h1 data-i18n="heroH1">Tech Made <em>Simple.</em><br>Results Made Real.</h1>
-    <p data-i18n="heroP">Whether you're a small business owner, a creative, a professional, or just someone who needs tech to actually work — Sebastian's got you covered.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary"><span data-i18n="heroBtn">Get a Free Consultation</span> <span>→</span></a>
-      <a href="#services" class="btn-secondary" data-i18n="heroBtn2">See what I do</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <span class="stat-number">4</span>
-        <span class="stat-label">Service areas</span>
+      <div class="hero-ctas">
+        <a href="/contact/" class="btn btn-primary btn-lg">Get a Free Audit →</a>
+        <a href="/portfolio/" class="btn btn-white btn-lg">See Our Work →</a>
       </div>
-      <div class="stat-item">
-        <span class="stat-number">100%</span>
-        <span class="stat-label">Personal attention</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">Miami</span>
-        <span class="stat-label">Based in Miami, FL</span>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="services-header fade-up">
-    <span class="section-label" data-i18n="servicesLabel">What I Can Help With</span>
-    <h2 class="section-title" data-i18n="servicesTitle">One person. Four superpowers.</h2>
-    <p class="section-sub" data-i18n="servicesSub">No long onboarding, no confusing quotes. Just straightforward help from someone who knows what they're doing.</p>
-  </div>
-  <div class="services-grid">
-    <div class="service-card fade-up">
-      <div class="service-icon">🖥️</div>
-      <h3 data-i18n="service1Title">IT Support & Troubleshooting</h3>
-      <p data-i18n="service1Desc">Tech acting up? I'll fix it. From setting up new devices and securing your network to solving the random issues that slow your day down — I make sure your tech works the way it's supposed to.</p>
-      <span class="service-tag" data-i18n="service1Tag">Homes · Offices · Small Businesses</span>
-    </div>
-    <div class="service-card fade-up">
-      <div class="service-icon">🎬</div>
-      <h3 data-i18n="service2Title">Content Production</h3>
-      <p data-i18n="service2Desc">Got something to say? I'll help you say it well. From recording and editing to post-production and publishing, I handle the full pipeline so you can focus on your message.</p>
-      <span class="service-tag" data-i18n="service2Tag">YouTube · Podcasts · Social Media</span>
-    </div>
-    <div class="service-card fade-up">
-      <div class="service-icon">🌐</div>
-      <h3 data-i18n="service3Title">Website Design & Support</h3>
-      <p data-i18n="service3Desc">Your website is your first impression — make it count. I build clean, professional, easy-to-navigate websites and provide ongoing support from small tweaks to full overhauls.</p>
-      <span class="service-tag" data-i18n="service3Tag">Businesses · Freelancers · Professionals</span>
-    </div>
-    <div class="service-card fade-up">
-      <div class="service-icon">📊</div>
-      <h3 data-i18n="service4Title">Business Consulting & Strategy</h3>
-      <p data-i18n="service4Desc">Not sure where your business is headed? Let's figure it out together. I help you plan, organize, and grow — from competitor analysis and action plans to systems that keep things running smoothly.</p>
-      <span class="service-tag" data-i18n="service4Tag">Small Businesses · Professional Services</span>
-    </div>
-    <div class="service-card fade-up">
-      <div class="service-icon">🏠</div>
-      <h3 data-i18n="service5Title">Smart Home Installation</h3>
-      <p data-i18n="service5Desc">Upgrade your home with seamless smart tech integration. From security systems to automated lighting and entertainment — I set it all up so it just works.</p>
-      <span class="service-tag" data-i18n="service5Tag">Homeowners · Families · Renters</span>
-    </div>
-    <div class="service-card fade-up">
-      <div class="service-icon">📼</div>
-      <h3 data-i18n="service6Title">Analog Media Conversion</h3>
-      <p data-i18n="service6Desc">Got old VHS tapes, CDs, or legacy media collecting dust? I'll convert them to digital formats so your memories are preserved and easy to access for years to come.</p>
-      <span class="service-tag" data-i18n="service6Tag">Families · Businesses · Archives</span>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" style="padding: 90px 5%; background: var(--white);">
-  <div class="about" style="padding: 0;">
-    <div class="about-visual fade-up">
-      <div class="about-card">
-        <div class="about-avatar">
-        <svg width="52" height="52" viewBox="0 0 60 60" fill="none">
-          <rect x="10" y="10" width="40" height="40" rx="8" fill="rgba(255,255,255,0.15)"/>
-          <rect x="14" y="14" width="32" height="32" rx="5" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
-          <line x1="30" y1="10" x2="30" y2="4" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
-          <line x1="30" y1="50" x2="30" y2="56" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
-          <line x1="10" y1="30" x2="4" y2="30" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
-          <line x1="50" y1="30" x2="56" y2="30" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="30" cy="4" r="2.5" fill="rgba(255,255,255,0.6)"/>
-          <circle cx="30" cy="56" r="2.5" fill="rgba(255,255,255,0.6)"/>
-          <circle cx="4" cy="30" r="2.5" fill="rgba(255,255,255,0.6)"/>
-          <circle cx="56" cy="30" r="2.5" fill="rgba(255,255,255,0.6)"/>
-          <text x="30" y="37" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="22" fill="white">S</text>
-        </svg>
-      </div>
-        <h3>Sebastian</h3>
-        <p class="role">IT Consultant & Tech Problem-Solver</p>
-        <div class="about-skills">
-          <span class="skill-pill">IT Support</span>
-          <span class="skill-pill">Video Production</span>
-          <span class="skill-pill">Web Design</span>
-          <span class="skill-pill">Business Strategy</span>
-          <span class="skill-pill">DaVinci Resolve</span>
-          <span class="skill-pill">Audio Engineering</span>
-          <span class="skill-pill">YouTube Production</span>
+      <div class="hero-stats">
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="2000000">$2M+</span>
+          <span class="stat-label">Client Revenue</span>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="4">4</span>
+          <span class="stat-label">Active Clients</span>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-number" data-target="10">10+</span>
+          <span class="stat-label">Platforms Automated</span>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-number">$150+</span>
+          <span class="stat-label">Hourly Rate</span>
         </div>
       </div>
-      <div class="about-floating">
-        <div class="dot"></div>
-        <span>Available for new clients</span>
-      </div>
     </div>
-    <div class="about-content fade-up">
-      <span class="section-label" data-i18n="aboutLabel">About Me</span>
-      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-        <h2 class="section-title" style="margin: 0;">Hey, I'm Sebastian.</h2>
-        <a href="https://www.linkedin.com/in/sebastianpodgaetz/" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--sky); border-radius: 6px; text-decoration: none; font-size: 18px; transition: all var(--transition);" title="Sebastian Podgaetz on LinkedIn">💼</a>
-      </div>
-      <p data-i18n="aboutP1">I'm a Miami-based tech consultant who genuinely loves helping people solve problems. Whether it's untangling a tech headache, building a YouTube channel from scratch, designing a website, or mapping out a business growth plan — I bring the same energy to every project: <strong>practical, personal, and results-focused.</strong></p>
-      <p data-i18n="aboutP2">I've worked with law firms, content creators, healthcare professionals, and everyday families. No matter the client, my goal is always the same: make things work better for <strong>you</strong>, without making it complicated.</p>
-      <p data-i18n="aboutP3">I'm not a big agency. I'm one person who's genuinely invested in seeing you succeed — and that means you always know exactly who you're working with.</p>
-      <div class="about-location" data-i18n="aboutLocation">
-        📍 Miami, FL · Local & Remote
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- PORTFOLIO -->
-<section class="portfolio" id="portfolio">
-  <div class="portfolio-header fade-up">
-    <span class="section-label" data-i18n="portfolioLabel">Past Work</span>
-    <h2 class="section-title" data-i18n="portfolioTitle">A few things I've built.</h2>
-    <p class="section-sub" data-i18n="portfolioSub">Real projects for real clients. Here's a taste of what working with me looks like.</p>
-  </div>
-  <div class="portfolio-grid">
-    <div class="portfolio-card fade-up">
-      <span class="p-tag">Business Strategy</span>
-      <h3>Law Firm Growth Package</h3>
-      <p>Developed a full strategy package for a boutique securities law firm — business plan, competitor analysis, 5-year budget, LinkedIn content calendar, and a 30/60/90 day action plan, all delivered as an interactive dashboard and polished Word document.</p>
-    </div>
-    <div class="portfolio-card fade-up">
-      <span class="p-tag">Content Production</span>
-      <h3>YouTube Channel Production Pipeline</h3>
-      <p>Built and manage a complete production pipeline for a long-form Christian content channel — including audio editing, SRT captioning, thumbnail design, and weekly upload scheduling from recording to published video.</p>
-    </div>
-    <div class="portfolio-card fade-up">
-      <span class="p-tag">Web & Dashboards</span>
-      <h3>Interactive Business Dashboard</h3>
-      <p>Created a custom HTML dashboard for tracking business growth strategy KPIs for a professional services client, turning complex data into a clean, easy-to-read interface.</p>
-    </div>
-    <div class="portfolio-card fade-up">
-      <span class="p-tag">Systems & Docs</span>
-      <h3>Document Systems & Templates</h3>
-      <p>Developed reusable document frameworks, workflow templates, and operational systems for client businesses — making day-to-day processes faster, more consistent, and easier to manage.</p>
-    </div>
-    <div class="portfolio-card fade-up">
-      <span class="p-tag">Operations Support</span>
-      <h3>E-Commerce Fulfillment Setup — Apparel Brand</h3>
-      <p>Configured and deployed a label printing system for a t-shirt brand's fulfillment operation, streamlining their order packaging workflow and providing ongoing hands-on support to help the team handle customer orders efficiently at scale.</p>
-    </div>
-  </div>
-</section>
+  <!-- ========== SERVICES GRID ========== -->
+  <section class="section section-cream">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 class="reveal">Services That Scale</h2>
+        <p class="reveal" style="font-size: 1.1rem; color: #666; max-width: 600px; margin: 1rem auto 0;">
+          Four specialized service lines designed to solve enterprise problems with boutique-level attention to detail.
+        </p>
+      </div>
 
-<!-- FAQ -->
-<section class="faq" id="faq">
-  <div class="faq-header fade-up">
-    <span class="section-label" data-i18n="faqLabel">Common Questions</span>
-    <h2 class="section-title" data-i18n="faqTitle">Got questions? I've got answers.</h2>
-  </div>
-  <div class="faq-list">
-    <div class="faq-item fade-up">
-      <div class="faq-question">
-        <span data-i18n="faq1Q">How quickly will you respond to my inquiry?</span>
-        <span class="faq-toggle">▼</span>
-      </div>
-      <div class="faq-answer">
-        <p data-i18n="faq1A">I aim to get back to you within 1-2 business days. Since I work with each client personally, I make sure to give your inquiry the attention it deserves.</p>
-      </div>
-    </div>
-
-    <div class="faq-item fade-up">
-      <div class="faq-question">
-        <span data-i18n="faq2Q">How long will my project take?</span>
-        <span class="faq-toggle">▼</span>
-      </div>
-      <div class="faq-answer">
-        <p data-i18n="faq2A">Timeline depends entirely on the scope of your project. A simple website tweak might take days, while a full content production pipeline could take weeks. During our initial consultation, I'll give you a realistic estimate based on what you need.</p>
-      </div>
-    </div>
-
-    <div class="faq-item fade-up">
-      <div class="faq-question">
-        <span data-i18n="faq3Q">Do you work remotely or locally in Miami?</span>
-        <span class="faq-toggle">▼</span>
-      </div>
-      <div class="faq-answer">
-        <p data-i18n="faq3A">I work both ways. Right now, I'm primarily taking on remote clients, but I'm available for local projects in the Miami area when needed. Either way, you get the same level of personal attention and quality work.</p>
-      </div>
-    </div>
-
-    <div class="faq-item fade-up">
-      <div class="faq-question">
-        <span data-i18n="faq4Q">How is pricing structured?</span>
-        <span class="faq-toggle">▼</span>
-      </div>
-      <div class="faq-answer">
-        <p data-i18n="faq4A">Pricing depends on the specific service and scope of work. Some projects are flat-rate, others are hourly. The best way to find out what your project will cost is to reach out and tell me what you're working on — I'll give you a clear, no-surprise quote.</p>
-      </div>
-    </div>
-
-    <div class="faq-item fade-up">
-      <div class="faq-question">
-        <span data-i18n="faq5Q">How do I get started?</span>
-        <span class="faq-toggle">▼</span>
-      </div>
-      <div class="faq-answer">
-        <p data-i18n="faq5A">Just fill out the form at the bottom of this page or send me an email at <a href="mailto:info@sebbyservices.com" style="color: var(--blue); text-decoration: underline;">info@sebbyservices.com</a>. Tell me what you're working on, and we'll set up a time to chat about how I can help.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-inner">
-    <div class="contact-header fade-up">
-      <span class="section-label" data-i18n="contactLabel">Get In Touch</span>
-      <h2 class="section-title" data-i18n="contactTitle">Ready to get started?</h2>
-      <p class="section-sub" data-i18n="contactSub">Fill out the form below or message me directly on WhatsApp. I'll get back to you within one business day.</p>
-      <div class="contact-methods fade-up" style="margin-top: 1.5rem;">
-        <a href="https://wa.me/17865431417?text=Hi%20Sebastian%21%20I%20need%20help%20with..." class="contact-method-btn" data-i18n="contactBtn">💬 Message on WhatsApp</a>
-      </div>
-    </div>
-    <form class="contact-form fade-up" id="contactForm" method="POST" action="https://formspree.io/f/mdayzeek">
-      <div class="form-row">
-        <div class="form-field">
-          <label data-i18n="formNameLabel">Your Name</label>
-          <input type="text" name="name" data-i18n-placeholder="formNamePlaceholder" placeholder="First Last" required />
+      <div class="grid grid-4">
+        <!-- IAM Service -->
+        <div class="card reveal">
+          <div style="font-size: 32px; margin-bottom: 1rem;">🔐</div>
+          <h3>IAM Consulting</h3>
+          <p>OAuth, PKCE, service accounts, enterprise authentication strategies. Ryder-level infrastructure design.</p>
+          <a href="/services/#iam" class="btn btn-secondary btn-sm">Learn More →</a>
         </div>
-        <div class="form-field">
-          <label data-i18n="formEmailLabel">Email Address</label>
-          <input type="email" name="email" data-i18n-placeholder="formEmailPlaceholder" placeholder="you@example.com" required />
+
+        <!-- Web Service -->
+        <div class="card reveal">
+          <div style="font-size: 32px; margin-bottom: 1rem;">🌐</div>
+          <h3>WordPress &amp; Web</h3>
+          <p>Elementor mastery, custom HTML/CSS, bilingual sites. Premium conversions. Kinsta-hosted, Cloudflare-protected.</p>
+          <a href="/services/#web" class="btn btn-secondary btn-sm">Learn More →</a>
+        </div>
+
+        <!-- DevOps Service -->
+        <div class="card reveal">
+          <div style="font-size: 32px; margin-bottom: 1rem;">⚙️</div>
+          <h3>DevOps &amp; Automation</h3>
+          <p>GitHub Actions, Terraform IaC, Railway deployments. Email campaigns, CRM pipelines, Reddit monitoring.</p>
+          <a href="/services/#devops" class="btn btn-secondary btn-sm">Learn More →</a>
+        </div>
+
+        <!-- Video Service -->
+        <div class="card reveal">
+          <div style="font-size: 32px; margin-bottom: 1rem;">🎬</div>
+          <h3>Video Pipeline</h3>
+          <p>Remotion renders, Whisper transcription, YouTube/Instagram automation. 8 shorts/week production capacity.</p>
+          <a href="/services/#video" class="btn btn-secondary btn-sm">Learn More →</a>
         </div>
       </div>
-      <div class="form-field">
-        <label data-i18n="formServiceLabel">What do you need help with?</label>
-        <select name="service" required>
-          <option data-i18n-value="formServiceSelect">Select a service...</option>
-          <option data-i18n-value="formService1">IT Support / Troubleshooting</option>
-          <option data-i18n-value="formService2">Content Production (Video/Audio)</option>
-          <option data-i18n-value="formService3">Website Design</option>
-          <option data-i18n-value="formService4">Business Consulting & Strategy</option>
-          <option data-i18n-value="formService5">Something else</option>
-        </select>
+    </div>
+  </section>
+
+  <!-- ========== FEATURED CASE STUDY ========== -->
+  <section class="section section-navy">
+    <div class="container">
+      <div class="grid grid-2" style="align-items: center; gap: 3rem;">
+        <div class="reveal">
+          <div style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 1rem;">Featured Project</div>
+          <h2 style="color: white; margin-bottom: 1rem;">Riera Law: Legal Tech Redefined</h2>
+          <p style="color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; line-height: 1.8;">
+            Built a bilingual WordPress CRM, email automation pipeline, Reddit lead monitoring, and social media scheduling for a securities law firm. Integrated HubSpot, YouTube, Instagram, TikTok, and Twitter. Generated 10+ qualified leads in month one.
+          </p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+            <span class="btn btn-sm" style="background: rgba(200,150,12,0.2); color: var(--gold-light); border: 1px solid var(--gold);">WordPress</span>
+            <span class="btn btn-sm" style="background: rgba(200,150,12,0.2); color: var(--gold-light); border: 1px solid var(--gold);">HubSpot</span>
+            <span class="btn btn-sm" style="background: rgba(200,150,12,0.2); color: var(--gold-light); border: 1px solid var(--gold);">Automation</span>
+            <span class="btn btn-sm" style="background: rgba(200,150,12,0.2); color: var(--gold-light); border: 1px solid var(--gold);">Bilingual</span>
+          </div>
+          <a href="/portfolio/" class="btn btn-gold" style="background: var(--gold); color: var(--navy);">View Full Case Study →</a>
+        </div>
+        <div class="reveal" style="background: linear-gradient(135deg, #0D3255 0%, #051620 100%); padding: 2rem; border-radius: 8px; text-align: center; min-height: 300px; display: flex; align-items: center; justify-content: center;">
+          <div style="color: rgba(255,255,255,0.5); font-size: 1.2rem;">📊 Case Study Image</div>
+        </div>
       </div>
-      <div class="form-field">
-        <label data-i18n="formMessageLabel">Tell me more</label>
-        <textarea name="message" data-i18n-placeholder="formMessagePlaceholder" placeholder="What are you working on? What's the challenge you're facing?" required></textarea>
+    </div>
+  </section>
+
+  <!-- ========== ADVANTAGE SECTION ========== -->
+  <section class="section">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 class="reveal">The Sebby Advantage</h2>
+        <p class="reveal" style="font-size: 1.1rem; color: #666; max-width: 600px; margin: 1rem auto 0;">
+          Why ambitious businesses choose us over agencies and freelancers.
+        </p>
       </div>
-      <button type="submit" class="btn-submit" data-i18n="formSubmit">Send It Over →</button>
-    </form>
+
+      <div class="grid grid-3">
+        <div class="card reveal">
+          <div style="color: var(--gold); font-size: 32px; margin-bottom: 1rem;">⚡</div>
+          <h4 style="margin-bottom: 0.5rem;">Leverage First</h4>
+          <p style="font-size: 0.95rem;">
+            We don't build custom when open source, SaaS, or partnerships do the job cheaper. Your money goes to defensible moats.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <div style="color: var(--gold); font-size: 32px; margin-bottom: 1rem;">🌎</div>
+          <h4 style="margin-bottom: 0.5rem;">Bilingual Mastery</h4>
+          <p style="font-size: 0.95rem;">
+            English + Spanish from day one. We understand Dominican Republic, Miami, and Latin American markets.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <div style="color: var(--gold); font-size: 32px; margin-bottom: 1rem;">👨‍💼</div>
+          <h4 style="margin-bottom: 0.5rem;">Senior-Level Execution</h4>
+          <p style="font-size: 0.95rem;">
+            No junior developers. Every project gets architectural thinking and production-ready code. Period.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA SECTION ========== -->
+  <section class="section section-navy">
+    <div class="container" style="text-align: center;">
+      <h2 class="reveal" style="color: white; margin-bottom: 1rem;">Ready to Transform Your Business?</h2>
+      <p class="reveal" style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Book a free 30-minute audit. No pitch. No sales pressure. Just honest feedback on your tech, security, and growth opportunities.
+      </p>
+      <a href="/contact/" class="btn btn-primary btn-lg reveal">Start Your Free Audit →</a>
+    </div>
+  </section>
+
+  <!-- Footer (loaded via JS) -->
+  <div id="footer-slot"></div>
+
+  <!-- Floating CTA Buttons -->
+  <div class="floating-cta">
+    <a href="https://wa.me/1234567890" class="floating-btn" title="WhatsApp Us" target="_blank" rel="noopener noreferrer">💬</a>
+    <a href="/contact/" class="floating-btn" style="background: var(--navy); color: var(--gold); font-size: 20px;" title="Free Audit">📋</a>
   </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="logo">
-    <svg width="28" height="28" viewBox="0 0 60 60" fill="none" style="display:inline-block;vertical-align:middle;margin-right:8px;">
-      <rect x="10" y="10" width="40" height="40" rx="8" fill="#1a6ff0"/>
-      <rect x="14" y="14" width="32" height="32" rx="5" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
-      <line x1="30" y1="10" x2="30" y2="4" stroke="#4a94ff" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="30" y1="50" x2="30" y2="56" stroke="#4a94ff" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="10" y1="30" x2="4" y2="30" stroke="#4a94ff" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="50" y1="30" x2="56" y2="30" stroke="#4a94ff" stroke-width="2.5" stroke-linecap="round"/>
-      <circle cx="30" cy="4" r="3" fill="#4a94ff"/>
-      <circle cx="30" cy="56" r="3" fill="#4a94ff"/>
-      <circle cx="4" cy="30" r="3" fill="#4a94ff"/>
-      <circle cx="56" cy="30" r="3" fill="#4a94ff"/>
-      <text x="30" y="37" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="22" fill="white">S</text>
-    </svg>Sebby <span>IT</span>&nbsp;Consulting
-  </div>
-  <ul class="footer-links">
-    <li><a href="#services" data-i18n="navServices">Services</a></li>
-    <li><a href="#about" data-i18n="navAbout">About</a></li>
-    <li><a href="#portfolio" data-i18n="navWork">Work</a></li>
-    <li><a href="#contact" data-i18n="navGetInTouch">Contact</a></li>
-  </ul>
-  <p><span data-i18n="footerCopyright">© 2026 Sebby IT Consulting, Corp.</span> · <a href="mailto:info@sebbyservices.com" style="color:rgba(255,255,255,0.45);">info@sebbyservices.com</a> · Miami, FL</p>
-</footer>
-
-<script>
-  const translations = {
-    en: {
-      navServices: "Services",
-      navAbout: "About",
-      navWork: "Work",
-      navFaq: "FAQ",
-      navGetInTouch: "Get in Touch",
-      heroBadge: "Miami-Based · Available Locally & Remotely",
-      heroH1: "Tech Made Simple. Results Made Real.",
-      heroP: "Whether you're a small business owner, a creative, a professional, or just someone who needs tech to actually work — Sebastian's got you covered.",
-      heroBtn: "Get a Free Consultation",
-      heroBtn2: "See what I do",
-      servicesLabel: "What I Can Help With",
-      servicesTitle: "One person. Four superpowers.",
-      servicesSub: "No long onboarding, no confusing quotes. Just straightforward help from someone who knows what they're doing.",
-      service1Title: "IT Support & Troubleshooting",
-      service1Desc: "Tech acting up? I'll fix it. From setting up new devices and securing your network to solving the random issues that slow your day down — I make sure your tech works the way it's supposed to.",
-      service1Tag: "Homes · Offices · Small Businesses",
-      service2Title: "Content Production",
-      service2Desc: "Got something to say? I'll help you say it well. From recording and editing to post-production and publishing, I handle the full pipeline so you can focus on your message.",
-      service2Tag: "YouTube · Podcasts · Social Media",
-      service3Title: "Website Design & Support",
-      service3Desc: "Your website is your first impression — make it count. I build clean, professional, easy-to-navigate websites and provide ongoing support from small tweaks to full overhauls.",
-      service3Tag: "Businesses · Freelancers · Professionals",
-      service4Title: "Business Consulting & Strategy",
-      service4Desc: "Not sure where your business is headed? Let's figure it out together. I help you plan, organize, and grow — from competitor analysis and action plans to systems that keep things running smoothly.",
-      service4Tag: "Small Businesses · Professional Services",
-      service5Title: "Smart Home Installation",
-      service5Desc: "Upgrade your home with seamless smart tech integration. From security systems to automated lighting and entertainment — I set it all up so it just works.",
-      service5Tag: "Homeowners · Families · Renters",
-      service6Title: "Analog Media Conversion",
-      service6Desc: "Got old VHS tapes, CDs, or legacy media collecting dust? I'll convert them to digital formats so your memories are preserved and easy to access for years to come.",
-      service6Tag: "Families · Businesses · Archives",
-      aboutLabel: "About Me",
-      aboutTitle: "Hey, I'm Sebastian.",
-      aboutP1: "I'm a Miami-based tech consultant who genuinely loves helping people solve problems. Whether it's untangling a tech headache, building a YouTube channel from scratch, designing a website, or mapping out a business growth plan — I bring the same energy to every project: practical, personal, and results-focused.",
-      aboutP2: "I've worked with law firms, content creators, healthcare professionals, and everyday families. No matter the client, my goal is always the same: make things work better for you, without making it complicated.",
-      aboutP3: "I'm not a big agency. I'm one person who's genuinely invested in seeing you succeed — and that means you always know exactly who you're working with.",
-      aboutLocation: "📍 Miami, FL · Local & Remote",
-      aboutRole: "IT Consultant & Tech Problem-Solver",
-      portfolioLabel: "Past Work",
-      portfolioTitle: "A few things I've built.",
-      portfolioSub: "Real projects for real clients. Here's a taste of what working with me looks like.",
-      faqLabel: "Common Questions",
-      faqTitle: "Got questions? I've got answers.",
-      faq1Q: "How quickly will you respond to my inquiry?",
-      faq1A: "I aim to get back to you within 1-2 business days. Since I work with each client personally, I make sure to give your inquiry the attention it deserves.",
-      faq2Q: "How long will my project take?",
-      faq2A: "Timeline depends entirely on the scope of your project. A simple website tweak might take days, while a full content production pipeline could take weeks. During our initial consultation, I'll give you a realistic estimate based on what you need.",
-      faq3Q: "Do you work remotely or locally in Miami?",
-      faq3A: "I work both ways. Right now, I'm primarily taking on remote clients, but I'm available for local projects in the Miami area when needed. Either way, you get the same level of personal attention and quality work.",
-      faq4Q: "How is pricing structured?",
-      faq4A: "Pricing depends on the specific service and scope of work. Some projects are flat-rate, others are hourly. The best way to find out what your project will cost is to reach out and tell me what you're working on — I'll give you a clear, no-surprise quote.",
-      faq5Q: "How do I get started?",
-      faq5A: "Just fill out the form at the bottom of this page or send me an email at info@sebbyservices.com. Tell me what you're working on, and we'll set up a time to chat about how I can help.",
-      contactLabel: "Get In Touch",
-      contactTitle: "Ready to get started?",
-      contactSub: "Fill out the form below or message me directly on WhatsApp. I'll get back to you within one business day.",
-      contactBtn: "Message on WhatsApp",
-      formNameLabel: "Your Name",
-      formNamePlaceholder: "First Last",
-      formEmailLabel: "Email Address",
-      formEmailPlaceholder: "you@example.com",
-      formServiceLabel: "What do you need help with?",
-      formServiceSelect: "Select a service...",
-      formService1: "IT Support / Troubleshooting",
-      formService2: "Content Production (Video/Audio)",
-      formService3: "Website Design",
-      formService4: "Business Consulting & Strategy",
-      formService5: "Something else",
-      formMessageLabel: "Tell me more",
-      formMessagePlaceholder: "What are you working on? What's the challenge you're facing?",
-      formSubmit: "Send It Over →",
-      footerEmail: "info@sebbyservices.com",
-      footerCopyright: "© 2026 Sebby IT Consulting, Corp.",
-      skillsLabel: "IT Support",
-    },
-    es: {
-      navServices: "Servicios",
-      navAbout: "Acerca de",
-      navWork: "Trabajos",
-      navFaq: "Preguntas",
-      navGetInTouch: "Contacto",
-      heroBadge: "Basado en Miami · Disponible Local y Remotamente",
-      heroH1: "Tecnología Simple. Resultados Reales.",
-      heroP: "Ya seas dueño de un pequeño negocio, creativo, profesional, o simplemente alguien que necesita que la tecnología funcione — Sebastian te tiene cubierto.",
-      heroBtn: "Obtén una Consulta Gratis",
-      heroBtn2: "Ver qué hago",
-      servicesLabel: "¿En Qué Puedo Ayudarte?",
-      servicesTitle: "Una persona. Cuatro superpoderes.",
-      servicesSub: "Sin incorporación larga, sin cotizaciones confusas. Solo ayuda directa de alguien que sabe lo que está haciendo.",
-      service1Title: "Soporte de TI y Solución de Problemas",
-      service1Desc: "¿La tecnología actuando de forma extraña? La arreglaré. Desde configurar nuevos dispositivos y asegurar tu red hasta resolver los problemas aleatorios que ralentizan tu día — me aseguro de que tu tecnología funcione como se supone.",
-      service1Tag: "Hogares · Oficinas · Pequeños Negocios",
-      service2Title: "Producción de Contenido",
-      service2Desc: "¿Tienes algo que decir? Te ayudaré a decirlo bien. Desde grabar y editar hasta postproducción y publicación, manejo todo el proceso para que te enfoques en tu mensaje.",
-      service2Tag: "YouTube · Podcasts · Redes Sociales",
-      service3Title: "Diseño de Sitios Web y Soporte",
-      service3Desc: "Tu sitio web es tu primera impresión — que sea importante. Construyo sitios web limpios, profesionales y fáciles de navegar y proporciono apoyo continuo desde pequeños ajustes hasta overhauls completos.",
-      service3Tag: "Negocios · Freelancers · Profesionales",
-      service4Title: "Consultoría Empresarial y Estrategia",
-      service4Desc: "¿No estás seguro de hacia dónde se dirige tu negocio? Averigüémoslo juntos. Te ayudo a planificar, organizar y crecer — desde análisis de competencia y planes de acción hasta sistemas que mantienen las cosas funcionando sin problemas.",
-      service4Tag: "Pequeños Negocios · Servicios Profesionales",
-      service5Title: "Instalación de Hogares Inteligentes",
-      service5Desc: "Actualiza tu hogar con integración de tecnología inteligente sin fisuras. Desde sistemas de seguridad hasta iluminación automatizada y entretenimiento — lo configuro todo para que simplemente funcione.",
-      service5Tag: "Propietarios · Familias · Inquilinos",
-      service6Title: "Conversión de Medios Analógicos",
-      service6Desc: "¿Tienes cintas VHS viejas, CDs o medios heredados acumulando polvo? Las convertiré a formatos digitales para que tus recuerdos se conserven y sean fáciles de acceder durante años.",
-      service6Tag: "Familias · Negocios · Archivos",
-      aboutLabel: "Acerca de Mí",
-      aboutTitle: "Hola, soy Sebastian.",
-      aboutP1: "Soy un consultor de tecnología basado en Miami que genuinamente ama ayudar a las personas a resolver problemas. Ya sea desentrañar un dolor de cabeza tecnológico, construir un canal de YouTube desde cero, diseñar un sitio web o mapear un plan de crecimiento empresarial — traigo la misma energía a cada proyecto: práctico, personal y enfocado en resultados.",
-      aboutP2: "He trabajado con bufetes de abogados, creadores de contenido, profesionales de la salud y familias cotidianas. No importa el cliente, mi objetivo es siempre el mismo: hacer que las cosas funcionen mejor para ti, sin complicaciones.",
-      aboutP3: "No soy una gran agencia. Soy una persona genuinamente invertida en verte tener éxito — y eso significa que siempre sabes exactamente con quién estás trabajando.",
-      aboutLocation: "📍 Miami, FL · Local y Remoto",
-      aboutRole: "Consultor de TI y Solucionador de Problemas Tecnológicos",
-      portfolioLabel: "Trabajos Anteriores",
-      portfolioTitle: "Algunas cosas que he construido.",
-      portfolioSub: "Proyectos reales para clientes reales. Aquí hay una muestra de cómo es trabajar conmigo.",
-      faqLabel: "Preguntas Frecuentes",
-      faqTitle: "¿Tienes preguntas? Tengo respuestas.",
-      faq1Q: "¿Qué tan rápido responderás a mi consulta?",
-      faq1A: "Intento responder dentro de 1-2 días hábiles. Como trabajo con cada cliente personalmente, me aseguro de darle a tu consulta la atención que merece.",
-      faq2Q: "¿Cuánto tiempo tomará mi proyecto?",
-      faq2A: "El cronograma depende completamente del alcance de tu proyecto. Un ajuste simple de sitio web podría tomar días, mientras que un pipeline completo de producción de contenido podría tomar semanas. Durante nuestra consulta inicial, te daré una estimación realista basada en lo que necesitas.",
-      faq3Q: "¿Trabajas remotamente o localmente en Miami?",
-      faq3A: "Trabajo de ambas maneras. En este momento, principalmente estoy tomando clientes remotos, pero estoy disponible para proyectos locales en el área de Miami cuando sea necesario. De cualquier manera, obtienes el mismo nivel de atención personal y trabajo de calidad.",
-      faq4Q: "¿Cómo se estructura el precio?",
-      faq4A: "El precio depende del servicio específico y el alcance del trabajo. Algunos proyectos tienen tarifa plana, otros son por hora. La mejor manera de saber qué costará tu proyecto es comunicarte conmigo y decirme en qué estás trabajando — te daré una cotización clara y sin sorpresas.",
-      faq5Q: "¿Cómo empiezo?",
-      faq5A: "Simplemente completa el formulario al final de esta página o envíame un correo electrónico a info@sebbyservices.com. Cuéntame en qué estás trabajando y estableceremos un tiempo para hablar sobre cómo puedo ayudarte.",
-      contactLabel: "Ponte en Contacto",
-      contactTitle: "¿Listo para empezar?",
-      contactSub: "Completa el formulario a continuación o envíame un mensaje directo en WhatsApp. Te responderé en uno o dos días hábiles.",
-      contactBtn: "Mensaje en WhatsApp",
-      formNameLabel: "Tu Nombre",
-      formNamePlaceholder: "Nombre y Apellido",
-      formEmailLabel: "Dirección de Correo",
-      formEmailPlaceholder: "tu@ejemplo.com",
-      formServiceLabel: "¿Con qué necesitas ayuda?",
-      formServiceSelect: "Selecciona un servicio...",
-      formService1: "Soporte de TI / Solución de Problemas",
-      formService2: "Producción de Contenido (Video/Audio)",
-      formService3: "Diseño de Sitios Web",
-      formService4: "Consultoría Empresarial y Estrategia",
-      formService5: "Algo más",
-      formMessageLabel: "Cuéntame más",
-      formMessagePlaceholder: "¿En qué estás trabajando? ¿Cuál es el desafío al que te enfrentas?",
-      formSubmit: "Envíalo →",
-      footerEmail: "info@sebbyservices.com",
-      footerCopyright: "© 2026 Sebby IT Consulting, Corp.",
-      skillsLabel: "Soporte de TI",
-    }
-  };
-
-  let currentLang = localStorage.getItem('siteLang') || 'en';
-
-  function setLanguage(lang) {
-    currentLang = lang;
-    localStorage.setItem('siteLang', lang);
-
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (translations[lang][key]) {
-        el.textContent = translations[lang][key];
-      }
-    });
-
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-      const key = el.getAttribute('data-i18n-placeholder');
-      if (translations[lang][key]) {
-        el.placeholder = translations[lang][key];
-      }
-    });
-
-    document.querySelectorAll('[data-i18n-value]').forEach(el => {
-      const key = el.getAttribute('data-i18n-value');
-      if (translations[lang][key]) {
-        el.value = translations[lang][key];
-      }
-    });
-
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.remove('active');
-      if (btn.getAttribute('data-lang') === lang) {
-        btn.classList.add('active');
-      }
-    });
-
-    document.documentElement.lang = lang;
-  }
-
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
-  });
-
-  setLanguage(currentLang);
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  document.querySelectorAll('.faq-question').forEach(question => {
-    question.addEventListener('click', () => {
-      const item = question.parentElement;
-      item.classList.toggle('open');
-    });
-  });
-
-  const form = document.getElementById('contactForm');
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn = form.querySelector('.btn-submit');
-      btn.textContent = 'Sending...';
-      btn.disabled = true;
-
-      fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          btn.textContent = 'Message sent! ✓';
-          btn.style.background = '#22c55e';
-          form.reset();
-        } else {
-          btn.textContent = 'Error sending message';
-          btn.style.background = '#ef4444';
-          btn.disabled = false;
-        }
-      })
-      .catch(error => {
-        btn.textContent = 'Error sending message';
-        btn.style.background = '#ef4444';
-        btn.disabled = false;
-      });
-    });
-  }
-</script>
-
+  <!-- Scripts -->
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/counter.js"></script>
 </body>
 </html>

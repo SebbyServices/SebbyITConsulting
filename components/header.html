@@ -1,0 +1,60 @@
+<nav>
+  <div class="nav-container">
+    <a href="/" class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Logo icon SVG - minimal tech consulting mark -->
+        <rect x="2" y="2" width="12" height="12" fill="#C8960C" rx="2"/>
+        <rect x="18" y="2" width="12" height="12" fill="none" stroke="#C8960C" stroke-width="2" rx="2"/>
+        <rect x="2" y="18" width="12" height="12" fill="none" stroke="#C8960C" stroke-width="2" rx="2"/>
+        <rect x="18" y="18" width="12" height="12" fill="#C8960C" rx="2"/>
+      </svg>
+      <span style="color: #C8960C; font-weight: 700; font-size: 14px; margin-left: 8px;">SEBBY IT</span>
+    </a>
+
+    <ul class="nav-menu">
+      <li><a href="/" class="nav-link">Home</a></li>
+      <li><a href="/services/" class="nav-link">Services</a></li>
+      <li><a href="/portfolio/" class="nav-link">Portfolio</a></li>
+      <li><a href="/contact/" class="nav-link">Contact</a></li>
+      <li><a href="/tools/" class="nav-link">Tools</a></li>
+    </ul>
+
+    <button class="hamburger-btn" id="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  // Set active nav link based on current page
+  function initNav() {
+    const pathname = window.location.pathname;
+    document.querySelectorAll('.nav-link').forEach(link => {
+      const href = link.getAttribute('href');
+      // Handle root path
+      if ((href === '/' && pathname === '/') ||
+          (href !== '/' && pathname.includes(href))) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.querySelector('.nav-menu');
+    if (hamburger && menu) {
+      hamburger.addEventListener('click', () => {
+        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNav);
+  } else {
+    initNav();
+  }
+</script>
