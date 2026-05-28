@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Case Study: ThePatientChase shipping automation and integration with Shippo and Wix.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="icon" type="image/png" href="/assets/images/logo-transparent.png">
+  <title>Case Study: ThePatientChase Shipping Automation</title>
+  <style>
+    /* Case Study Custom Styles */
+    .hero .hero-bg {
+      background-image:
+        radial-gradient(circle, rgba(99,102,241,0.18) 1px, transparent 1px),
+        linear-gradient(135deg, rgba(15,23,42,0.82) 0%, rgba(15,23,42,0.93) 100%),
+        url('/assets/images/cs-patientchase-hero.png');
+      background-size: 28px 28px, 100% 100%, cover;
+      background-position: 0 0, 0 0, center center;
+      background-repeat: repeat, no-repeat, no-repeat;
+    }
+
+    .process-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .flow-step {
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--bg-subtle);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+    }
+
+    .flow-step h5 {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--indigo);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .flow-step p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .flow-arrow {
+      font-size: 1.5rem;
+      color: var(--indigo);
+      margin: 0 -0.5rem;
+    }
+
+    .metric-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .metric-card.dark {
+      background: var(--bg-dark);
+      border-color: var(--border-dark);
+      color: white;
+    }
+
+    .metric-label {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .metric-card.dark .metric-label {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .metric-number {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--indigo);
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-note {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .metric-card.dark .metric-note {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .before-after img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .before-after {
+        grid-template-columns: 1fr;
+      }
+
+      .process-flow {
+        gap: 0.5rem;
+      }
+
+      .flow-step {
+        min-width: 100px;
+        padding: 1rem;
+      }
+
+      .metric-number {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="header-slot"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow reveal">Private Case Study Draft</div>
+      <h1 class="hero-h1 reveal">ThePatientChase: From Manual to Automated Shipping</h1>
+      <p class="hero-sub reveal">Transforming a bottleneck into a competitive advantage. Saving $61K-100K annually while enabling weekly shipping cycles.</p>
+
+      <div class="hero-stats reveal">
+        <div class="stat-item">
+          <span class="stat-number">$61K–100K</span>
+          <span class="stat-label">Annual Impact</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">4x</span>
+          <span class="stat-label">Shipping Frequency</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">2 Weeks</span>
+          <span class="stat-label">To Transform</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Banner -->
+  <section class="section section-navy">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center;">
+        <div class="reveal">
+          <div style="font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;">Time Saved per Drop</div>
+          <div style="font-size: 2.5rem; font-weight: 800; color: var(--indigo); margin-bottom: 0.5rem;">8–12 hrs</div>
+          <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">→ Minimal labor</div>
+        </div>
+        <div class="reveal">
+          <div style="font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;">Orders/Hour Ready</div>
+          <div style="font-size: 2.5rem; font-weight: 800; color: var(--indigo); margin-bottom: 0.5rem;">60–70</div>
+          <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">Drop-ready, labeled</div>
+        </div>
+        <div class="reveal">
+          <div style="font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;">Cost Per Label</div>
+          <div style="font-size: 2.5rem; font-weight: 800; color: var(--indigo); margin-bottom: 0.5rem;">$1–2</div>
+          <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">Savings per unit</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study Content -->
+  <section class="section">
+    <div class="container">
+
+      <!-- The Problem -->
+      <div class="reveal" style="margin-bottom: 4rem;">
+        <h2 style="margin-bottom: 2rem;">The Problem</h2>
+        <div class="grid grid-2" style="gap: 3rem; align-items: start;">
+          <div>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text); margin-bottom: 1.5rem;">
+              ThePatientChase was shipping 75–150 orders per drop, but their shipping process was a major bottleneck consuming 8–12 hours per drop:
+            </p>
+            <ul style="font-size: 1rem; line-height: 2; color: var(--text); margin-left: 1.5rem; space-y: 1rem;">
+              <li><strong>Manual address writing</strong> on every polymailer</li>
+              <li><strong>Post office dependency</strong> — $6–8 per label charged individually</li>
+              <li><strong>Low frequency</strong> — only 1–2 drops/month due to time investment</li>
+              <li><strong>No tracking</strong> — customers had zero visibility</li>
+              <li><strong>Chargebacks & disputes</strong> — lack of transparency</li>
+            </ul>
+          </div>
+          <div style="position: relative;">
+            <img src="/assets/images/cs-patientchase-before.png" alt="Before: Chaotic manual shipping process" style="width: 100%; height: 320px; object-fit: cover; border-radius: var(--radius-lg); display: block;">
+            <div style="position: absolute; bottom: 1rem; left: 1rem; background: rgba(0,0,0,0.6); color: white; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600;">Before</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Process Flow -->
+      <div class="reveal" style="margin-bottom: 4rem;">
+        <h2 style="margin-bottom: 2rem;">The Automation Pipeline</h2>
+        <div class="process-flow">
+          <div class="flow-step">
+            <div style="width: 40px; height: 40px; background: var(--indigo-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--indigo);">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                <path d="M9 2L6 6M15 2L18 6M6 6H18V18C18 19.1 17.1 20 16 20H8C6.9 20 6 19.1 6 18V6Z"/>
+              </svg>
+            </div>
+            <h5>Wix Order</h5>
+            <p>Customer order created</p>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div style="width: 40px; height: 40px; background: var(--indigo-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--indigo);">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+              </svg>
+            </div>
+            <h5>Shippo API</h5>
+            <p>Bulk rate generation</p>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div style="width: 40px; height: 40px; background: var(--indigo-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--indigo);">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                <path d="M21 2H3C1.9 2 1 2.9 1 4V7H23V4C23 2.9 22.1 2 21 2ZM1 9V20C1 21.1 1.9 22 3 22H21C22.1 22 23 21.1 23 20V9H1Z"/>
+              </svg>
+            </div>
+            <h5>Print Labels</h5>
+            <p>Automated printing</p>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div style="width: 40px; height: 40px; background: var(--indigo-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--indigo);">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <h5>Track + Notify</h5>
+            <p>Customer email sent</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Solution -->
+      <div class="reveal" style="margin-bottom: 4rem;">
+        <h2 style="margin-bottom: 2rem;">The Solution</h2>
+        <div class="grid grid-2" style="gap: 3rem; align-items: start;">
+          <div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">Integrated Shipping Automation</h3>
+            <p style="font-size: 1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 1.5rem;">
+              We built a complete automation system connecting Wix orders to Shippo's bulk-rate API, with direct integration to a label printer. Orders flow from customer order → API call → label generated → printer ready → customer notified.
+            </p>
+            <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2rem;">
+              <strong>Timeline:</strong> 2 weeks from discovery to first automated drop.
+            </p>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <span class="badge">Wix</span>
+              <span class="badge">Shippo API</span>
+              <span class="badge">Label Printer</span>
+              <span class="badge">Automation</span>
+            </div>
+          </div>
+          <div style="position: relative;">
+            <img src="/assets/images/cs-patientchase-after.png" alt="After: Clean automated fulfillment station" style="width: 100%; height: 320px; object-fit: cover; border-radius: var(--radius-lg); display: block;">
+            <div style="position: absolute; bottom: 1rem; left: 1rem; background: var(--indigo); color: white; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600;">After</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Results -->
+      <div class="reveal" style="margin-bottom: 4rem;">
+        <h2 style="margin-bottom: 2rem;">The Results</h2>
+
+        <div style="margin-bottom: 3rem;">
+          <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--text);">Shipping Frequency</h3>
+          <div class="grid grid-2" style="gap: 2rem;">
+            <div class="metric-card dark">
+              <div class="metric-label">Before</div>
+              <div style="font-size: 1.8rem; font-weight: 700; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem;">1–2x/month</div>
+              <div class="metric-note">Time-constrained</div>
+            </div>
+            <div class="metric-card dark">
+              <div class="metric-label">After</div>
+              <div style="font-size: 1.8rem; font-weight: 700; color: var(--indigo); margin-bottom: 0.5rem;">Weekly</div>
+              <div class="metric-note" style="color: var(--indigo); font-weight: 600;">4x Increase</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 3rem;">
+          <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--text);">Cost Per Drop</h3>
+          <div class="grid grid-2" style="gap: 2rem;">
+            <div class="metric-card">
+              <div class="metric-label">Label Cost Reduction</div>
+              <div class="metric-number">$1–2</div>
+              <div class="metric-note">Per label (down from $6–8)</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Per Drop Savings</div>
+              <div class="metric-number">$75–450</div>
+              <div class="metric-note">75–150 orders per drop</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: var(--cream); padding: 2rem; border-radius: var(--radius-lg);">
+          <h4 style="color: var(--text); margin-bottom: 1rem;">Customer-Facing Impact</h4>
+          <ul style="font-size: 1rem; line-height: 2; color: var(--text); margin-left: 1.5rem;">
+            <li><strong>Automatic tracking emails</strong> — customers notified instantly</li>
+            <li><strong>Real-time order tracking</strong> via Wix portal</li>
+            <li><strong>Eliminated disputes</strong> — transparency builds trust</li>
+            <li><strong>Professional fulfillment</strong> — neutral packaging prevents theft</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Financial Impact -->
+      <div class="reveal" style="margin-bottom: 4rem; margin-top: 4rem;">
+        <h2 style="margin-bottom: 2rem;">Financial Impact</h2>
+        <div class="grid grid-3" style="gap: 2rem; margin-bottom: 3rem;">
+          <div class="metric-card">
+            <div class="metric-label">Time Savings</div>
+            <div class="metric-number">$4,800–7,200</div>
+            <div class="metric-note">/month @ $150/hr</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Label Savings</div>
+            <div class="metric-number">$300–1,200</div>
+            <div class="metric-note">/month reduction</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Total Monthly</div>
+            <div class="metric-number">$5,100–8,400</div>
+            <div class="metric-note">Combined impact</div>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-dark); color: white; padding: 3rem; border-radius: var(--radius-lg); text-align: center;">
+          <div style="font-size: var(--text-sm); color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Annual Impact</div>
+          <div style="font-size: 4rem; font-weight: 800; color: var(--indigo); margin-bottom: 1rem;">$61K–100K</div>
+          <p style="color: rgba(255,255,255,0.8); font-size: 1rem;">
+            Plus: 4x shipping volume capacity, eliminated chargebacks, improved customer retention
+          </p>
+        </div>
+      </div>
+
+      <!-- Key Takeaway -->
+      <div class="reveal" style="background: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(99,102,241,0.05) 100%); border-left: 4px solid var(--indigo); padding: 2rem; border-radius: var(--radius-md); margin-bottom: 4rem;">
+        <h4 style="color: var(--text); margin-bottom: 1rem;">The Bottom Line</h4>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--text);">
+          By eliminating manual processes and automating the shipping workflow, ThePatientChase transformed an 8–12 hour bottleneck into a streamlined, repeatable process. The result: <span style="color: var(--indigo); font-weight: 700;">$61K–100K annual savings</span>, <span style="color: var(--indigo); font-weight: 700;">4x shipping frequency</span>, and significantly improved customer experience. <strong>ROI paid for itself within the first month.</strong>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Client Review -->
+  <section class="section" style="background: rgba(255, 193, 7, 0.05);">
+    <div class="container" style="max-width: 800px;">
+      <div class="reveal" style="background: white; padding: 2rem; border-radius: var(--radius-lg); border: 2px solid var(--warning);">
+        <h4 style="color: var(--text); margin-bottom: 1rem;">⚠️ For Client Review</h4>
+        <p style="font-size: 0.95rem; color: var(--text); line-height: 1.8; margin-bottom: 1.5rem;">
+          This is a private draft case study pending client approval before public release.
+        </p>
+        <ul style="font-size: 0.95rem; color: var(--text); line-height: 2; margin-left: 1.5rem;">
+          <li>Please verify all financial figures are accurate</li>
+          <li>Confirm any details that need adjustment or removal</li>
+          <li>Once approved, this will be published on our portfolio page</li>
+          <li>Neutral branding is maintained throughout — no logos or identifiers</li>
+        </ul>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 1.5rem;">
+          Ready to approve or need changes? Contact us before publication.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-slot"></div>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

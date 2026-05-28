@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Disallow tools portal from indexing
+Disallow: /tools/
+
+Sitemap: https://sebbyservices.com/sitemap.xml

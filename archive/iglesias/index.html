@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SebbyIT Church Solutions - Presencia Digital para Iglesias Católicas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f8f6f1;
+            color: #2c2c2c;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 20px auto;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.5px;
+        }
+
+        .cross-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        /* ===== PROBLEM SECTION ===== */
+        .problem-section {
+            background: white;
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 3px solid #d4a574;
+        }
+
+        .problem-section h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #1a472a;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .problem-card {
+            padding: 30px;
+            background: #f8f6f1;
+            border-left: 4px solid #c41e3a;
+            text-align: left;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-card h3 {
+            color: #c41e3a;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .problem-card p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* ===== SOLUTION SECTION ===== */
+        .solution-intro {
+            background: linear-gradient(135deg, #f8f6f1 0%, #f0ebe3 100%);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .solution-intro h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            color: #1a472a;
+            margin-bottom: 30px;
+        }
+
+        /* ===== PRICING TIERS ===== */
+        .pricing-section {
+            padding: 80px 20px;
+            background: white;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .pricing-section h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1a472a;
+        }
+
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            align-items: start;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid #e0ddd5;
+            border-radius: 8px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1a472a 0%, #d4a574 100%);
+            transition: height 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: #1a472a;
+            box-shadow: 0 10px 40px rgba(26, 71, 42, 0.1);
+            transform: translateY(-10px);
+        }
+
+        .pricing-card:hover::before {
+            height: 8px;
+        }
+
+        .pricing-card.featured {
+            border-color: #c41e3a;
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(196, 30, 58, 0.15);
+        }
+
+        .pricing-card.featured::before {
+            background: #c41e3a;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            background: #1a472a;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-card.featured .tier-badge {
+            background: #c41e3a;
+        }
+
+        .tier-name {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.8rem;
+            color: #1a472a;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .tier-price {
+            font-size: 2.5rem;
+            color: #c41e3a;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .tier-price .currency {
+            font-size: 1.2rem;
+        }
+
+        .tier-period {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            text-align: left;
+            margin: 30px 0;
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0ebe3;
+            font-size: 0.95rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: #1a472a;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 12px;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .pricing-card.featured .feature-list li::before {
+            background: #c41e3a;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a472a;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 30px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #1a472a;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: #1a472a;
+        }
+
+        .pricing-card.featured .cta-button {
+            background: #c41e3a;
+            border-color: #c41e3a;
+        }
+
+        .pricing-card.featured .cta-button:hover {
+            background: transparent;
+            color: #c41e3a;
+        }
+
+        /* ===== FEATURES COMPARISON ===== */
+        .comparison-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #f8f6f1 0%, #f0ebe3 100%);
+        }
+
+        .comparison-section h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1a472a;
+        }
+
+        .comparison-table {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #f0ebe3;
+        }
+
+        .comparison-table th {
+            background: #1a472a;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .comparison-table th:first-child {
+            text-align: left;
+        }
+
+        .comparison-table td:not(:first-child),
+        .comparison-table th:not(:first-child) {
+            text-align: center;
+        }
+
+        .feature-name {
+            font-weight: 600;
+            color: #1a472a;
+        }
+
+        .check-mark {
+            color: #1a472a;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* ===== EXAMPLES SECTION ===== */
+        .examples-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .examples-section h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1a472a;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .example-card {
+            border: 1px solid #e0ddd5;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: #f8f6f1;
+        }
+
+        .example-card:hover {
+            box-shadow: 0 15px 40px rgba(26, 71, 42, 0.15);
+            transform: translateY(-8px);
+        }
+
+        .example-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .example-content {
+            padding: 30px;
+        }
+
+        .example-content h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            color: #1a472a;
+            margin-bottom: 12px;
+        }
+
+        .example-content p {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .example-feature {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .example-feature::before {
+            content: '→';
+            margin-right: 10px;
+            color: #1a472a;
+            font-weight: bold;
+        }
+
+        /* ===== CTA FOOTER ===== */
+        .cta-footer {
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 165, 116, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-footer h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-footer p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-footer .cta-button {
+            background: #c41e3a;
+            border-color: #c41e3a;
+            font-size: 1.1rem;
+            padding: 16px 50px;
+        }
+
+        .cta-footer .cta-button:hover {
+            background: transparent;
+            color: white;
+        }
+
+        .whatsapp-info {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .whatsapp-info p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .whatsapp-number {
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: block;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0d2617;
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #d4a574;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .problem-section h2,
+            .solution-intro h2,
+            .pricing-section h2,
+            .comparison-section h2,
+            .examples-section h2,
+            .cta-footer h2 {
+                font-size: 1.8rem;
+            }
+
+            .pricing-container {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .tier-price {
+                font-size: 2rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pricing-card {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .pricing-card:nth-child(1) { animation-delay: 0.1s; }
+        .pricing-card:nth-child(2) { animation-delay: 0.2s; }
+        .pricing-card:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="cross-icon">✝️</div>
+        <h1>SebbyIT Soluciones para Iglesias</h1>
+        <p>Presencia Digital Profesional para tu Parroquia</p>
+        <p style="font-size: 1rem; margin-top: 30px; font-weight: 400;">Sitios web modernos, directorios de misas claros, y gestión de redes sociales — todo en un solo lugar</p>
+    </header>
+
+    <!-- PROBLEM SECTION -->
+    <section class="problem-section">
+        <h2>¿Cuál es el Problema?</h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <h3>📍 Información Desactualizada</h3>
+                <p>Los feligreses no encuentran horarios de misa correctos. Muchas familias pierden tiempo y dinero llegando a iglesias con información incorrecta o desactualizada.</p>
+            </div>
+            <div class="problem-card">
+                <h3>📱 Sin Presencia Online</h3>
+                <p>La mayoría de iglesias en el país no tienen sitios web o redes sociales profesionales. Los estudiantes extranjeros especialmente luchan para encontrar información de misas.</p>
+            </div>
+            <div class="problem-card">
+                <h3>📧 Comunicación Inconsistente</h3>
+                <p>No hay forma centralizada de compartir anuncios, eventos, actividades parroquiales. La información se pierde en conversaciones de WhatsApp desorganizadas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTION INTRO -->
+    <section class="solution-intro">
+        <h2>Nuestra Solución: Presencia Digital Completa para tu Iglesia</h2>
+        <p style="max-width: 700px; margin: 0 auto; font-size: 1.1rem;">Ofrecemos tres niveles de servicios, cada uno diseñado para las necesidades específicas de tu parroquia. Desde sitios básicos hasta plataformas completas con transmisiones en vivo, tenemos una solución que se ajusta a tu presupuesto.</p>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section class="pricing-section">
+        <h2>Nuestros Paquetes</h2>
+        <div class="pricing-container">
+            <!-- TIER 1: BASIC -->
+            <div class="pricing-card">
+                <div class="tier-badge">Básico</div>
+                <h3 class="tier-name">Presencia Esencial</h3>
+                <div class="tier-price"><span class="currency">RD$</span>60,000</div>
+                <div class="tier-period">Sitio web (único) + Configuración</div>
+                
+                <ul class="feature-list">
+                    <li>Sitio web profesional (hasta 5 páginas)</li>
+                    <li>Directorio de horarios de misa</li>
+                    <li>Información de ubicación y contacto</li>
+                    <li>Galería de fotos</li>
+                    <li>Formulario de contacto básico</li>
+                    <li>Optimizado para móvil (responsive)</li>
+                    <li>SSL seguro incluido</li>
+                </ul>
+                
+                <a href="https://wa.me/c/1809XXXXXXX" class="cta-button">Consultar por WhatsApp</a>
+            </div>
+
+            <!-- TIER 2: PROFESSIONAL (FEATURED) -->
+            <div class="pricing-card featured">
+                <div class="tier-badge">Profesional</div>
+                <h3 class="tier-name">Sitio Web + Mantenimiento</h3>
+                <div class="tier-price"><span class="currency">RD$</span>150,000</div>
+                <div class="tier-period">Sitio web + 3 meses de actualizaciones</div>
+                
+                <ul class="feature-list">
+                    <li>Todo del paquete Básico</li>
+                    <li>Hasta 10 páginas personalizadas</li>
+                    <li>Sistema de anuncios y noticias (Blog)</li>
+                    <li>Calendario de eventos interactivo</li>
+                    <li>Integración con redes sociales</li>
+                    <li>Email para newsletters (plantillas)</li>
+                    <li>Soporte técnico 24/7 por 3 meses</li>
+                    <li>Copias de seguridad automáticas</li>
+                </ul>
+                
+                <a href="https://wa.me/c/1809XXXXXXX" class="cta-button">Consultar por WhatsApp</a>
+            </div>
+
+            <!-- TIER 3: PREMIUM -->
+            <div class="pricing-card">
+                <div class="tier-badge">Premium</div>
+                <h3 class="tier-name">Solución Completa</h3>
+                <div class="tier-price"><span class="currency">RD$</span>330,000</div>
+                <div class="tier-period">Sitio web + 6 meses mantenimiento</div>
+                
+                <ul class="feature-list">
+                    <li>Todo del paquete Profesional</li>
+                    <li>Transmisión en vivo de misas (YouTube Live)</li>
+                    <li>Sistema de donaciones/diezmos online</li>
+                    <li>Gestor de eventos con registro de asistentes</li>
+                    <li>Directorio parroquial (sacerdotes, personal)</li>
+                    <li>Gestión de redes sociales (Facebook/Instagram)</li>
+                    <li>Publicación automática de anuncios</li>
+                    <li>Análisis y reportes mensales</li>
+                    <li>Soporte prioritario por 6 meses</li>
+                </ul>
+                
+                <a href="https://wa.me/c/1809XXXXXXX" class="cta-button">Consultar por WhatsApp</a>
+            </div>
+        </div>
+
+        <!-- RECURRING SERVICE -->
+        <div style="text-align: center; margin-top: 80px; padding-top: 60px; border-top: 2px solid #e0ddd5;">
+            <h3 style="font-family: 'Crimson Text', serif; font-size: 1.8rem; color: #1a472a; margin-bottom: 30px;">Servicio de Mantenimiento Mensual</h3>
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <p style="font-size: 1.1rem; margin-bottom: 40px; color: #555;">Después de tu sitio web inicial, recomendamos mantenimiento continuo. Elige el nivel que mejor se ajusta a tus necesidades:</p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+                    <!-- BASIC RETAINER -->
+                    <div style="background: #f8f6f1; padding: 30px; border-left: 4px solid #1a472a; border-radius: 4px;">
+                        <p style="font-size: 1.3rem; font-weight: 600; color: #1a472a; margin-bottom: 20px;">RD$20,000/mes</p>
+                        <p style="font-size: 0.95rem; color: #888; margin-bottom: 20px; font-style: italic;">Mantenimiento Esencial</p>
+                        <ul style="text-align: left; list-style: none; margin: 0;">
+                            <li style="padding: 10px 0; color: #555;">✓ Actualización de horarios de misa</li>
+                            <li style="padding: 10px 0; color: #555;">✓ Publicación de anuncios y noticias</li>
+                            <li style="padding: 10px 0; color: #555;">✓ Backup automático y actualizaciones de seguridad</li>
+                            <li style="padding: 10px 0; color: #555;">✓ Soporte técnico por email/WhatsApp</li>
+                        </ul>
+                    </div>
+
+                    <!-- ENHANCED RETAINER -->
+                    <div style="background: #f8f6f1; padding: 30px; border-left: 4px solid #c41e3a; border-radius: 4px; border: 2px solid #c41e3a; border-left: 4px solid #c41e3a;">
+                        <p style="font-size: 1.3rem; font-weight: 600; color: #c41e3a; margin-bottom: 20px;">RD$35,000/mes</p>
+                        <p style="font-size: 0.95rem; color: #888; margin-bottom: 20px; font-style: italic;">Mantenimiento + Gestión de Redes</p>
+                        <ul style="text-align: left; list-style: none; margin: 0;">
+                            <li style="padding: 10px 0; color: #555;">✓ Actualización de horarios de misa</li>
+                            <li style="padding: 10px 0; color: #555;">✓ Publicación de anuncios y noticias</li>
+                            <li style="padding: 10px 0; color: #555;">✓ <strong>Gestión activa de redes sociales</strong></li>
+                            <li style="padding: 10px 0; color: #555;">✓ Backup automático y actualizaciones de seguridad</li>
+                            <li style="padding: 10px 0; color: #555;">✓ Soporte técnico por email/WhatsApp</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARISON TABLE -->
+    <section class="comparison-section">
+        <h2>Comparativa de Características</h2>
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Básico</th>
+                        <th>Profesional</th>
+                        <th>Premium</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-name">Sitio Web (5-10 páginas)</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Directorio de Misas</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Blog/Anuncios</td>
+                        <td>—</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Calendario de Eventos</td>
+                        <td>—</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Transmisión en Vivo (YouTube)</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td><span class="check-mark">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Sistema de Donaciones Online</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td><span class="check-mark">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Gestión de Redes Sociales</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td><span class="check-mark">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Análisis y Reportes</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td><span class="check-mark">✓</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- EXAMPLES SECTION -->
+    <section class="examples-section">
+        <h2>Ejemplos de Iglesias Exitosas</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 60px; color: #555; font-size: 1.05rem;">Estos son ejemplos de iglesias en Miami que ya tienen presencia digital fuerte. Nosotros traemos este mismo nivel de profesionalismo a iglesias en República Dominicana.</p>
+        
+        <div class="examples-grid">
+            <div class="example-card">
+                <div class="example-image">🎥</div>
+                <div class="example-content">
+                    <h3>Transmisión en Vivo de Misas</h3>
+                    <p>St. Augustine Church transmite su misa dominical del 8am en vivo a través de YouTube, permitiendo que fieles de todo el mundo participen.</p>
+                    <div class="example-feature">Acceso global a la comunidad</div>
+                    <div class="example-feature">Feligreses pueden asistir desde casa</div>
+                    <div class="example-feature">Archivo de misas antiguas disponible</div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-image">📧</div>
+                <div class="example-content">
+                    <h3>Boletín y Listas de Email</h3>
+                    <p>Todas las iglesias modernas ofrecen newsletters donde comparten anuncios, actividades, oportunidades de voluntariado y eventos especiales.</p>
+                    <div class="example-feature">Mantener a feligreses informados</div>
+                    <div class="example-feature">Comunicación directa y regular</div>
+                    <div class="example-feature">Promoción de eventos y actividades</div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-image">🗓️</div>
+                <div class="example-content">
+                    <h3>Horarios Claros y Actualizados</h3>
+                    <p>Directorio completo de horarios de misas (entre semana, fines de semana, días festivos) en un lugar fácil de encontrar.</p>
+                    <div class="example-feature">Buscar por horario preferido</div>
+                    <div class="example-feature">Misas en diferentes idiomas</div>
+                    <div class="example-feature">Información de confecciones</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FOOTER -->
+    <section class="cta-footer">
+        <h2>¿Listo para Modernizar tu Iglesia?</h2>
+        <p>Contacta con nosotros por WhatsApp para una consulta gratuita. Entendemos las necesidades específicas de las iglesias católicas en República Dominicana.</p>
+        
+        <a href="https://wa.me/c/1809XXXXXXX" class="cta-button">📱 Contáctanos por WhatsApp</a>
+        
+        <div class="whatsapp-info">
+            <p>O escríbenos directamente:</p>
+            <span class="whatsapp-number">+1 (809) XXX-XXXX</span>
+            <p style="font-size: 0.9rem; margin-top: 10px;">Disponible de Lunes a Viernes, 9am - 6pm</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 SebbyIT Soluciones. Presencia Digital para Iglesias Católicas en República Dominicana.</p>
+        <p><a href="#">Política de Privacidad</a> | <a href="#">Términos de Servicio</a></p>
+    </footer>
+
+    <script>
+        // WhatsApp integration - update with actual number
+        const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+        const whatsappNumber = '+18099999999'; // Replace with actual number
+        const whatsappMessage = encodeURIComponent('Hola, me interesa conocer más sobre los servicios de sitios web para iglesias. ¿Podrían enviarme información sobre los paquetes disponibles?');
+        
+        whatsappLinks.forEach(link => {
+            link.href = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+        });
+
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.pricing-card, .example-card, .problem-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

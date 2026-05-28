@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SebbyIT — Lead Gen Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #18181f;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --accent: #00e5a0;
+    --accent2: #0066ff;
+    --text: #f0f0f5;
+    --muted: #6b6b80;
+    --hot: #ff4545;
+    --warm: #ff9a00;
+    --cold: #3d7aff;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .logo span { color: var(--accent); }
+
+  .header-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+  }
+
+  .page-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.35rem;
+  }
+
+  .page-sub {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .setup-banner {
+    background: linear-gradient(135deg, rgba(0,229,160,0.08), rgba(0,102,255,0.08));
+    border: 1px solid rgba(0,229,160,0.2);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .setup-banner.hidden { display: none; }
+
+  .setup-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .setup-banner h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+    color: var(--accent);
+  }
+
+  .setup-banner p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .setup-banner a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.82rem;
+  }
+
+  .api-input-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .api-input-row input {
+    flex: 1;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    outline: none;
+  }
+
+  .api-input-row input:focus { border-color: var(--accent); }
+
+  .btn-save {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+
+  .btn-save:hover { opacity: 0.85; }
+
+  .search-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: end;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .form-group select,
+  .form-group input[type="text"] {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .form-group select:focus,
+  .form-group input[type="text"]:focus { border-color: var(--accent); }
+
+  .btn-search {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+    height: 42px;
+  }
+
+  .btn-search:hover { opacity: 0.85; }
+  .btn-search:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .stat-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-value.hot { color: var(--hot); }
+  .stat-value.warm { color: var(--warm); }
+  .stat-value.total { color: var(--accent); }
+
+  .results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .results-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .btn-export {
+    background: transparent;
+    border: 1px solid var(--border2);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .btn-export:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,229,160,0.05); }
+
+  .leads-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+  }
+
+  .leads-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .leads-table td {
+    padding: 13px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .leads-table tr:last-child td { border-bottom: none; }
+
+  .leads-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .biz-name {
+    font-weight: 500;
+    font-size: 0.88rem;
+    margin-bottom: 2px;
+  }
+
+  .biz-address {
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .badge-hot { background: rgba(255,69,69,0.15); color: var(--hot); border: 1px solid rgba(255,69,69,0.3); }
+  .badge-warm { background: rgba(255,154,0,0.15); color: var(--warm); border: 1px solid rgba(255,154,0,0.3); }
+  .badge-cold { background: rgba(61,122,255,0.15); color: var(--cold); border: 1px solid rgba(61,122,255,0.3); }
+
+  .pitch-tag {
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  .flag {
+    font-size: 0.7rem;
+    color: var(--accent);
+    background: rgba(0,229,160,0.08);
+    border: 1px solid rgba(0,229,160,0.2);
+    padding: 2px 7px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 3px;
+  }
+
+  .stars {
+    color: #f0c040;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  .rating-count {
+    color: var(--muted);
+    font-size: 0.72rem;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .no-site {
+    color: var(--hot);
+    font-size: 0.78rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .has-site {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-family: 'DM Mono', monospace;
+    text-decoration: none;
+  }
+
+  .has-site:hover { color: var(--accent); }
+
+  .phone-link {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.82rem;
+  }
+
+  .phone-link:hover { color: var(--accent); }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+  }
+
+  .empty-state .big-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.3;
+  }
+
+  .empty-state p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .loading-state {
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .spinner {
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--border2);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin: 0 auto 1rem;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-state p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .error-msg {
+    background: rgba(255,69,69,0.08);
+    border: 1px solid rgba(255,69,69,0.2);
+    color: #ff8080;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .results-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .outreach-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .outreach-modal.hidden { display: none; }
+
+  .modal-box {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    max-width: 560px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .modal-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .btn-close {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .btn-close:hover { color: var(--text); }
+
+  .outreach-copy {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--text);
+    white-space: pre-wrap;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 1rem;
+  }
+
+  .btn-copy-text {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  .btn-outreach {
+    background: transparent;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+    margin-top: 4px;
+  }
+
+  .btn-outreach:hover { border-color: var(--accent); color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .form-grid { grid-template-columns: 1fr 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    main { padding: 1.5rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Sebby<span>IT</span> — Lead Gen</div>
+  <div class="header-badge">INTERNAL TOOL v1.0</div>
+</header>
+
+<main>
+  <div class="page-title">Lead Generator</div>
+  <p class="page-sub">Find medical & dental businesses across South Florida. Scored by opportunity.</p>
+
+  <div class="setup-banner" id="setupBanner">
+    <div class="setup-icon">🔑</div>
+    <div style="flex:1;">
+      <h3>Google Places API Key Required</h3>
+      <p>This tool uses Google Places API (free up to $200/month credit). Get your key at <a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a> → Enable Places API → Create credentials. Your key is stored only in your browser.</p>
+      <div class="api-input-row">
+        <input type="password" id="apiKeyInput" placeholder="AIza..." autocomplete="off">
+        <button class="btn-save" onclick="saveKey()">Save Key</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-panel">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Niche</label>
+        <select id="niche">
+          <option value="medical clinic">Medical Clinics</option>
+          <option value="dental office">Dental Offices</option>
+          <option value="urgent care">Urgent Care Centers</option>
+          <option value="dermatologist">Dermatology</option>
+          <option value="pediatrician">Pediatrics</option>
+          <option value="orthodontist">Orthodontists</option>
+          <option value="physical therapy">Physical Therapy</option>
+          <option value="chiropractor">Chiropractors</option>
+          <option value="optometrist">Optometrists</option>
+          <option value="psychiatrist">Mental Health / Psychiatry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>City / Area</label>
+        <select id="city">
+          <option value="Miami, FL">Miami</option>
+          <option value="Hialeah, FL">Hialeah</option>
+          <option value="Coral Gables, FL">Coral Gables</option>
+          <option value="Doral, FL">Doral</option>
+          <option value="Kendall, FL">Kendall</option>
+          <option value="Miami Lakes, FL">Miami Lakes</option>
+          <option value="Homestead, FL">Homestead</option>
+          <option value="Fort Lauderdale, FL">Fort Lauderdale</option>
+          <option value="Hollywood, FL">Hollywood</option>
+          <option value="Pembroke Pines, FL">Pembroke Pines</option>
+          <option value="Miramar, FL">Miramar</option>
+          <option value="Boca Raton, FL">Boca Raton</option>
+          <option value="West Palm Beach, FL">West Palm Beach</option>
+          <option value="Pompano Beach, FL">Pompano Beach</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Max Results</label>
+        <select id="maxResults">
+          <option value="10">10 leads</option>
+          <option value="20" selected>20 leads</option>
+          <option value="60">60 leads</option>
+        </select>
+      </div>
+      <button class="btn-search" id="searchBtn" onclick="runSearch()">Search →</button>
+    </div>
+  </div>
+
+  <div id="errorMsg" class="error-msg hidden"></div>
+
+  <div class="stats-row" id="statsRow" style="display:none;">
+    <div class="stat-card">
+      <div class="stat-label">Total Found</div>
+      <div class="stat-value total" id="statTotal">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">🔥 Hot Leads</div>
+      <div class="stat-value hot" id="statHot">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">🟡 Warm Leads</div>
+      <div class="stat-value warm" id="statWarm">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">No Website</div>
+      <div class="stat-value hot" id="statNoSite">0</div>
+    </div>
+  </div>
+
+  <div class="results-header" id="resultsHeader" style="display:none;">
+    <div class="results-title" id="resultsTitle">Results</div>
+    <button class="btn-export" onclick="exportCSV()">Export CSV</button>
+  </div>
+
+  <div class="results-wrap" id="resultsWrap">
+    <div class="empty-state">
+      <div class="big-icon">🎯</div>
+      <p>Select a niche and city above,<br>then hit Search to find leads.</p>
+    </div>
+  </div>
+</main>
+
+<div class="outreach-modal hidden" id="outreachModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Outreach Script</div>
+      <button class="btn-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="outreach-copy" id="modalCopy"></div>
+    <button class="btn-copy-text" onclick="copyScript()">Copy Script</button>
+  </div>
+</div>
+
+<script>
+const HISPANIC_KEYWORDS = ['garcia','rodriguez','martinez','hernandez','lopez','gonzalez','perez','sanchez','ramirez','torres','flores','rivera','morales','diaz','cruz','ortiz','ramos','vargas','reyes','medina','castillo','jimenez','alvarez','moreno','romero','suarez','riera','gutierrez','delgado','mendez','nunez','ruiz','aguilar','navarro','vega','rios','soto','ibarra','fuentes','molina','herrera'];
+
+let allLeads = [];
+let currentBusiness = null;
+
+function saveKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key.startsWith('AIza')) { showError('Invalid API key format. Should start with AIza...'); return; }
+  localStorage.setItem('gplaces_key', key);
+  document.getElementById('setupBanner').classList.add('hidden');
+  showError('');
+}
+
+function getKey() {
+  return localStorage.getItem('gplaces_key') || '';
+}
+
+window.onload = () => {
+  if (getKey()) document.getElementById('setupBanner').classList.add('hidden');
+};
+
+function showError(msg) {
+  const el = document.getElementById('errorMsg');
+  if (msg) { el.textContent = msg; el.classList.remove('hidden'); }
+  else { el.classList.add('hidden'); }
+}
+
+async function runSearch() {
+  const key = getKey();
+  if (!key) { showError('Please enter your Google Places API key first.'); return; }
+
+  const niche = document.getElementById('niche').value;
+  const city = document.getElementById('city').value;
+  const maxResults = parseInt(document.getElementById('maxResults').value);
+
+  document.getElementById('searchBtn').disabled = true;
+  document.getElementById('searchBtn').textContent = 'Searching...';
+  showError('');
+  document.getElementById('statsRow').style.display = 'none';
+  document.getElementById('resultsHeader').style.display = 'none';
+
+  document.getElementById('resultsWrap').innerHTML = `
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Pulling ${niche}s in ${city}...</p>
+    </div>`;
+
+  try {
+    const query = encodeURIComponent(`${niche} in ${city}`);
+    const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${key}`;
+
+    const resp = await fetch(url);
+    const data = await resp.json();
+
+    if (data.status === 'REQUEST_DENIED') {
+      showError('API key denied. Make sure Places API is enabled in Google Cloud Console.');
+      resetSearch(); return;
+    }
+
+    if (data.status === 'ZERO_RESULTS') {
+      document.getElementById('resultsWrap').innerHTML = `<div class="empty-state"><div class="big-icon">🔍</div><p>No results found. Try a different niche or city.</p></div>`;
+      resetSearch(); return;
+    }
+
+    let places = data.results || [];
+
+    // Paginate if needed
+    if (maxResults > 20 && data.next_page_token) {
+      await new Promise(r => setTimeout(r, 2000));
+      const resp2 = await fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=${data.next_page_token}&key=${key}`);
+      const data2 = await resp2.json();
+      places = places.concat(data2.results || []);
+
+      if (maxResults > 40 && data2.next_page_token) {
+        await new Promise(r => setTimeout(r, 2000));
+        const resp3 = await fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=${data2.next_page_token}&key=${key}`);
+        const data3 = await resp3.json();
+        places = places.concat(data3.results || []);
+      }
+    }
+
+    places = places.slice(0, maxResults);
+
+    // Get details for each (website, phone)
+    const detailPromises = places.map(p => getDetails(p.place_id, key));
+    const details = await Promise.all(detailPromises);
+
+    allLeads = places.map((p, i) => scoreLead(p, details[i]));
+    allLeads.sort((a, b) => b.score - a.score);
+
+    renderResults(allLeads, niche, city);
+
+  } catch(e) {
+    showError('Network error. Check that your API key has Places API enabled and billing is set up in Google Cloud.');
+    document.getElementById('resultsWrap').innerHTML = `<div class="empty-state"><div class="big-icon">⚠️</div><p>Something went wrong. Check your API key and try again.</p></div>`;
+  }
+
+  resetSearch();
+}
+
+async function getDetails(placeId, key) {
+  try {
+    const fields = 'formatted_phone_number,website,opening_hours';
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=${fields}&key=${key}`;
+    const r = await fetch(url);
+    const d = await r.json();
+    return d.result || {};
+  } catch { return {}; }
+}
+
+function scoreLead(place, details) {
+  let score = 0;
+  const name = place.name || '';
+  const rating = place.rating || 0;
+  const reviewCount = place.user_ratings_total || 0;
+  const hasWebsite = !!details.website;
+  const phone = details.formatted_phone_number || '';
+  const address = place.formatted_address || '';
+
+  const nameLower = name.toLowerCase();
+  const isHispanic = HISPANIC_KEYWORDS.some(k => nameLower.includes(k)) || address.includes('Hialeah') || address.includes('Doral') || address.includes('Sweetwater');
+
+  // Scoring
+  if (!hasWebsite) score += 40;
+  if (reviewCount < 10) score += 25;
+  else if (reviewCount < 30) score += 10;
+  if (rating < 3.5 && rating > 0) score += 20;
+  else if (rating < 4.0 && rating > 0) score += 10;
+  if (isHispanic) score += 15;
+
+  let tier = 'cold';
+  if (score >= 50) tier = 'hot';
+  else if (score >= 25) tier = 'warm';
+
+  const pitchServices = [];
+  if (!hasWebsite) pitchServices.push('Website Build');
+  if (reviewCount < 20) pitchServices.push('Reputation Mgmt');
+  if (rating < 4.0 && rating > 0) pitchServices.push('Review Strategy');
+  if (isHispanic) pitchServices.push('Bilingual Site');
+  if (pitchServices.length === 0) pitchServices.push('SEO / Visibility');
+
+  return {
+    name,
+    address,
+    phone,
+    website: details.website || '',
+    rating,
+    reviewCount,
+    hasWebsite,
+    isHispanic,
+    score,
+    tier,
+    pitchServices,
+    placeId: place.place_id
+  };
+}
+
+function renderResults(leads, niche, city) {
+  const hot = leads.filter(l => l.tier === 'hot').length;
+  const warm = leads.filter(l => l.tier === 'warm').length;
+  const noSite = leads.filter(l => !l.hasWebsite).length;
+
+  document.getElementById('statTotal').textContent = leads.length;
+  document.getElementById('statHot').textContent = hot;
+  document.getElementById('statWarm').textContent = warm;
+  document.getElementById('statNoSite').textContent = noSite;
+  document.getElementById('statsRow').style.display = 'grid';
+
+  document.getElementById('resultsTitle').textContent = `${leads.length} ${niche}s in ${city}`;
+  document.getElementById('resultsHeader').style.display = 'flex';
+
+  if (leads.length === 0) {
+    document.getElementById('resultsWrap').innerHTML = `<div class="empty-state"><div class="big-icon">🔍</div><p>No results found.</p></div>`;
+    return;
+  }
+
+  const rows = leads.map((l, i) => {
+    const stars = l.rating ? '★'.repeat(Math.round(l.rating)) + '☆'.repeat(5 - Math.round(l.rating)) : '—';
+    const websiteCell = l.hasWebsite
+      ? `<a href="${l.website}" target="_blank" class="has-site">↗ view site</a>`
+      : `<span class="no-site">✗ none</span>`;
+    const pitchTags = l.pitchServices.map(s => `<span class="pitch-tag">${s}</span>`).join(' ');
+    const hispFlag = l.isHispanic ? `<br><span class="flag">🌎 Spanish opp</span>` : '';
+    const badge = `<span class="badge badge-${l.tier}">${l.tier}</span>`;
+
+    return `<tr>
+      <td>
+        <div class="biz-name">${l.name}</div>
+        <div class="biz-address">${l.address}</div>
+        ${hispFlag}
+      </td>
+      <td>${l.phone ? `<a href="tel:${l.phone}" class="phone-link">${l.phone}</a>` : '<span style="color:var(--muted)">—</span>'}</td>
+      <td>${websiteCell}</td>
+      <td>
+        <div class="stars">${stars}</div>
+        <span class="rating-count">${l.reviewCount} reviews</span>
+      </td>
+      <td>${pitchTags}</td>
+      <td>${badge}</td>
+      <td><button class="btn-outreach" onclick="openOutreach(${i})">Script →</button></td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('resultsWrap').innerHTML = `
+    <table class="leads-table">
+      <thead>
+        <tr>
+          <th>Business</th>
+          <th>Phone</th>
+          <th>Website</th>
+          <th>Rating</th>
+          <th>Pitch</th>
+          <th>Score</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function openOutreach(index) {
+  const l = allLeads[index];
+  currentBusiness = l;
+  document.getElementById('modalTitle').textContent = `Outreach — ${l.name}`;
+
+  const noWebLine = !l.hasWebsite ? `I noticed ${l.name} doesn't have a website yet — that's actually costing you new patients every day who search online and can't find you.` : `I took a look at your online presence and saw some opportunities to help ${l.name} get more visibility and new patients.`;
+
+  const hispLine = l.isHispanic ? `\n\nSoy bilingüe (inglés/español), así que también podemos hablar en español si prefieres.` : '';
+
+  const pitch = l.pitchServices.join(', ');
+
+  const script = `Hi, I'm Sebastian from SebbyIT — we help medical practices in South Florida grow their patient base through digital marketing and web solutions.
+
+${noWebLine}
+
+We specialize in: ${pitch} — specifically for clinics and practices like yours.
+
+I work with a few other medical offices in the area and have helped them [increase calls / grow reviews / show up on Google Maps].
+
+Would you be open to a quick 15-minute call this week to see if we'd be a good fit? No pitch, just a conversation.
+
+You can reach me directly at (786) 543-1417 or sebastian@sebbyit.com.${hispLine}
+
+— Sebastian P.
+SebbyIT Consulting`;
+
+  document.getElementById('modalCopy').textContent = script;
+  document.getElementById('outreachModal').classList.remove('hidden');
+}
+
+function closeModal() {
+  document.getElementById('outreachModal').classList.add('hidden');
+}
+
+function copyScript() {
+  navigator.clipboard.writeText(document.getElementById('modalCopy').textContent);
+  document.querySelector('.btn-copy-text').textContent = 'Copied!';
+  setTimeout(() => document.querySelector('.btn-copy-text').textContent = 'Copy Script', 2000);
+}
+
+function exportCSV() {
+  if (!allLeads.length) return;
+  const headers = ['Business Name','Address','Phone','Website','Rating','Reviews','Has Website','Hispanic Flag','Pitch Services','Lead Score'];
+  const rows = allLeads.map(l => [
+    `"${l.name}"`, `"${l.address}"`, l.phone, l.website, l.rating, l.reviewCount,
+    l.hasWebsite ? 'Yes' : 'No', l.isHispanic ? 'Yes' : 'No',
+    `"${l.pitchServices.join(', ')}"`, l.tier.toUpperCase()
+  ]);
+  const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `sebbyit-leads-${Date.now()}.csv`;
+  a.click();
+}
+
+function resetSearch() {
+  document.getElementById('searchBtn').disabled = false;
+  document.getElementById('searchBtn').textContent = 'Search →';
+}
+
+document.getElementById('outreachModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+</script>
+</body>
+</html>
