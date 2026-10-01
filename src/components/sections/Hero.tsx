@@ -1,4 +1,4 @@
-import { CheckCheck, ShieldCheck } from "lucide-react";
+import { CheckCheck, Headset, ShieldCheck } from "lucide-react";
 import { Button } from "../ui/Button";
 import { Container } from "../layout/Container";
 import { cn } from "../../lib/utils";
@@ -61,11 +61,9 @@ export function Hero({ eyebrow, h1, sub, primaryCta, secondaryCta, trust, chat }
           <div aria-hidden className="absolute -inset-6 rounded-[2rem] bg-brand/10 blur-2xl" />
           <div className="relative card shadow-lift overflow-hidden">
             <div className="flex items-center gap-3 px-5 py-4 border-b border-line bg-white">
-              <img
-                src="/assets/headshot.jpg"
-                alt="Sebastian Podgaetz"
-                className="w-11 h-11 rounded-full object-cover ring-2 ring-white shadow"
-              />
+              <span className="flex-shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-full bg-brand text-white shadow">
+                <Headset size={22} aria-hidden />
+              </span>
               <div className="min-w-0">
                 <p className="font-semibold text-ink leading-tight">{chat.name}</p>
                 <p className="text-sm text-accent flex items-center gap-1.5">

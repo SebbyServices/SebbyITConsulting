@@ -1,3 +1,4 @@
+import { ShieldCheck } from "lucide-react";
 import { Container } from "../layout/Container";
 import { Button } from "../ui/Button";
 
@@ -13,12 +14,12 @@ export function AboutTeaser({ eyebrow, h2, body, cta }: AboutTeaserProps) {
     <section className="py-20 md:py-28 bg-surface border-y border-line">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-10 md:gap-14 items-center max-w-4xl mx-auto">
-          <img
-            src="/assets/headshot.jpg"
-            alt="Sebastian Podgaetz, founder of Sebby IT Consulting"
-            className="w-44 h-44 md:w-56 md:h-56 rounded-2xl object-cover shadow-lift mx-auto"
-            loading="lazy"
-          />
+          <span
+            aria-hidden
+            className="inline-flex items-center justify-center w-36 h-36 md:w-44 md:h-44 rounded-3xl bg-brand-light text-brand border border-brand/15 mx-auto"
+          >
+            <ShieldCheck size={72} strokeWidth={1.5} />
+          </span>
           <div className="space-y-5 text-center md:text-left">
             <p className="eyebrow">{eyebrow}</p>
             <h2 className="text-3xl md:text-4xl font-bold">{h2}</h2>

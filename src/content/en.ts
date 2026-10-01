@@ -247,7 +247,7 @@ export const content = {
       },
       {
         name: "One-time fix",
-        priceRange: "$95–$125",
+        priceRange: "$95 to $125",
         summary: "No plan, no commitment. One problem, one flat price.",
         features: [
           "Flat price based on complexity",

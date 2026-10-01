@@ -1,4 +1,4 @@
-import { Award, MapPin } from "lucide-react";
+import { Award, MapPin, ShieldCheck } from "lucide-react";
 import { PageShell } from "../components/layout/PageShell";
 import { Container } from "../components/layout/Container";
 import { FinalCTA } from "../components/sections/FinalCTA";
@@ -15,11 +15,12 @@ export function About() {
               <p className="eyebrow">{page.eyebrow}</p>
               <h1 className="text-4xl md:text-5xl font-extrabold leading-[1.1]">{page.h1}</h1>
             </div>
-            <img
-              src="/assets/headshot.jpg"
-              alt="Sebastian Podgaetz, founder of Sebby IT Consulting"
-              className="w-48 h-48 md:w-64 md:h-64 rounded-2xl object-cover shadow-lift"
-            />
+            <span
+              aria-hidden
+              className="hidden md:inline-flex items-center justify-center w-52 h-52 rounded-3xl bg-white text-brand border border-line shadow-card"
+            >
+              <ShieldCheck size={96} strokeWidth={1.25} />
+            </span>
           </div>
         </Container>
       </section>
