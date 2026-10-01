@@ -1,5 +1,5 @@
 import { PageShell } from "../components/layout/PageShell";
-import { SectionHeading } from "../components/layout/SectionHeading";
+import { PageHeader } from "../components/layout/PageHeader";
 import { Container } from "../components/layout/Container";
 import { PriceTier } from "../components/ui/PriceTier";
 import { Button } from "../components/ui/Button";
@@ -9,16 +9,12 @@ export function AIPhoneAgents() {
   const page = content.aiPhoneAgents;
   return (
     <PageShell title="Bilingual AI Phone Agents" description={page.intro}>
-      <section className="pt-32 pb-24 md:pt-40 md:pb-32 bg-bg">
-        <Container className="space-y-16">
-          <SectionHeading eyebrow={page.eyebrow} h1={page.h1} sub={page.intro} />
+      <PageHeader eyebrow={page.eyebrow} h1={page.h1} sub={page.intro} />
 
-          <div className="max-w-xl mx-auto">
-            <PriceTier {...page.offer} highlighted />
-          </div>
-
+      <section className="py-20 md:py-24 bg-white">
+        <Container className="max-w-xl space-y-8">
+          <PriceTier {...page.offer} />
           <p className="text-base text-muted text-center">{page.terms}</p>
-
           <div className="flex justify-center">
             <Button as="a" href={page.cta.href} size="lg">
               {page.cta.label}

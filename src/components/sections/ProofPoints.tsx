@@ -23,18 +23,20 @@ const iconMap = {
 
 export function ProofPoints({ eyebrow, h2, items }: ProofPointsProps) {
   return (
-    <section className="py-24 md:py-32 bg-bg">
-      <Container className="space-y-16">
+    <section className="py-20 md:py-28 bg-white">
+      <Container className="space-y-14">
         <SectionHeading eyebrow={eyebrow} h2={h2} />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
           {items.map((item) => {
             const Icon = iconMap[item.icon as keyof typeof iconMap] ?? ShieldCheck;
             return (
-              <div key={item.title} className="glass rounded-xl p-8 space-y-4 border border-white/10">
-                <Icon size={28} className="text-teal" />
-                <h3 className="text-xl font-bold text-text">{item.title}</h3>
-                <p className="text-base md:text-lg text-muted leading-relaxed">{item.body}</p>
+              <div key={item.title} className="space-y-4">
+                <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-light text-brand">
+                  <Icon size={24} />
+                </span>
+                <h3 className="text-lg font-bold">{item.title}</h3>
+                <p className="text-base text-body leading-relaxed">{item.body}</p>
               </div>
             );
           })}

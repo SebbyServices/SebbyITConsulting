@@ -16,6 +16,8 @@ export function Home() {
         sub={content.home.hero.sub}
         primaryCta={content.home.hero.primaryCta}
         secondaryCta={content.home.hero.secondaryCta}
+        trust={content.home.hero.trust}
+        chat={content.home.hero.chat}
       />
 
       <PlanPaths

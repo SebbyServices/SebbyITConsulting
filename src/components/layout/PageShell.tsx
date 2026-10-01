@@ -20,7 +20,7 @@ export function PageShell({ children, title, description }: PageShellProps) {
   }, [title, description]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-bg text-text">
+    <div className="min-h-screen flex flex-col bg-white text-body">
       <Header />
       <main className="flex-1">
         {children}

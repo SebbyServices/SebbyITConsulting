@@ -1,10 +1,11 @@
 import { PageShell } from "../components/layout/PageShell";
-import { SectionHeading } from "../components/layout/SectionHeading";
+import { PageHeader } from "../components/layout/PageHeader";
 import { Container } from "../components/layout/Container";
 import { PriceTiers } from "../components/ui/PriceTiers";
 import { PlanDetails } from "../components/sections/PlanDetails";
-import { Button } from "../components/ui/Button";
+import { FinalCTA } from "../components/sections/FinalCTA";
 import type { TierType } from "../components/ui/PriceTier";
+import { content } from "../content/en";
 
 type PlanPageProps = {
   title: string;
@@ -23,21 +24,17 @@ type PlanPageProps = {
 export function PlanPage({ title, plan }: PlanPageProps) {
   return (
     <PageShell title={title} description={plan.intro}>
-      <section className="pt-32 pb-24 md:pt-40 md:pb-32 bg-bg">
-        <Container className="space-y-16">
-          <SectionHeading eyebrow={plan.eyebrow} h1={plan.h1} sub={plan.intro} />
+      <PageHeader eyebrow={plan.eyebrow} h1={plan.h1} sub={plan.intro} />
 
+      <section className="py-20 md:py-24 bg-white">
+        <Container>
           <PriceTiers tiers={plan.tiers} highlightedIndex={1} />
-
-          <div className="flex justify-center">
-            <Button as="a" href={plan.cta.href} size="lg">
-              {plan.cta.label}
-            </Button>
-          </div>
         </Container>
       </section>
 
       <PlanDetails covers={plan.covers} faq={plan.faq} />
+
+      <FinalCTA h2={content.home.finalCta.h2} sub={content.home.finalCta.sub} primaryCta={plan.cta} />
     </PageShell>
   );
 }

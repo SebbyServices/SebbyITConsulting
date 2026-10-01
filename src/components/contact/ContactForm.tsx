@@ -94,10 +94,10 @@ export function ContactForm() {
   if (state === "success") {
     return (
       <div className="space-y-4">
-        <h3 className="text-2xl font-bold text-text">
+        <h3 className="text-2xl font-bold">
           {content.contact.form.successHeading}
         </h3>
-        <p className="text-base text-muted">{content.contact.form.successBody}</p>
+        <p className="text-lg text-body">{content.contact.form.successBody}</p>
       </div>
     );
   }
@@ -105,10 +105,10 @@ export function ContactForm() {
   if (state === "error") {
     return (
       <div className="space-y-4">
-        <h3 className="text-2xl font-bold text-text">
+        <h3 className="text-2xl font-bold">
           {content.contact.form.errorHeading}
         </h3>
-        <p className="text-base text-muted">{content.contact.form.errorBody}</p>
+        <p className="text-lg text-body">{content.contact.form.errorBody}</p>
         <Button
           onClick={() => setState("idle")}
           variant="secondary"
@@ -121,12 +121,10 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Honeypot */}
-      <input type="hidden" name="_gotcha" value={formData._gotcha} onChange={handleChange} />
 
       {/* Name */}
       <div>
-        <label htmlFor="name" className="block text-base font-medium text-text mb-2">
+        <label htmlFor="name" className="block text-base font-semibold text-ink mb-2">
           {content.contact.form.nameLabel}
         </label>
         <input
@@ -135,14 +133,14 @@ export function ContactForm() {
           type="text"
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg bg-bg-2 border border-white/10 text-text placeholder-muted/50 focus:outline-none focus:ring-2 focus:ring-teal/50"
+          className="field"
           required
         />
       </div>
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block text-base font-medium text-text mb-2">
+        <label htmlFor="email" className="block text-base font-semibold text-ink mb-2">
           {content.contact.form.emailLabel}
         </label>
         <input
@@ -151,14 +149,14 @@ export function ContactForm() {
           type="email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg bg-bg-2 border border-white/10 text-text placeholder-muted/50 focus:outline-none focus:ring-2 focus:ring-teal/50"
+          className="field"
           required
         />
       </div>
 
       {/* Topic */}
       <div>
-        <label htmlFor="topic" className="block text-base font-medium text-text mb-2">
+        <label htmlFor="topic" className="block text-base font-semibold text-ink mb-2">
           {content.contact.form.topicLabel}
         </label>
         <select
@@ -166,7 +164,7 @@ export function ContactForm() {
           name="topic"
           value={formData.topic}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg bg-bg-2 border border-white/10 text-text text-base focus:outline-none focus:ring-2 focus:ring-teal/50"
+          className="field"
         >
           <option value="">Choose one</option>
           {content.contact.form.topics.map((t) => (
@@ -179,7 +177,7 @@ export function ContactForm() {
 
       {/* Company */}
       <div>
-        <label htmlFor="company" className="block text-base font-medium text-text mb-2">
+        <label htmlFor="company" className="block text-base font-semibold text-ink mb-2">
           {content.contact.form.companyLabel}
         </label>
         <input
@@ -188,13 +186,13 @@ export function ContactForm() {
           type="text"
           value={formData.company}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg bg-bg-2 border border-white/10 text-text placeholder-muted/50 focus:outline-none focus:ring-2 focus:ring-teal/50"
+          className="field"
         />
       </div>
 
       {/* Phone */}
       <div>
-        <label htmlFor="phone" className="block text-base font-medium text-text mb-2">
+        <label htmlFor="phone" className="block text-base font-semibold text-ink mb-2">
           {content.contact.form.phoneLabel}
         </label>
         <input
@@ -203,13 +201,13 @@ export function ContactForm() {
           type="tel"
           value={formData.phone}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg bg-bg-2 border border-white/10 text-text placeholder-muted/50 focus:outline-none focus:ring-2 focus:ring-teal/50"
+          className="field"
         />
       </div>
 
       {/* Message */}
       <div>
-        <label htmlFor="message" className="block text-base font-medium text-text mb-2">
+        <label htmlFor="message" className="block text-base font-semibold text-ink mb-2">
           {content.contact.form.messageLabel}
         </label>
         <textarea
@@ -219,7 +217,7 @@ export function ContactForm() {
           onChange={handleChange}
           rows={5}
           placeholder={content.contact.form.messagePlaceholder}
-          className="w-full px-4 py-3 rounded-lg bg-bg-2 border border-white/10 text-text placeholder-muted/50 focus:outline-none focus:ring-2 focus:ring-teal/50 resize-none"
+          className="field resize-y"
           required
         />
       </div>
@@ -227,13 +225,17 @@ export function ContactForm() {
       {/* Submit Button */}
       <Button
         type="submit"
+        size="lg"
         disabled={state === "submitting"}
-        className={cn(state === "submitting" && "opacity-50 cursor-not-allowed")}
+        className={cn("w-full sm:w-auto", state === "submitting" && "opacity-60 cursor-not-allowed")}
       >
         {state === "submitting"
           ? content.contact.form.submittingLabel
           : content.contact.form.submitLabel}
       </Button>
+
+      {/* Honeypot (last child so it doesn't add spacing above the first field) */}
+      <input type="hidden" name="_gotcha" value={formData._gotcha} onChange={handleChange} />
     </form>
   );
 }

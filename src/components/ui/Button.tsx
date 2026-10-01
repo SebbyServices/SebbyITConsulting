@@ -3,19 +3,21 @@ import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "../../lib/utils";
 
-type ButtonVariant = "primary" | "secondary" | "ghost";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "inverse" | "outlineInverse";
 type ButtonSize = "sm" | "md" | "lg";
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: "bg-teal text-white hover:bg-teal/90 transition-colors",
-  secondary: "border border-white/20 text-white hover:bg-white/5 transition-colors",
-  ghost: "text-teal hover:bg-teal/10 transition-colors",
+  primary: "bg-brand text-white shadow-sm hover:bg-brand-dark",
+  secondary: "bg-white border border-line text-ink hover:border-brand/40 hover:text-brand",
+  ghost: "text-brand hover:bg-brand-light",
+  inverse: "bg-white text-ink hover:bg-brand-light",
+  outlineInverse: "bg-white/10 text-white border border-white/25 hover:bg-white/20",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
   sm: "px-4 py-2 text-sm",
-  md: "px-6 py-3 text-base",
-  lg: "px-8 py-4 text-lg",
+  md: "px-5 py-3 text-base",
+  lg: "px-7 py-4 text-base md:text-lg",
 };
 
 type ButtonProps = {
@@ -49,7 +51,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
     ref
   ) => {
     const baseStyles = cn(
-      "inline-flex items-center justify-center font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-teal/50 focus:ring-offset-2 focus:ring-offset-bg",
+      "inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-brand/30",
       variantStyles[variant],
       sizeStyles[size],
       className

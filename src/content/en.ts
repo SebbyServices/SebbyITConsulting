@@ -46,6 +46,18 @@ export const content = {
       sub: "Text, email, or WhatsApp me the problem. Most fixes happen right in the chat. When it needs more, we jump on a call or screen-share. For small businesses, individuals, and families.",
       primaryCta: { label: "Get help now", href: "/contact" },
       secondaryCta: { label: "See plans", href: "#plans" },
+      trust: ["M.S. Cybersecurity, FIU", "English & Español", "Reply within 1 business day"],
+      // Illustrative example of the async-first flow shown in the hero.
+      chat: {
+        name: "Sebastian · Sebby IT",
+        status: "Usually replies within a few hours",
+        messages: [
+          { from: "client", text: "Hi! I got a text saying my bank account is locked and to click a link. Is this real?" },
+          { from: "sebby", text: "Good call checking first. Don't click it. That's a common scam. Can you send me a screenshot?" },
+          { from: "client", text: "Just sent it." },
+          { from: "sebby", text: "Confirmed, it's fake. I'll walk you through blocking the number and reporting it. Takes two minutes." },
+        ],
+      },
     },
     paths: {
       eyebrow: "Plans",
