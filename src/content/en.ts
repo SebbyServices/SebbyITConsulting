@@ -5,6 +5,11 @@
 // reachable from nav/footer but are not part of the homepage message.
 // Style rule: no em dashes in copy.
 
+// Outbound link to madebysebby.com, tagged so referrals are visible in its analytics.
+function mbs(path: string) {
+  return `https://madebysebby.com${path}?utm_source=sebbyservices&utm_medium=referral&utm_campaign=web-design-page`;
+}
+
 export const content = {
   meta: {
     siteName: "Sebby IT",
@@ -306,7 +311,7 @@ export const content = {
       },
       {
         title: "Web design",
-        description: "New websites are handled by my sister studio, Made by Sebby.",
+        description: "Websites that build trust, designed, built, and cared for by my studio, Made by Sebby.",
         href: "/services/web-design",
       },
     ],
@@ -355,12 +360,132 @@ export const content = {
   },
 
   webDesign: {
-    eyebrow: "Service · Web design",
-    h1: "Need a new website? Meet Made by Sebby.",
-    intro: "Website design and builds live at my sister studio, Made by Sebby. Same standards, dedicated to building sites that look great and bring in business.",
-    supportNote: "Already have a site? Sebby IT Shield and Sebby IT Care clients get help keeping their accounts, email, and devices running smoothly.",
-    cta: { label: "Visit madebysebby.com", href: "https://madebysebby.com" },
-    secondaryCta: { label: "See support plans", href: "/business" },
+    // Referral page for Made by Sebby (madebysebby.com), my web design studio.
+    // Facts and prices mirror madebysebby.com; keep them in sync when it changes.
+    // Every outbound link goes through mbs() so referrals show up in its analytics.
+    eyebrow: "Web design · Made by Sebby",
+    h1: "Need a website? That's Made by Sebby.",
+    intro: "Sebby IT keeps your tech running. For websites, I run a dedicated design studio called Made by Sebby. It designs, builds, and cares for websites that help your business look professional, earn trust, and grow.",
+    cta: { label: "Visit madebysebby.com", href: mbs("/") },
+    secondaryCta: { label: "Book a free 15-minute call", href: mbs("/book.html") },
+    reassurance: "No agency runaround, no jargon. You talk to me, and I build it like it's my own.",
+
+    services: {
+      eyebrow: "What Made by Sebby does",
+      h2: "Three ways to help your business online.",
+      items: [
+        {
+          icon: "layout",
+          tag: "Made to convert",
+          title: "Web Design & Build",
+          body: "A website you're proud to share, one that makes strangers trust you enough to call, book, or buy.",
+          href: mbs("/services.html"),
+        },
+        {
+          icon: "shield",
+          tag: "Made to last",
+          title: "Website Care",
+          body: "Your site kept fast, secure, and updated month after month, so you never have to think about it.",
+          href: mbs("/website-care.html"),
+        },
+        {
+          icon: "search",
+          tag: "Made to be found",
+          title: "Get Found on Google",
+          body: "Honest SEO that helps people actually find your business when they search, and compounds over time.",
+          href: mbs("/services.html"),
+        },
+      ],
+    },
+
+    pricing: {
+      eyebrow: "Clear starting prices",
+      h2: "Know the range before you call.",
+      sub: "Every project is scoped after a free conversation. You get an exact number up front, and it doesn't go up afterwards.",
+      items: [
+        { name: "Starter build", price: "From $2,500", detail: "Up to 5 pages, bilingual, live in 2 to 3 weeks" },
+        { name: "Custom build", price: "From $5,000", detail: "Up to 10 pages, custom design, 4 to 6 weeks" },
+        { name: "Premium build", price: "From $9,000", detail: "Unlimited pages, strategy, integrations, 6 to 10 weeks" },
+        { name: "Website Care", price: "From $99/mo", detail: "Updates, backups, monitoring, and edits" },
+      ],
+      audit: {
+        label: "Already have a site that isn't pulling its weight?",
+        body: "Start with a Website Audit for $750, credited toward whatever comes next.",
+        cta: { label: "About the audit", href: mbs("/website-audit.html") },
+      },
+      cta: { label: "See full pricing", href: mbs("/pricing.html") },
+    },
+
+    included: {
+      heading: "Included in every build",
+      items: [
+        "Mobile-first design",
+        "Fast load times, targeting under 2 seconds",
+        "Bilingual English and Spanish, written by a native speaker",
+        "SEO foundations: meta tags, schema, sitemap",
+        "Google Analytics set up for you",
+        "You own 100% of it: domain, hosting, content, and code",
+      ],
+    },
+
+    process: {
+      eyebrow: "How a project works",
+      h2: "Simple from start to finish.",
+      steps: [
+        { n: "01", title: "We talk", body: "A free 15-minute call about your business and what your website needs to do. If it's not the right fit, you'll hear that honestly." },
+        { n: "02", title: "I design and build", body: "You see the design before anything is built, and get updates in plain English while it comes together." },
+        { n: "03", title: "You launch, I stay on", body: "Your site goes live, and it stays fast, secure, and current. When you need a change, you text me." },
+      ],
+    },
+
+    work: {
+      eyebrow: "Recent work",
+      h2: "Real businesses, real results.",
+      projects: [
+        { name: "Riera Law Firm", detail: "Securities law · Full bilingual build, 70+ pages, ongoing care", href: mbs("/case-study-rieralaw.html") },
+        { name: "Ortho Flow Recovery", detail: "Recovery equipment · Bilingual build, ongoing care", href: mbs("/case-study-orthoflow.html") },
+        { name: "Elite Care Recovery", detail: "Medical equipment · Full site build", href: mbs("/case-study-elitecare.html") },
+      ],
+      testimonials: [
+        {
+          quote: "Sebby rebuilt my law firm's entire web presence. He works fast, explains everything in plain English, and treats my site like it's his own. I trust him with the online face of my practice.",
+          initials: "JR",
+          name: "Jorge L. Riera",
+          role: "Founding Principal, Riera Law Firm",
+        },
+        {
+          quote: "He took our vision for Elite Care Recovery and built a professional website that exceeded our expectations. His communication and turnaround time were exceptional throughout the entire process.",
+          initials: "JP",
+          name: "John Pierce",
+          role: "Co-Founder, Elite Care Recovery",
+        },
+      ],
+      cta: { label: "See all work", href: mbs("/work.html") },
+    },
+
+    together: {
+      eyebrow: "Better together",
+      h2: "Your website and your tech, handled by one person.",
+      sub: "Made by Sebby takes care of your website. Sebby IT takes care of everything around it. One person who already knows your whole setup.",
+      columns: [
+        {
+          brand: "Made by Sebby",
+          role: "Your website",
+          items: ["Design and build", "Website Care and updates", "Google visibility and SEO", "Bilingual English and Spanish sites"],
+        },
+        {
+          brand: "Sebby IT",
+          role: "Everything else",
+          items: ["Email, Microsoft 365, Google Workspace", "Computers, phones, printers, Wi-Fi", "Passwords, accounts, two-factor", "Scams, phishing, and security check-ins"],
+        },
+      ],
+      cta: { label: "See Sebby IT Shield for business", href: "/business" },
+    },
+
+    final: {
+      h2: "Let's make your business look as good online as it is in person.",
+      sub: "Tell Made by Sebby about your business, and you'll hear exactly what I'd build and what it costs.",
+    },
   },
 
   about: {
