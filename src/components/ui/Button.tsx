@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { forwardRef } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "../../lib/utils";
 
 type ButtonVariant = "primary" | "secondary" | "ghost";
@@ -53,6 +54,21 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
       sizeStyles[size],
       className
     );
+
+    // Internal routes go through the router so navigation doesn't reload the page.
+    if (as === "a" && href && href.startsWith("/") && !props.target) {
+      return (
+        <Link
+          to={href}
+          className={baseStyles}
+          ref={ref as React.Ref<HTMLAnchorElement>}
+          onClick={onClick as any}
+          {...props}
+        >
+          {children}
+        </Link>
+      );
+    }
 
     if (as === "a" && href) {
       return (

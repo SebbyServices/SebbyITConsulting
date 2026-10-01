@@ -4,7 +4,7 @@ import { Button } from "../components/ui/Button";
 
 export function NotFound() {
   return (
-    <PageShell>
+    <PageShell title="Page not found">
       <section className="py-32 md:py-48 bg-bg flex items-center">
         <Container className="text-center space-y-8">
           <div className="space-y-4">

@@ -47,13 +47,13 @@ export function PriceTier({
         {features.map((feature, idx) => (
           <div key={idx} className="flex items-start gap-3">
             <Check className="flex-shrink-0 text-teal mt-0.5" size={18} />
-            <p className="text-sm text-muted leading-relaxed">{feature}</p>
+            <p className="text-base text-muted leading-relaxed">{feature}</p>
           </div>
         ))}
       </div>
 
       {/* Best For */}
-      <p className="text-xs text-muted/70 border-t border-white/10 pt-6">
+      <p className="text-sm text-muted/80 border-t border-white/10 pt-6">
         <span className="font-medium text-muted">Best for:</span> {bestFor}
       </p>
     </div>

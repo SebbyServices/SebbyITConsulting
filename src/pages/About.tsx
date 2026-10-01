@@ -6,8 +6,8 @@ import { content } from "../content/en";
 
 export function About() {
   return (
-    <PageShell>
-      <section className="py-24 md:py-32 bg-bg">
+    <PageShell title="About" description={content.about.body[0]}>
+      <section className="pt-32 pb-24 md:pt-40 md:pb-32 bg-bg">
         <Container className="space-y-16">
           <SectionHeading
             eyebrow={content.about.eyebrow}

@@ -1,22 +1,30 @@
 import { useState, type FormEvent } from "react";
+import { useSearchParams } from "react-router-dom";
 import { content } from "../../content/en";
 import { Button } from "../ui/Button";
 import { cn } from "../../lib/utils";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
+const topicValues: readonly string[] = content.contact.form.topics.map((t) => t.value);
+
 export function ContactForm() {
+  const [searchParams] = useSearchParams();
+  const initialTopic = searchParams.get("topic") ?? "";
   const [state, setState] = useState<FormState>("idle");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    topic: topicValues.includes(initialTopic) ? initialTopic : "",
     company: "",
     phone: "",
     message: "",
     _gotcha: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -56,6 +64,8 @@ export function ContactForm() {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
+          topic:
+            content.contact.form.topics.find((t) => t.value === formData.topic)?.label ?? "",
           company: formData.company || "",
           phone: formData.phone || "",
           message: formData.message,
@@ -67,6 +77,7 @@ export function ContactForm() {
         setFormData({
           name: "",
           email: "",
+          topic: "",
           company: "",
           phone: "",
           message: "",
@@ -75,7 +86,7 @@ export function ContactForm() {
       } else {
         setState("error");
       }
-    } catch (error) {
+    } catch {
       setState("error");
     }
   };
@@ -115,7 +126,7 @@ export function ContactForm() {
 
       {/* Name */}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-text mb-2">
+        <label htmlFor="name" className="block text-base font-medium text-text mb-2">
           {content.contact.form.nameLabel}
         </label>
         <input
@@ -131,7 +142,7 @@ export function ContactForm() {
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-text mb-2">
+        <label htmlFor="email" className="block text-base font-medium text-text mb-2">
           {content.contact.form.emailLabel}
         </label>
         <input
@@ -145,9 +156,30 @@ export function ContactForm() {
         />
       </div>
 
+      {/* Topic */}
+      <div>
+        <label htmlFor="topic" className="block text-base font-medium text-text mb-2">
+          {content.contact.form.topicLabel}
+        </label>
+        <select
+          id="topic"
+          name="topic"
+          value={formData.topic}
+          onChange={handleChange}
+          className="w-full px-4 py-3 rounded-lg bg-bg-2 border border-white/10 text-text text-base focus:outline-none focus:ring-2 focus:ring-teal/50"
+        >
+          <option value="">Choose one</option>
+          {content.contact.form.topics.map((t) => (
+            <option key={t.value} value={t.value}>
+              {t.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {/* Company */}
       <div>
-        <label htmlFor="company" className="block text-sm font-medium text-text mb-2">
+        <label htmlFor="company" className="block text-base font-medium text-text mb-2">
           {content.contact.form.companyLabel}
         </label>
         <input
@@ -162,7 +194,7 @@ export function ContactForm() {
 
       {/* Phone */}
       <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-text mb-2">
+        <label htmlFor="phone" className="block text-base font-medium text-text mb-2">
           {content.contact.form.phoneLabel}
         </label>
         <input
@@ -177,7 +209,7 @@ export function ContactForm() {
 
       {/* Message */}
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-text mb-2">
+        <label htmlFor="message" className="block text-base font-medium text-text mb-2">
           {content.contact.form.messageLabel}
         </label>
         <textarea

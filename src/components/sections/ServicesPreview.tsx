@@ -11,8 +11,8 @@ type Card = {
 };
 
 type ServicesPreviewProps = {
-  eyebrow: string;
-  h2: string;
+  eyebrow?: string;
+  h2?: string;
   cards: readonly Card[];
 };
 
@@ -20,7 +20,7 @@ export function ServicesPreview({ eyebrow, h2, cards }: ServicesPreviewProps) {
   return (
     <section className="py-24 md:py-32 bg-bg">
       <Container className="space-y-16">
-        <SectionHeading eyebrow={eyebrow} h2={h2} />
+        {(eyebrow || h2) && <SectionHeading eyebrow={eyebrow} h2={h2} />}
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {cards.map((card) => (

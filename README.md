@@ -1,73 +1,28 @@
-# React + TypeScript + Vite
+# sebbyservices.com
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website for **Sebby IT Consulting, Corp.** Vite + React + TypeScript + Tailwind, deployed to GitHub Pages on push to `main`.
 
-Currently, two official plugins are available:
+## Positioning
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Headline:** remote tech support, async-first (chat/email/text/WhatsApp, escalating to phone/video/screen-share).
+  - **Sebby IT Shield** (`/business`): small business plans, $250 / $450 / $750 per month.
+  - **Sebby IT Care** (`/home-and-family`): individuals and families, $39 / $69 per month, plus $95–$125 one-time fixes.
+- **Proof points, not the headline:** MS in Cybersecurity, bilingual EN/ES, Miami (DR opportunistic), small client list.
+- **Secondary pages** (nav "Other Services" + footer, not on the homepage):
+  - `/services/ai-phone-agents`: $5,000 setup + $500/mo, 6-month minimum.
+  - `/services/consulting`: custom-scoped retainers.
+  - `/services/web-design`: refers to madebysebby.com.
 
-## React Compiler
+## Editing copy
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+All site copy lives in `src/content/en.ts`. House rule: no em dashes.
 
-## Expanding the ESLint configuration
+## Scripts
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm ci
+npm run dev      # local dev server
+npm run build    # typecheck + production build to dist/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The previous static site is kept in `archive/` for reference.

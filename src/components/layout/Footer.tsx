@@ -10,9 +10,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Column 1: Logo + Tagline + Location */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-text">SebbyIT</h3>
+            <h3 className="text-lg font-bold text-text">{content.meta.legalName}</h3>
             <p className="text-sm text-muted">{content.footer.tagline}</p>
-            <p className="text-xs text-muted/70">{content.footer.location}</p>
+            <p className="text-sm text-muted/80">{content.footer.location}</p>
           </div>
 
           {/* Column 2 & 3: Link Columns */}

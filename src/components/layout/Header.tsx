@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { Button } from "../ui/Button";
@@ -7,87 +7,91 @@ import { content } from "../../content/en";
 import logoIcon from "../../assets/logo-icon.png";
 
 export function Header() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    const threshold = window.innerHeight * 0.9;
-
-    const handleScroll = () => {
-      setIsVisible(window.scrollY > threshold);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 16);
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close the mobile menu whenever the route changes.
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <>
       <header
         className={cn(
-          "fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300",
-          isVisible ? "opacity-100 visible" : "opacity-0 invisible"
+          "fixed top-0 inset-x-0 z-50 transition-colors duration-300",
+          isScrolled || isMobileMenuOpen
+            ? "bg-bg/90 backdrop-blur-xl border-b border-white/10"
+            : "bg-transparent"
         )}
       >
-        <nav className="glass rounded-full px-8 py-4 flex items-center justify-between gap-8 backdrop-blur-xl">
+        <nav className="max-w-content mx-auto px-6 md:px-8 h-16 md:h-20 flex items-center justify-between gap-6">
           {/* Logo + Brand Name */}
           <Link to="/" className="flex-shrink-0 flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <img src={logoIcon} alt="SebbyIT" className="w-8 h-8 object-contain" />
-            <span className="font-bold text-text text-sm">Sebby IT Consulting, Corp.</span>
+            <img src={logoIcon} alt="" className="w-8 h-8 object-contain" />
+            <span className="font-bold text-text">{content.meta.siteName}</span>
           </Link>
 
           {/* Desktop Nav Items */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6">
             {content.nav.map((item) => (
-              <Link
+              <NavLink
                 key={item.href}
                 to={item.href}
-                className="text-sm text-muted hover:text-text transition-colors"
+                className={({ isActive }) =>
+                  cn(
+                    "text-base transition-colors",
+                    isActive ? "text-text" : "text-muted hover:text-text"
+                  )
+                }
               >
                 {item.label}
-              </Link>
+              </NavLink>
             ))}
           </div>
 
           {/* Desktop CTA Button */}
-          <div className="hidden md:block flex-shrink-0">
-            <Button as="a" href={content.home.hero.primaryCta.href} size="sm">
-              {content.home.hero.primaryCta.label}
+          <div className="hidden lg:block flex-shrink-0">
+            <Button as="a" href={content.headerCta.href} size="sm">
+              {content.headerCta.label}
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-text hover:text-teal transition-colors"
+            className="lg:hidden text-text hover:text-teal transition-colors p-2 -mr-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </nav>
       </header>
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-bg/95 backdrop-blur-sm md:hidden">
-          <div className="flex flex-col items-center justify-center min-h-screen gap-8">
+        <div className="fixed inset-0 z-40 bg-bg/95 backdrop-blur-sm lg:hidden">
+          <div className="flex flex-col items-center justify-center min-h-screen gap-8 px-6">
             {content.nav.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
                 className="text-2xl text-text hover:text-teal transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.label}
               </Link>
             ))}
-            <Button
-              as="a"
-              href={content.home.hero.primaryCta.href}
-              size="lg"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {content.home.hero.primaryCta.label}
+            <Button as="a" href={content.headerCta.href} size="lg">
+              {content.headerCta.label}
             </Button>
           </div>
         </div>
