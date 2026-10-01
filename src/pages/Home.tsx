@@ -1,7 +1,8 @@
 import { PageShell } from "../components/layout/PageShell";
 import { Hero } from "../components/sections/Hero";
-import { ServicesPreview } from "../components/sections/ServicesPreview";
+import { PlanPaths } from "../components/sections/PlanPaths";
 import { HowItWorks } from "../components/sections/HowItWorks";
+import { ProofPoints } from "../components/sections/ProofPoints";
 import { AboutTeaser } from "../components/sections/AboutTeaser";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { content } from "../content/en";
@@ -15,18 +16,28 @@ export function Home() {
         sub={content.home.hero.sub}
         primaryCta={content.home.hero.primaryCta}
         secondaryCta={content.home.hero.secondaryCta}
+        trust={content.home.hero.trust}
+        chat={content.home.hero.chat}
       />
 
-      <ServicesPreview
-        eyebrow={content.home.servicesPreview.eyebrow}
-        h2={content.home.servicesPreview.h2}
-        cards={content.home.servicesPreview.cards}
+      <PlanPaths
+        eyebrow={content.home.paths.eyebrow}
+        h2={content.home.paths.h2}
+        sub={content.home.paths.sub}
+        cards={content.home.paths.cards}
+        oneTime={content.home.paths.oneTime}
       />
 
       <HowItWorks
         eyebrow={content.home.howItWorks.eyebrow}
         h2={content.home.howItWorks.h2}
         steps={content.home.howItWorks.steps}
+      />
+
+      <ProofPoints
+        eyebrow={content.home.proof.eyebrow}
+        h2={content.home.proof.h2}
+        items={content.home.proof.items}
       />
 
       <AboutTeaser

@@ -12,6 +12,12 @@ export type TierType = {
 
 type PriceTierProps = TierType;
 
+// Splits "$250/mo" into "$250" + "/mo" so the amount can be emphasized.
+function splitPrice(price: string) {
+  const match = price.match(/^(.*?)(\s*\/\s*mo)$/);
+  return match ? [match[1], "/mo"] : [price, ""];
+}
+
 export function PriceTier({
   name,
   priceRange,
@@ -20,41 +26,42 @@ export function PriceTier({
   bestFor,
   highlighted = false,
 }: PriceTierProps) {
+  const [amount, unit] = splitPrice(priceRange);
   return (
     <div
       className={cn(
-        "glass rounded-xl p-8 space-y-6 h-full flex flex-col",
-        highlighted ? "border border-teal/50" : "border border-white/10"
+        "relative bg-white rounded-2xl p-8 h-full flex flex-col gap-6",
+        highlighted
+          ? "border-2 border-brand shadow-lift"
+          : "border border-line shadow-card"
       )}
     >
-      {/* Tier Name */}
-      <div>
-        <p className="text-sm uppercase tracking-widest text-teal font-medium mb-2">
-          {name}
+      {highlighted && (
+        <span className="absolute -top-3.5 left-8 rounded-full bg-brand px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">
+          Most popular
+        </span>
+      )}
+
+      <div className="space-y-3">
+        <h3 className="text-xl font-bold">{name}</h3>
+        <p className="font-display text-ink">
+          <span className="text-4xl font-extrabold tracking-tight">{amount}</span>
+          {unit && <span className="text-lg font-semibold text-muted">{unit}</span>}
         </p>
+        <p className="text-base text-body leading-relaxed">{summary}</p>
       </div>
 
-      {/* Price */}
-      <div>
-        <p className="text-3xl font-bold text-text">{priceRange}</p>
-      </div>
-
-      {/* Summary */}
-      <p className="text-base text-muted leading-relaxed">{summary}</p>
-
-      {/* Features */}
-      <div className="space-y-3 flex-grow">
-        {features.map((feature, idx) => (
-          <div key={idx} className="flex items-start gap-3">
-            <Check className="flex-shrink-0 text-teal mt-0.5" size={18} />
-            <p className="text-sm text-muted leading-relaxed">{feature}</p>
-          </div>
+      <ul className="space-y-3 flex-grow border-t border-line pt-6">
+        {features.map((feature) => (
+          <li key={feature} className="flex items-start gap-3">
+            <Check className="flex-shrink-0 text-accent mt-0.5" size={20} strokeWidth={2.5} />
+            <span className="text-base text-body leading-relaxed">{feature}</span>
+          </li>
         ))}
-      </div>
+      </ul>
 
-      {/* Best For */}
-      <p className="text-xs text-muted/70 border-t border-white/10 pt-6">
-        <span className="font-medium text-muted">Best for:</span> {bestFor}
+      <p className="text-sm text-muted bg-surface rounded-lg px-4 py-3">
+        <span className="font-semibold text-ink">Best for:</span> {bestFor}
       </p>
     </div>
   );

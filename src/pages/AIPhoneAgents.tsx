@@ -1,29 +1,23 @@
 import { PageShell } from "../components/layout/PageShell";
-import { SectionHeading } from "../components/layout/SectionHeading";
+import { PageHeader } from "../components/layout/PageHeader";
 import { Container } from "../components/layout/Container";
-import { PriceTiers } from "../components/ui/PriceTiers";
+import { PriceTier } from "../components/ui/PriceTier";
 import { Button } from "../components/ui/Button";
 import { content } from "../content/en";
 
 export function AIPhoneAgents() {
+  const page = content.aiPhoneAgents;
   return (
-    <PageShell>
-      <section className="py-24 md:py-32 bg-bg">
-        <Container className="space-y-16">
-          <SectionHeading
-            eyebrow={content.aiPhoneAgents.eyebrow}
-            h1={content.aiPhoneAgents.h1}
-            sub={content.aiPhoneAgents.intro}
-          />
+    <PageShell title="Bilingual AI Phone Agents" description={page.intro}>
+      <PageHeader eyebrow={page.eyebrow} h1={page.h1} sub={page.intro} />
 
-          <PriceTiers
-            tiers={content.aiPhoneAgents.tiers}
-            highlightedIndex={1}
-          />
-
-          <div className="flex justify-center pt-8">
-            <Button as="a" href={content.aiPhoneAgents.cta.href} size="lg">
-              {content.aiPhoneAgents.cta.label}
+      <section className="py-20 md:py-24 bg-white">
+        <Container className="max-w-xl space-y-8">
+          <PriceTier {...page.offer} />
+          <p className="text-base text-muted text-center">{page.terms}</p>
+          <div className="flex justify-center">
+            <Button as="a" href={page.cta.href} size="lg">
+              {page.cta.label}
             </Button>
           </div>
         </Container>
