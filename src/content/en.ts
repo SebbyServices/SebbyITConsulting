@@ -22,8 +22,8 @@ export const content = {
       phone: "+1 (786) 543-1417",
       phoneRaw: "17865431417",
       whatsappUrl: "https://wa.me/17865431417",
-      calendlyUrl: "https://calendly.com/sebbyit-consulting/intro-call",
-      // ↑ PLACEHOLDER. Sebastian to provide actual Calendly URL.
+      // Shared Cal.com booking page with Made by Sebby (free 15-minute call).
+      bookingUrl: "https://cal.com/madebysebby/chat",
       linkedinPersonal: "https://www.linkedin.com/in/sebastianpodgaetz/",
       linkedinCompany: "https://www.linkedin.com/company/sebby-it-consulting-corp/",
     },
@@ -544,7 +544,7 @@ export const content = {
     alternatives: {
       heading: "Other ways to reach me",
       whatsapp: { label: "WhatsApp", value: "+1 (786) 543-1417", description: "Fastest. Send a message or a screenshot of the problem." },
-      calendly: { label: "Book a call", value: "Free intro call", description: "For businesses that want to talk through a plan before signing up." },
+      booking: { label: "Book a call", value: "Free 15-minute call", description: "Pick a time that works for you. Good for talking through a plan before signing up." },
       email: { label: "Email", value: "contact@sebbyservices.com", description: "Good for detailed questions or anything with attachments." },
     },
   },
