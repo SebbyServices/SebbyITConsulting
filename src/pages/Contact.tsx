@@ -67,10 +67,10 @@ export function Contact() {
               />
               <AltMethod
                 icon={<CalendarDays size={22} />}
-                label={alternatives.calendly.label}
-                value={alternatives.calendly.value}
-                description={alternatives.calendly.description}
-                href={contact.calendlyUrl}
+                label={alternatives.booking.label}
+                value={alternatives.booking.value}
+                description={alternatives.booking.description}
+                href={contact.bookingUrl}
                 external
               />
             </div>
