@@ -89,8 +89,6 @@ function setupContactForm() {
   if (!form) return;
   const status = document.getElementById('form-status');
   form.addEventListener('submit', async e => {
-    // Until a real Formspree ID is set, let the browser handle it normally.
-    if (form.action.includes('YOUR_FORM_ID')) return;
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;

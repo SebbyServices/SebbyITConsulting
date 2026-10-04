@@ -24,7 +24,9 @@ These rules exist because emoji/em-dash inconsistencies have caused build check 
 
 ## Deploy Model
 
-GitHub Pages serving `main` from `github.com/SebbyServices/SebbyITConsulting`, with `CNAME` → `sebbyservices.com`. **There is no CI and no staging — pushing to `main` publishes to production.** Verify locally before pushing.
+GitHub Pages from `github.com/SebbyServices/SebbyITConsulting`. Every push to `main` runs `.github/workflows/deploy.yml`, which copies only the site files (not `CLAUDE.md` or `scripts/`) and publishes them. **There is no staging: pushing to `main` publishes to production.** Verify locally before pushing. New top-level site folders must be added to the workflow's `cp` line.
+
+DNS runs through Cloudflare (proxied), so GitHub cannot issue a certificate and its "Enforce HTTPS" box stays off. Cloudflare handles HTTPS: SSL mode **Full** (not Full strict, which returns error 526) and "Always Use HTTPS" on. The React/Vite rebuild that main replaced on 2026-10-04 is kept on the `react-main-backup` branch.
 
 ## Dev Commands
 
@@ -52,7 +54,7 @@ Active pages: `index.html`, `services/index.html`, `services/shield/`, `services
 
 - `loadComponents()` fetches `/components/header.html` and `/components/footer.html` into `#header-slot` / `#footer-slot`. Because this is async, **nothing outside this function may query header/footer DOM at load time.** Header-dependent setup (`initNavLinks`, `setupHeaderScroll`) and the footer year run inside it after injection.
 - `setupMobileMenuDelegation()` uses document-level click/keydown delegation for `.hamburger-btn` / `.nav-menu.open`, so it works whenever the header lands. Never query `.hamburger-btn` directly at init (the bug fixed three times in git history).
-- `setupContactForm()` submits `#contact-form` to Formspree with `fetch` and shows `#form-status`. While the action still contains `YOUR_FORM_ID` it does nothing and the browser submits normally.
+- `setupContactForm()` submits `#contact-form` to Formspree with `fetch` (form `meaodnbq`) and shows `#form-status`. Without JS the browser posts to Formspree directly.
 - Removed: page transitions, scroll reveals, parallax, stat counters. Content is visible at rest; do not add opacity-0 reveal animations back.
 
 **`assets/css/main.css` is the entire design system**, in `/* ===== SECTION ===== */` banners: tokens, reset, typography, layout, components, header, footer, sections, responsive. Add styles under the matching banner. Colors only through the tokens at the top.
@@ -94,7 +96,7 @@ Home, Services, Contact, and the footer were updated 2026-09 for the tech-suppor
 - [x] New OG image at `assets/brand/og-image.png` (2026-09 rebrand); all pages point to it.
 - [x] Site email switched to `hello@sebbyservices.com` (footer + contact).
 - [x] Unverified testimonials removed (homepage section, Care page quote headline). Only add real, attributable client quotes.
-- [ ] **Set the Formspree form ID** — `contact/index.html` still posts to `formspree.io/f/YOUR_FORM_ID`.
+- [x] Formspree form ID set (2026-10): `contact/index.html` posts to `formspree.io/f/meaodnbq`.
 - [x] Real contact numbers in place (2026-09): phone/call `+1 (786) 543-1417` (US), WhatsApp `+1 (849) 856-1504` (DR, `wa.me/18498561504`). Footer, contact page, floating buttons on `index.html` and `websites/index.html`.
 - [x] `#privacy` / `#terms` links removed from the footer; `setupPageTransitions()` now skips same-page hash links.
 - [x] **Cross-site referral to Made by Sebby** built (2026-09): homepage partner section, Services "More ways we can help" card, `/websites/#partner`, footer column + partner bar, contact form note. All point to `https://www.madebysebby.com/book.html` (free 15-min call). Rule: new website, redesign, or ongoing website care goes to Made by Sebby; Sebby IT keeps only one-time technical website fixes.
