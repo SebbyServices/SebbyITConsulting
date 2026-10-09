@@ -59,6 +59,8 @@ Active pages: `index.html`, `services/index.html`, `services/shield/`, `services
 
 **`assets/css/main.css` is the entire design system**, in `/* ===== SECTION ===== */` banners: tokens, reset, typography, layout, components, header, footer, sections, responsive. Add styles under the matching banner. Colors only through the tokens at the top.
 
+**Cache busting:** Cloudflare caches CSS, JS and images for 4 hours, so a deploy can show stale styles. After changing `main.css`, `main.js`, favicons or `og-image.png`, bump the `?v=YYYYMMDD` query on their URLs in every page's `<head>` (and on the script tag) so visitors fetch the new file.
+
 Pages are plain HTML sharing one `<head>` pattern (Google Fonts link, favicon set in `/assets/brand/`, OG image `/assets/brand/og-image.png`). Every page has `<main id="main">` for the skip link. The floating WhatsApp button (`.float-wa`) is on every page except Contact.
 
 ### Dead pages (on disk, unlinked, old enterprise brand)
