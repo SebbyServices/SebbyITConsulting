@@ -468,16 +468,16 @@ p { margin: 0; }
 .site-footer .credit a:hover { color: var(--accent); }
 .credit-mark { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
 
-/* Floating WhatsApp */
-.float-wa {
+/* Floating text button */
+.float-text {
   position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 90;
   display: inline-flex; align-items: center; gap: 10px;
   padding: 12px 18px 12px 14px; border-radius: var(--radius-lg) var(--radius-lg) var(--radius-tail) var(--radius-lg);
   background: var(--brand); color: var(--on-brand); text-decoration: none; font-weight: 700;
   box-shadow: var(--shadow-lift);
 }
-.float-wa:hover { background: var(--brand-hover); color: var(--on-brand); }
-.float-wa svg { width: 20px; height: 20px; }
+.float-text:hover { background: var(--brand-hover); color: var(--on-brand); }
+.float-text svg { width: 20px; height: 20px; }
 
 /* ===== SECTIONS ===== */
 
@@ -560,8 +560,8 @@ p { margin: 0; }
   .plan-flag { left: var(--space-6); }
   .path-card { grid-template-columns: auto 1fr; }
   .path-card .arrow { display: none; }
-  .float-wa span { display: none; }
-  .float-wa { padding: 14px; }
+  .float-text span { display: none; }
+  .float-text { padding: 14px; }
   .brand-link img { width: 32px; height: 32px; }
   .brand-name { font-size: 1.125rem; }
   .nav { gap: var(--space-2); }

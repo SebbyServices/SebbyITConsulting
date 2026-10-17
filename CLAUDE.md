@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-Static HTML/CSS/JS marketing site for **Sebby IT Consulting, Corp.** — async-first tech support (chat/email/WhatsApp escalating to phone/screen-share) for individuals, families, and small businesses in Miami + the Dominican Republic, remote-first. Front door is two plan tiers: **Sebby IT Shield** (business) and **Sebby IT Care** (individual/family), plus one-time fixes across the same 4 service categories as before.
+Static HTML/CSS/JS marketing site for **Sebby IT Consulting, Corp.** — async-first tech support (chat/text/email escalating to phone/screen-share) for individuals, families, and small businesses in Miami and across the USA, remote-first. On-site is Miami area only. The Dominican Republic was dropped from the site on 2026-10-17: do not add DR locations, DR phone numbers, or WhatsApp back. Front door is two plan tiers: **Sebby IT Shield** (business) and **Sebby IT Care** (individual/family), plus one-time fixes across the same 4 service categories as before.
 
 No build step, no framework, no package manager. Edit a file, reload the browser.
 
@@ -61,7 +61,7 @@ Active pages: `index.html`, `services/index.html`, `services/shield/`, `services
 
 **Cache busting:** Cloudflare caches CSS, JS and images for 4 hours, so a deploy can show stale styles. After changing `main.css`, `main.js`, favicons or `og-image.png`, bump the `?v=YYYYMMDD` query on their URLs in every page's `<head>` (and on the script tag) so visitors fetch the new file.
 
-Pages are plain HTML sharing one `<head>` pattern (Google Fonts link, favicon set in `/assets/brand/`, OG image `/assets/brand/og-image.png`). Every page has `<main id="main">` for the skip link. The floating WhatsApp button (`.float-wa`) is on every page except Contact.
+Pages are plain HTML sharing one `<head>` pattern (Google Fonts link, favicon set in `/assets/brand/`, OG image `/assets/brand/og-image.png`). Every page has `<main id="main">` for the skip link. The floating "Text us" button (`.float-text`, `sms:+17865431417`) is on every page except Contact.
 
 ### Dead pages (on disk, unlinked, old enterprise brand)
 
@@ -99,7 +99,7 @@ Home, Services, Contact, and the footer were updated 2026-09 for the tech-suppor
 - [x] Site email switched to `hello@sebbyservices.com` (footer + contact).
 - [x] Unverified testimonials removed (homepage section, Care page quote headline). Only add real, attributable client quotes.
 - [x] Formspree form ID set (2026-10): `contact/index.html` posts to `formspree.io/f/meaodnbq`.
-- [x] Real contact numbers in place (2026-09): phone/call `+1 (786) 543-1417` (US), WhatsApp `+1 (849) 856-1504` (DR, `wa.me/18498561504`). Footer, contact page, floating buttons on `index.html` and `websites/index.html`.
+- [x] Real contact number in place: call and text `+1 (786) 543-1417` (US). The DR WhatsApp number was removed 2026-10-17; text (`sms:`) replaced WhatsApp in the footer, contact page, floating buttons, and form messages.
 - [x] `#privacy` / `#terms` links removed from the footer; `setupPageTransitions()` now skips same-page hash links.
 - [x] **Cross-site referral to Made by Sebby** built (2026-09): homepage partner section, Services "More ways we can help" card, `/websites/#partner`, footer column + partner bar, contact form note. All point to `https://www.madebysebby.com/book.html` (free 15-min call). Rule: new website, redesign, or ongoing website care goes to Made by Sebby; Sebby IT keeps only one-time technical website fixes.
 

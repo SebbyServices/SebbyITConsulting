@@ -101,10 +101,10 @@ function setupContactForm() {
       if (!res.ok) throw new Error(res.status);
       form.reset();
       status.className = 'form-status ok';
-      status.textContent = t('Got it. We will get back to you soon, usually by text or WhatsApp.');
+      status.textContent = t('Got it. We will get back to you soon, usually by text.');
     } catch (err) {
       status.className = 'form-status err';
-      status.textContent = t('That did not send. Please try again, or message us on WhatsApp at +1 (849) 856-1504.');
+      status.textContent = t('That did not send. Please try again, or text us at +1 (786) 543-1417.');
     }
     status.hidden = false;
     btn.disabled = false;
