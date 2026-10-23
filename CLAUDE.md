@@ -67,14 +67,16 @@ Pages are plain HTML sharing one `<head>` pattern (Google Fonts link, favicon se
 
 `portfolio/`, `case-studies/thepatientchase.html`, plus their images and `assets/js/counter.js` were deleted 2026-09 (off-brand case studies: cancelled client Tom's Cuban, unconfirmed client Riera Law). `Tools/index.html` had its "Web, IAM, DevOps, Video" proposal-template line scrubbed to remove the IAM/DevOps reference; the page itself (internal, noindexed) stays. `iglesias/` (Spanish-language church vertical landing page) was deleted 2026-09 — that project was retired in favor of Made by Sebby.
 
-## HQ (`/hq/`, redirect only)
+## HQ (`/hq/`, behind Cloudflare Access)
 
-`hq/index.html` is only a noindexed redirect to the private claude.ai artifact **Sebby Services HQ** (https://claude.ai/artifact/CdtrvKZuRvwYwg9PK4HvmQ), so only Sebastian's Claude login can use it. Do not put the app itself back on the public site, and do not add `/hq/` to robots.txt (a Disallow would hide the noindex) or any sitemap.
+`hq/index.html` is Sebby Services HQ, a private single-file tool (own inline CSS/JS, does not load `main.css`/`main.js`, no header/footer, English only by design). Tabs: **Echo Desk** (JustAnswer chat console: draft reply, plain-text cleaner, per-chat check-in timers, EN/ES templates), Earnings (CSV import), Rules, Overview.
 
-- The app (Echo Desk for JustAnswer chats, Earnings, Rules, Overview) is edited from the local copy `.claude/hq/index.html` (untracked) and republished to that artifact URL with the Artifact tool. Inside claude.ai it drafts with Claude `sample`; a Gemini fallback (key in `localStorage` `sshq-gkey`) is also built in.
-- **The repo is public.** Never commit the app, earnings numbers, customer text, or the JustAnswer CSV.
-- Nothing may automate justanswer.com (Expert Agreement 5(k), 7). No rating asks, no PII asks, never route a JustAnswer customer to Sebby IT (5(f)).
-- Local-only notes in `.claude/hq/`: `justanswer-compliance.md`, `echo-desk-spec.md`, `echo-desk-templates.md`, `check_agreement.py`. Weekly: `/agreement-check`.
+- **Access:** a Cloudflare Zero Trust (Free) Access application protects `sebbyservices.com/hq` and admits only Sebastian. Verified 2026-10-22 that `/hq`, `/hq/`, `/hq/index.html`, `/HQ/`, www and the github.io URL all end at the Access login. If you rename or move `/hq`, update the Access app first. Account details are in `.claude/hq/` (local only).
+- The page also has a `noindex` meta and is unlinked. Do not add it to robots.txt or any sitemap.
+- Drafting: Claude `sample` when opened as a claude.ai artifact, otherwise free Gemini with the key in the browser's `localStorage`. Never hardcode a key.
+- **The repo is public**, so the page's code is readable on GitHub even though the URL is gated. Never commit earnings numbers, customer text, or the JustAnswer CSV. `SNAP` must stay the empty placeholder.
+- Nothing may automate justanswer.com. No rating asks, no PII asks, never route a JustAnswer customer to Sebby IT.
+- Local-only notes in `.claude/hq/` (untracked), including the working copy `index.html` (keep in sync with `hq/index.html`). Weekly: `/agreement-check`.
 
 ## Brand & Design System ("Harbor", 2026-09 full rebrand)
 
