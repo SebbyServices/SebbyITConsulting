@@ -382,11 +382,11 @@ function renderDesk(){
           <button class="btn" id="draft" data-act="draft" ${S.sample?"":"hidden"}>Draft reply</button>
           <button class="btn quiet" id="stop" data-act="stop" hidden>Stop</button>
         </div>
-        <div class="status" id="status">${S.sample?"":"Add a free Gemini key in Desk settings to turn on drafting. You can still paste any draft below and clean it up."}</div>
+        <div class="status" id="status">${S.sample?"":"Add a free AI key (Groq by default) in Desk settings to turn on drafting. You can still paste any draft below and clean it up."}</div>
         <div id="flag"></div>
         <div>
           <label class="lbl" for="reply">Your reply</label>
-          <textarea id="reply" rows="9" placeholder="The draft lands here. Pasting from Gemini? Drop it in and tap Clean formatting."></textarea>
+          <textarea id="reply" rows="9" placeholder="The draft lands here. Pasting from another AI? Drop it in and tap Clean formatting."></textarea>
         </div>
         <div class="row">
           <button class="btn quiet sm" data-act="clean">Clean formatting</button>
@@ -712,6 +712,7 @@ function openTpl(){
    ${Object.keys(TPL_NAMES).map(k=>`<div class="grid2" style="gap:12px"><div><label class="lbl" for="t-en-${k}">${TPL_NAMES[k]}, English</label><textarea id="t-en-${k}" rows="5">${esc(S.tpl.en[k])}</textarea></div><div><label class="lbl" for="t-es-${k}">${TPL_NAMES[k]}, Español</label><textarea id="t-es-${k}" rows="5">${esc(S.tpl.es[k])}</textarea></div></div>`).join("")}
    <div class="row"><button class="btn quiet" data-act="tpl-reset">Restore defaults</button><span class="spacer"></span><button class="btn" data-act="tpl-save">Save templates</button></div>`);
 }
+document.addEventListener("change",e=>{if(e.target&&e.target.id==="s-prov"){const p=e.target.value;$("#s-kname").textContent=PROV[p].name;$("#s-ksite").textContent=PROV[p].site;$("#s-pkey").value=provKey(p);$("#s-model").value=provModel(p,true);$("#s-model").placeholder=PROV[p].fast}});
 function openSettings(){
   const s=S.set;
   openDlg(`<div class="row"><h2>Desk settings</h2><span class="spacer"></span><button class="iconbtn" data-act="dlg-close" aria-label="Close">${ICON.x}</button></div>
@@ -721,7 +722,11 @@ function openSettings(){
     <div><label class="lbl" for="s-cap">Max active chats</label><input id="s-cap" type="number" min="1" max="40" value="${s.cap}"></div>
     <div><label class="lbl" for="s-tier">Drafting</label><select id="s-tier"><option value="quick" ${s.tier==="quick"?"selected":""}>Fast (seconds)</option><option value="careful" ${s.tier==="careful"?"selected":""}>Careful (slower, deeper)</option></select></div>
    </div>
-   <div><label class="lbl" for="s-gkey">Gemini API key (free at aistudio.google.com/apikey, stored only in this browser)</label><input id="s-gkey" type="password" autocomplete="off" value="${esc(gemKey())}"></div>
+   <div class="grid2" style="gap:14px">
+    <div><label class="lbl" for="s-prov">AI provider (free tiers)</label><select id="s-prov">${Object.keys(PROV).map(k=>`<option value="${k}" ${provId()===k?"selected":""}>${PROV[k].name}</option>`).join("")}</select></div>
+    <div><label class="lbl" for="s-model">Model (blank = default)</label><input id="s-model" type="text" autocomplete="off" value="${esc(provModel(provId(),true))}" placeholder="${esc(PROV[provId()].fast)}"></div>
+   </div>
+   <div><label class="lbl" for="s-pkey">API key for <span id="s-kname">${PROV[provId()].name}</span> (get one free at <span id="s-ksite">${PROV[provId()].site}</span>; stored only in this browser)</label><input id="s-pkey" type="password" autocomplete="off" value="${esc(provKey(provId()))}"></div>
    <label class="row"><input type="checkbox" id="s-web" ${s.web!==false?"checked":""}> Search the web for current steps (Gemini only)</label>
    <label class="row"><input type="checkbox" id="s-beep" ${s.beep?"checked":""}> Beep when a chat needs you</label>
    <label class="row"><input type="checkbox" id="s-scrub" ${s.scrub?"checked":""}> Strip emails and phone or account numbers before drafting</label>
@@ -760,7 +765,7 @@ document.addEventListener("click",async e=>{
     case "settings":openSettings();break;
     case "set-save":{const n=(id,lo,hi,dv)=>{const v=Math.round(Number($(id).value));return v>=lo&&v<=hi?v:dv};
       S.set={interval:n("#s-iv",1,120,10),replyTarget:n("#s-rt",1,60,3),cap:n("#s-cap",1,40,15),tier:$("#s-tier").value,beep:$("#s-beep").checked,scrub:$("#s-scrub").checked,web:$("#s-web").checked};
-      try{localStorage.setItem("sshq-gkey",$("#s-gkey").value.trim())}catch(e){}useGemini();
+      {const pv=$("#s-prov").value;lsw("sshq-prov",pv);lsw("sshq-key-"+pv,$("#s-pkey").value.trim());lsw("sshq-model-"+pv,$("#s-model").value.trim())}useAI();
       save("set");closeDlg();if(S.tab==="desk")refreshMeters();toast("Settings saved");break}
     case "dlg-close":closeDlg();break;
     case "reviewed":S.rules.lastReviewed=todayKey();save("rules");renderRules();toast("Review logged");break;
@@ -779,44 +784,73 @@ try{const t=localStorage.getItem("sshq-tab");if(t&&TABS.some(x=>x[0]===t))S.tab=
 renderTabs();render();setHdr();window.addEventListener("resize",setHdr);
 setInterval(tick,1000);
 
-/* ---------- free drafting via Gemini (used when Claude access isn't available, e.g. on sebbyservices.com/hq) ---------- */
-function gemKey(){try{return localStorage.getItem("sshq-gkey")||""}catch(e){return ""}}
-const b64=b=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(String(r.result).split(",")[1]);r.onerror=no;r.readAsDataURL(b)});
-async function geminiSample(prompt,opts){
+/* ---------- drafting via free AI APIs (no Claude usage). Keys live only in this browser's localStorage ---------- */
+// OpenAI-compatible providers share one code path; all four allow browser (CORS) calls, checked 2026-10-23.
+const PROV={
+  groq:{name:"Groq",site:"console.groq.com/keys",base:"https://api.groq.com/openai/v1",fast:"llama-3.3-70b-versatile",careful:"llama-3.3-70b-versatile",vision:"meta-llama/llama-4-scout-17b-16e-instruct"},
+  cerebras:{name:"Cerebras",site:"cloud.cerebras.ai",base:"https://api.cerebras.ai/v1",fast:"llama-3.3-70b",careful:"llama-3.3-70b"},
+  openrouter:{name:"OpenRouter (free models)",site:"openrouter.ai/keys",base:"https://openrouter.ai/api/v1",fast:"meta-llama/llama-3.3-70b-instruct:free",careful:"deepseek/deepseek-chat-v3-0324:free"},
+  mistral:{name:"Mistral",site:"console.mistral.ai/api-keys",base:"https://api.mistral.ai/v1",fast:"mistral-small-latest",careful:"mistral-medium-latest",vision:"mistral-small-latest"},
+  gemini:{name:"Google Gemini",site:"aistudio.google.com/apikey",gemini:true,fast:"gemini-flash-latest",careful:"gemini-pro-latest"}
+};
+function lsr(k){try{return localStorage.getItem(k)||""}catch(e){return ""}}
+function lsw(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function provId(){const p=lsr("sshq-prov");return PROV[p]?p:"groq"}
+function provKey(p){return lsr("sshq-key-"+p)||(p==="gemini"?lsr("sshq-gkey"):"")}
+function provModel(p,raw){const m=lsr("sshq-model-"+p);return raw?m:(m||PROV[p][S.set.tier==="careful"?"careful":"fast"])}
+const b64=b=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(String(r.result));r.onerror=no;r.readAsDataURL(b)});
+async function post(url,headers,body,signal){
+  let res;
+  try{res=await fetch(url,{method:"POST",signal,headers:Object.assign({"Content-Type":"application/json"},headers),body:JSON.stringify(body)})}
+  catch(e){if(e.name==="AbortError")throw {code:"cancelled"};throw new Error("Network error reaching the AI provider")}
+  const data=await res.json().catch(()=>({}));
+  const msg=(data.error&&(data.error.message||data.error))||data.message||("HTTP "+res.status);
+  return {res,data,msg:typeof msg==="string"?msg:JSON.stringify(msg)};
+}
+async function geminiCall(prompt,opts){
   const parts=[];
-  for(const b of (opts.images||[]))parts.push({inline_data:{mime_type:b.type||"image/png",data:await b64(b)}});
+  for(const b of (opts.images||[]))parts.push({inline_data:{mime_type:b.type||"image/png",data:(await b64(b)).split(",")[1]}});
   parts.push({text:prompt});
   const body={contents:[{role:"user",parts}],generationConfig:{temperature:0.6}};
   if(S.set.web!==false)body.tools=[{google_search:{}}];
-  // "-latest" aliases follow Google's current model, so retirements of a pinned version can't break drafting
-  const models=S.set.tier==="careful"?["gemini-pro-latest","gemini-flash-latest"]:["gemini-flash-latest"];
-  let res,data;
-  for(const model of models){
-    try{res=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent",{method:"POST",signal:opts.signal,headers:{"Content-Type":"application/json","x-goog-api-key":gemKey()},body:JSON.stringify(body)})}
-    catch(e){if(e.name==="AbortError")throw {code:"cancelled"};throw e}
-    data=await res.json().catch(()=>({}));
-    if(res.ok||res.status===429||res.status===400&&/api key/i.test((data.error&&data.error.message)||""))break; // only fall back on model errors
-  }
-  if(!res.ok){if(res.status===429)throw {code:"rate_limited"};throw new Error((data.error&&data.error.message)||("HTTP "+res.status))}
+  const {res,data,msg}=await post("https://generativelanguage.googleapis.com/v1beta/models/"+provModel("gemini")+":generateContent",{"x-goog-api-key":provKey("gemini")},body,opts.signal);
+  if(!res.ok){if(res.status===429)throw {code:"rate_limited"};throw new Error(msg)}
   const c=data.candidates&&data.candidates[0];
   const text=((c&&c.content&&c.content.parts)||[]).filter(p=>p.text&&!p.thought).map(p=>p.text).join("").trim();
   if(!text)throw new Error("Empty reply ("+((c&&c.finishReason)||"no candidates")+")");
   return {text,truncated:c.finishReason==="MAX_TOKENS"};
 }
-function useGemini(){
-  if(S.sample&&!S.sample.gemini)return; // Claude access wins when present
-  if(gemKey()){S.sample=geminiSample;S.sample.gemini=true;S.sampleImg=true}else{S.sample=null;S.sampleImg=false}
+async function openaiCall(p,prompt,opts){
+  const P=PROV[p],imgs=opts.images||[];
+  let model=provModel(p),content=prompt;
+  if(imgs.length&&P.vision){ // screenshots need a vision model; keep the user's model for text-only drafts
+    if(!lsr("sshq-model-"+p))model=P.vision;
+    content=[{type:"text",text:prompt}];for(const b of imgs)content.push({type:"image_url",image_url:{url:await b64(b)}});
+  }
+  const hdr={Authorization:"Bearer "+provKey(p)};
+  if(p==="openrouter"){hdr["X-Title"]="Sebby HQ"}
+  const {res,data,msg}=await post(P.base+"/chat/completions",hdr,{model,temperature:0.6,max_tokens:900,messages:[{role:"user",content}]},opts.signal);
+  if(!res.ok){
+    if(res.status===429)throw {code:"rate_limited"};
+    if(/model/i.test(msg))throw new Error(msg+" (set a current model name in Desk settings; the provider's site lists them)");
+    throw new Error(msg);
+  }
+  const ch=data.choices&&data.choices[0];
+  const text=((ch&&ch.message&&ch.message.content)||"").trim();
+  if(!text)throw new Error("Empty reply ("+((ch&&ch.finish_reason)||"no choices")+")");
+  return {text,truncated:ch.finish_reason==="length"};
+}
+async function aiSample(prompt,opts){const p=provId();return PROV[p].gemini?geminiCall(prompt,opts):openaiCall(p,prompt,opts)}
+function useAI(){
+  const p=provId();
+  if(provKey(p)){S.sample=aiSample;S.sampleImg=!!(PROV[p].gemini||PROV[p].vision)}else{S.sample=null;S.sampleImg=false}
   if(S.tab==="desk"&&$("#q")){S.draftQ=$("#q").value;S.draftR=$("#reply").value;renderDesk()}
 }
-useGemini();
+useAI();
 
 const C=window.claude;
 if(C&&typeof C.use==="function"){
-  C.use("sample").then(async s=>{
-    if(!s)return;S.sample=s;S.sampleImg=false;
-    try{const lim=await s.limits();S.sampleImg=!!(lim&&lim.images)}catch(e){}
-    if(S.tab==="desk"){S.draftQ=$("#q")?$("#q").value:S.draftQ;S.draftR=$("#reply")?$("#reply").value:S.draftR;renderDesk()}
-  });
+  // Drafting never uses Claude here (usage cost); only db/user sync when opened inside claude.ai.
   Promise.all([C.use("db"),C.use("user")]).then(async([db,user])=>{
     if(!db||!user)return;
     const id=await user.id();if(!id)return;

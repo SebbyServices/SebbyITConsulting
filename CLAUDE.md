@@ -73,7 +73,7 @@ Pages are plain HTML sharing one `<head>` pattern (Google Fonts link, favicon se
 
 - **Access:** a Cloudflare Zero Trust (Free) Access application protects `sebbyservices.com/hq` and admits only Sebastian. Verified 2026-10-22 that `/hq`, `/hq/`, `/hq/index.html`, `/HQ/`, www and the github.io URL all end at the Access login. If you rename or move `/hq`, update the Access app first. Account details are in `.claude/hq/` (local only).
 - The page also has a `noindex` meta and is unlinked. Do not add it to robots.txt or any sitemap.
-- Drafting: Claude `sample` when opened as a claude.ai artifact, otherwise free Gemini with the key in the browser's `localStorage`. Never hardcode a key.
+- Drafting: free AI APIs only, never Claude (usage cost). Provider picker in Desk settings: Groq (default), Cerebras, OpenRouter free models, Mistral, Gemini. All are called from the browser (CORS verified 2026-10-23); keys live only in `localStorage` (`sshq-key-<provider>`). Gemini free tier is unavailable on Sebastian's Google account. Never hardcode a key.
 - **The repo is public**, so the page's code is readable on GitHub even though the URL is gated. Never commit earnings numbers, customer text, or the JustAnswer CSV. `SNAP` must stay the empty placeholder.
 - Nothing may automate justanswer.com. No rating asks, no PII asks, never route a JustAnswer customer to Sebby IT.
 - Local-only notes in `.claude/hq/` (untracked), including the working copy `index.html` (keep in sync with `hq/index.html`). Weekly: `/agreement-check`.
