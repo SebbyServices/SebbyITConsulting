@@ -67,14 +67,14 @@ Pages are plain HTML sharing one `<head>` pattern (Google Fonts link, favicon se
 
 `portfolio/`, `case-studies/thepatientchase.html`, plus their images and `assets/js/counter.js` were deleted 2026-09 (off-brand case studies: cancelled client Tom's Cuban, unconfirmed client Riera Law). `Tools/index.html` had its "Web, IAM, DevOps, Video" proposal-template line scrubbed to remove the IAM/DevOps reference; the page itself (internal, noindexed) stays. `iglesias/` (Spanish-language church vertical landing page) was deleted 2026-09 — that project was retired in favor of Made by Sebby.
 
-## HQ (`/hq/`, internal, noindexed)
+## HQ (`/hq/`, redirect only)
 
-`hq/index.html` is Sebby Services HQ, a private single-file tool (own inline CSS/JS, does not load `main.css`/`main.js`, no header/footer, English only by design). Tabs: **Echo Desk** (JustAnswer chat console: draft reply, plain-text cleaner, per-chat 10/10/10 check-in timers, EN/ES templates), Earnings (CSV import), Rules, Overview. It has a `noindex` meta and is unlinked; do not add it to robots.txt (a Disallow would hide the noindex from Google) or to any sitemap.
+`hq/index.html` is only a noindexed redirect to the private claude.ai artifact **Sebby Services HQ** (https://claude.ai/artifact/CdtrvKZuRvwYwg9PK4HvmQ), so only Sebastian's Claude login can use it. Do not put the app itself back on the public site, and do not add `/hq/` to robots.txt (a Disallow would hide the noindex) or any sitemap.
 
-- Drafting: uses Claude `sample` when opened as a claude.ai artifact, otherwise free Gemini (`gemini-2.5-flash`, Careful = `gemini-2.5-pro`, Google Search grounding) with the key in `localStorage` `sshq-gkey`. Never hardcode a key.
-- **The repo is public.** Never commit earnings numbers, customer text, or the JustAnswer CSV. `SNAP` in the page must stay the empty placeholder; real numbers only come from CSV import in the browser.
-- Nothing may automate justanswer.com (no scraping, bots, or auto-posting): Expert Agreement 5(k) and 7. Everything moves by human copy and paste. No rating asks, no PII asks, never route a JustAnswer customer to Sebby IT (5(f)).
-- Local-only notes (untracked, in `.claude/hq/`): `justanswer-compliance.md`, `echo-desk-spec.md`, `echo-desk-templates.md`, `check_agreement.py`. Weekly: `/agreement-check`.
+- The app (Echo Desk for JustAnswer chats, Earnings, Rules, Overview) is edited from the local copy `.claude/hq/index.html` (untracked) and republished to that artifact URL with the Artifact tool. Inside claude.ai it drafts with Claude `sample`; a Gemini fallback (key in `localStorage` `sshq-gkey`) is also built in.
+- **The repo is public.** Never commit the app, earnings numbers, customer text, or the JustAnswer CSV.
+- Nothing may automate justanswer.com (Expert Agreement 5(k), 7). No rating asks, no PII asks, never route a JustAnswer customer to Sebby IT (5(f)).
+- Local-only notes in `.claude/hq/`: `justanswer-compliance.md`, `echo-desk-spec.md`, `echo-desk-templates.md`, `check_agreement.py`. Weekly: `/agreement-check`.
 
 ## Brand & Design System ("Harbor", 2026-09 full rebrand)
 
