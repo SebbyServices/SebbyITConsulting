@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<!-- Internal tool (noindexed). English only by choice: replies are written for JustAnswer customers, and the operator works in English. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Sebby HQ</title>
+<link rel="icon" href="/favicon.ico">
+<style>
+:root{--ink:#0B1B34;--muted:#51627A;--brand:#1D4ED8;--brand-hover:#1E3A8A;--tint:#EEF3FF;--bg:#F3F6FB;--card:#fff;--line:#E1E7F0;--warn:#B45309;--err:#B91C1C}
+@media (prefers-color-scheme:dark){:root{--ink:#E6EDF7;--muted:#9AA9BF;--brand:#60A5FA;--brand-hover:#93C5FD;--tint:#13264A;--bg:#0B1B34;--card:#10233F;--line:#22385C}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--card);position:sticky;top:0;z-index:2}
+header h1{font-size:16px;margin:0;flex:1}
+main{padding:12px 14px;display:grid;gap:12px;max-width:760px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+textarea,input,select{width:100%;font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+textarea{resize:vertical;min-height:110px}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+button:hover{border-color:var(--brand)}
+button.primary{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600}
+@media (prefers-color-scheme:dark){button.primary{color:#0B1B34}}
+button.on{background:var(--tint);border-color:var(--brand);color:var(--brand);font-weight:600}
+button:disabled{opacity:.5;cursor:wait}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.stages button{font-size:13px}
+.thumbs{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.thumbs div{position:relative}
+.thumbs img{height:64px;border-radius:8px;border:1px solid var(--line)}
+.thumbs span{position:absolute;top:-6px;right:-6px;background:var(--err);color:#fff;border-radius:50%;width:18px;height:18px;font-size:12px;text-align:center;line-height:18px;cursor:pointer}
+#out{white-space:pre-wrap;min-height:60px}
+.hint{font-size:12px;color:var(--muted)}
+.sources a{color:var(--brand);font-size:12px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.log{font-size:12px;color:var(--muted);max-height:160px;overflow:auto;white-space:pre-wrap}
+.err{color:var(--err)}
+details summary{cursor:pointer;font-weight:600}
+.drop{outline:2px dashed var(--brand)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Sebby HQ: JustAnswer reply desk</h1>
+  <button id="newBtn" title="Clear the thread for a new customer">New customer</button>
+</header>
+<main>
+  <details class="card" id="settings">
+    <summary>Settings</summary>
+    <div style="display:grid;gap:8px;margin-top:8px">
+      <div><label for="key">Gemini API key (stored only in this browser)</label>
+        <input id="key" type="password" autocomplete="off" placeholder="Paste key from aistudio.google.com/apikey"></div>
+      <div><label for="model">Model</label>
+        <select id="model">
+          <option value="gemini-2.5-flash">gemini-2.5-flash (free tier, best default)</option>
+          <option value="gemini-flash-latest">gemini-flash-latest</option>
+          <option value="gemini-2.5-flash-lite">gemini-2.5-flash-lite (fastest, highest free limits)</option>
+          <option value="gemini-2.5-pro">gemini-2.5-pro (smarter, low free limits)</option>
+        </select></div>
+      <div class="row"><input id="search" type="checkbox" style="width:auto" checked> <span>Search the web (Google grounding) for steps</span></div>
+      <div><label for="name">Your name in replies</label><input id="name" value="Sebastian"></div>
+    </div>
+  </details>
+
+  <section class="card">
+    <label>Stage</label>
+    <div class="row stages" id="stages" style="margin-top:6px"></div>
+  </section>
+
+  <section class="card" id="inCard">
+    <label for="input">Customer message, chat text, or paste a screenshot (Cmd+V)</label>
+    <textarea id="input" placeholder="Paste the chat or the customer's latest message. Screenshots: paste, drag in, or pick a file."></textarea>
+    <div class="thumbs" id="thumbs"></div>
+    <div class="row" style="margin-top:8px">
+      <button class="primary" id="go">Write reply</button>
+      <label style="margin:0"><input type="file" id="file" accept="image/*" multiple hidden><button type="button" onclick="document.getElementById('file').click()">Add screenshot</button></label>
+      <input id="extra" placeholder="Optional note to AI, e.g. shorter, customer is on iPhone" style="flex:1;min-width:180px">
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="row" style="justify-content:space-between">
+      <label>Reply to paste</label>
+      <div class="row">
+        <button id="shorter">Shorter</button>
+        <button id="redo">Regenerate</button>
+        <button class="primary" id="copy">Copy</button>
+      </div>
+    </div>
+    <div id="out" class="hint">Reply appears here.</div>
+    <div class="sources" id="sources"></div>
+  </section>
+
+  <details class="card">
+    <summary>Thread so far (<span id="turns">0</span> turns)</summary>
+    <div class="log" id="log"></div>
+  </details>
+</main>
+
+<script>
+const STAGES = {
+  auto: 'Auto: read the chat and pick the right next step',
+  greet: 'Greeting: introduce yourself, restate the problem in one line, ask the single most useful clarifying question',
+  clarify: 'Clarify: ask one or two short questions needed before giving steps (device, app, exact error)',
+  steps: 'Resolution: give clear numbered steps researched from current official sources, then ask them to report back',
+  followup: 'Follow-up: the customer replied; adjust steps or troubleshoot the next likely cause',
+  phone: 'Phone call: the customer wants a call. Offer a phone call through the JustAnswer chat (the call option in this chat), keep it friendly',
+  billing: 'Billing / refund / cancel JustAnswer: explain you are an independent expert with no access to their account or charges, point to https://www.justanswer.com/help/contact-us, then offer to keep helping with the original issue',
+  nudge: 'Nudge: customer went quiet; one short friendly check-in',
+  close: 'Close: wrap up kindly, summarize the fix in one line, invite them to come back to this chat if anything else comes up'
+};
+const LABELS = {auto:'Auto',greet:'Greeting',clarify:'Clarify',steps:'Steps',followup:'Follow-up',phone:'Phone call',billing:'Billing/refund',nudge:'Nudge',close:'Close'};
+
+const $ = id => document.getElementById(id);
+const store = {
+  get(k, d){ try { return localStorage.getItem('hq_'+k) ?? d; } catch { return d; } },
+  set(k, v){ try { localStorage.setItem('hq_'+k, v); } catch {} }
+};
+
+let stage = 'auto', images = [], history = [], lastUser = null;
+
+$('key').value = store.get('key', '');
+$('model').value = store.get('model', 'gemini-2.5-flash');
+$('search').checked = store.get('search', '1') === '1';
+$('name').value = store.get('name', 'Sebastian');
+if (!$('key').value) $('settings').open = true;
+['key','model','name'].forEach(k => $(k).addEventListener('change', () => store.set(k, $(k).value.trim())));
+$('search').addEventListener('change', () => store.set('search', $('search').checked ? '1' : '0'));
+
+for (const k in STAGES) {
+  const b = document.createElement('button');
+  b.textContent = LABELS[k]; b.title = STAGES[k]; b.dataset.k = k;
+  b.onclick = () => { stage = k; paintStages(); };
+  $('stages').appendChild(b);
+}
+function paintStages(){ [...$('stages').children].forEach(b => b.classList.toggle('on', b.dataset.k === stage)); }
+paintStages();
+
+function addImage(file){
+  if (!file || !file.type.startsWith('image/')) return;
+  const r = new FileReader();
+  r.onload = () => { images.push({mime: file.type, data: r.result.split(',')[1], url: r.result}); paintThumbs(); };
+  r.readAsDataURL(file);
+}
+function paintThumbs(){
+  $('thumbs').innerHTML = '';
+  images.forEach((im, i) => {
+    const d = document.createElement('div');
+    d.innerHTML = `<img src="${im.url}" alt="screenshot ${i+1}"><span title="Remove">x</span>`;
+    d.querySelector('span').onclick = () => { images.splice(i,1); paintThumbs(); };
+    $('thumbs').appendChild(d);
+  });
+}
+document.addEventListener('paste', e => {
+  for (const it of e.clipboardData?.items || []) if (it.kind === 'file') { addImage(it.getAsFile()); }
+});
+$('file').onchange = e => { [...e.target.files].forEach(addImage); e.target.value = ''; };
+const card = $('inCard');
+card.addEventListener('dragover', e => { e.preventDefault(); card.classList.add('drop'); });
+card.addEventListener('dragleave', () => card.classList.remove('drop'));
+card.addEventListener('drop', e => { e.preventDefault(); card.classList.remove('drop'); [...e.dataTransfer.files].forEach(addImage); });
+
+function systemPrompt(){
+  const name = $('name').value || 'Sebastian';
+  return `You write chat replies for ${name}, a Tech Specialist answering SOFTWARE and tech-support questions on JustAnswer (an independent professional services platform). ${name} copies your reply straight into the customer chat.
+
+Context: customers arrive through a JustAnswer AI intake that already collected basics. Many are older or non-technical, many expected a phone call, some are confused about charges. Screenshots may show the JustAnswer expert console: the chat thread is in the center; ignore the sidebar, the request list, and the Conversation Wizard.
+
+Rules for every reply:
+- Output ONLY the message text to paste. Plain text, no markdown, no asterisks, no headings, no preamble like "Here is a reply".
+- Never use em dashes. Use commas, colons or periods.
+- Warm, calm, plain words. Short paragraphs. Mobile-friendly.
+- Steps: numbered 1. 2. 3., one action each, name exact buttons and menus. Use web search to confirm current steps from official sources (vendor help pages) when giving instructions. Do not include URLs except official vendor help links when truly useful, and the JustAnswer contact link for billing.
+- End with exactly one clear question or next action so the chat keeps moving.
+- Never claim to see their account, payments or JustAnswer membership. Never promise refunds. For JustAnswer billing, refunds, cancelling membership or deleting their JustAnswer account: say you are an independent expert and a fellow user of the site, with no access to billing, and point to https://www.justanswer.com/help/contact-us, then offer to keep helping.
+- Never ask for passwords, card numbers or full SSNs. Warn kindly if the customer posts one.
+- If the issue is likely a scam (fake tech support pop-up, gift card request, remote access by a stranger), say so clearly and give safety steps.
+- Only the first message of a conversation introduces ${name}: "Hi, I'm ${name}, a Tech Specialist here on JustAnswer."
+- Keep it under about 170 words unless step-by-step instructions need more.`;
+}
+
+async function generate(mode){
+  const key = $('key').value.trim();
+  if (!key) { $('settings').open = true; $('key').focus(); return show('Add your Gemini API key in Settings first.', true); }
+
+  let userParts;
+  if (mode === 'new') {
+    const text = $('input').value.trim();
+    if (!text && !images.length) return show('Paste the customer message or a screenshot first.', true);
+    userParts = [];
+    images.forEach(im => userParts.push({inline_data:{mime_type: im.mime, data: im.data}}));
+    userParts.push({text: `STAGE: ${STAGES[stage]}\n${$('extra').value ? 'NOTE FROM ' + ($('name').value||'expert') + ': ' + $('extra').value + '\n' : ''}\nLATEST FROM CHAT:\n${text || '(see screenshot)'}`});
+    lastUser = {role:'user', parts: userParts, preview: (images.length ? `[${images.length} screenshot(s)] ` : '') + (text || '')};
+  } else {
+    if (!lastUser) return show('Nothing to redo yet.', true);
+    if (history.length && history[history.length-1].role === 'model') history.pop(); // replace last reply
+    if (history.length && history[history.length-1] === lastUser) history.pop();
+    userParts = mode === 'shorter'
+      ? [...lastUser.parts, {text: 'Make the reply about half as long. Keep the essential steps and the closing question.'}]
+      : lastUser.parts;
+  }
+
+  const contents = [...history.map(h => ({role:h.role, parts:h.parts})), {role:'user', parts:userParts}];
+  const body = {
+    system_instruction: {parts:[{text: systemPrompt()}]},
+    contents,
+    generationConfig: {temperature: 0.6}
+  };
+  if ($('search').checked) body.tools = [{google_search:{}}];
+
+  setBusy(true); show('Researching and writing...');
+  $('sources').innerHTML = '';
+  try {
+    const model = $('model').value;
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-goog-api-key': key},
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error?.message || ('HTTP ' + res.status));
+    const cand = data.candidates?.[0];
+    let reply = (cand?.content?.parts || []).filter(p => p.text && !p.thought).map(p => p.text).join('').trim();
+    if (!reply) throw new Error('Empty reply (' + (cand?.finishReason || 'no candidates') + ').');
+    reply = clean(reply);
+    history.push({role:'user', parts: userParts, preview: lastUser.preview});
+    lastUser = history[history.length-1];
+    history.push({role:'model', parts:[{text: reply}], preview: reply});
+    show(reply);
+    const chunks = cand.groundingMetadata?.groundingChunks || [];
+    $('sources').innerHTML = chunks.filter(c => c.web).slice(0,5)
+      .map(c => `<a href="${c.web.uri}" target="_blank" rel="noopener noreferrer">${escapeHtml(c.web.title || c.web.uri)}</a>`).join('');
+    if (mode === 'new') { $('input').value = ''; $('extra').value = ''; images = []; paintThumbs(); if (stage !== 'auto') { stage = 'auto'; paintStages(); } }
+    paintLog();
+  } catch (e) {
+    show('Error: ' + e.message + (/quota|429|rate/i.test(e.message) ? '\nFree-tier limit hit. Switch to gemini-2.5-flash-lite in Settings or wait a minute.' : ''), true);
+  } finally { setBusy(false); }
+}
+
+function clean(t){
+  return t.replace(/\u2014/g, ', ').replace(/\*\*(.+?)\*\*/g, '$1').replace(/^#+\s*/gm, '').replace(/^\s*[\*\-]\s+/gm, '- ').replace(/ ,/g, ',');
+}
+function escapeHtml(s){ return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function show(t, err){ $('out').textContent = t; $('out').className = err ? 'err' : (t.endsWith('...') ? 'hint' : ''); }
+function setBusy(b){ ['go','redo','shorter'].forEach(id => $(id).disabled = b); }
+function paintLog(){
+  $('turns').textContent = history.length;
+  $('log').textContent = history.map(h => (h.role === 'user' ? 'IN: ' : 'OUT: ') + h.preview.slice(0, 220)).join('\n\n');
+}
+
+$('go').onclick = () => generate('new');
+$('redo').onclick = () => generate('redo');
+$('shorter').onclick = () => generate('shorter');
+$('input').addEventListener('keydown', e => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) generate('new'); });
+$('copy').onclick = async () => {
+  const t = $('out').textContent;
+  try { await navigator.clipboard.writeText(t); $('copy').textContent = 'Copied'; setTimeout(() => $('copy').textContent = 'Copy', 1200); }
+  catch { show('Copy blocked by the browser. Select the text manually.', true); }
+};
+$('newBtn').onclick = () => {
+  history = []; lastUser = null; images = []; paintThumbs(); paintLog();
+  $('input').value = ''; $('extra').value = ''; $('sources').innerHTML = '';
+  stage = 'greet'; paintStages(); show('New customer. Paste the intake chat and hit Write reply.');
+};
+</script>
+</body>
+</html>
