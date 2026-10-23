@@ -788,11 +788,15 @@ async function geminiSample(prompt,opts){
   parts.push({text:prompt});
   const body={contents:[{role:"user",parts}],generationConfig:{temperature:0.6}};
   if(S.set.web!==false)body.tools=[{google_search:{}}];
-  const model=S.set.tier==="careful"?"gemini-2.5-pro":"gemini-2.5-flash";
-  let res;
-  try{res=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent",{method:"POST",signal:opts.signal,headers:{"Content-Type":"application/json","x-goog-api-key":gemKey()},body:JSON.stringify(body)})}
-  catch(e){if(e.name==="AbortError")throw {code:"cancelled"};throw e}
-  const data=await res.json().catch(()=>({}));
+  // "-latest" aliases follow Google's current model, so retirements of a pinned version can't break drafting
+  const models=S.set.tier==="careful"?["gemini-pro-latest","gemini-flash-latest"]:["gemini-flash-latest"];
+  let res,data;
+  for(const model of models){
+    try{res=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent",{method:"POST",signal:opts.signal,headers:{"Content-Type":"application/json","x-goog-api-key":gemKey()},body:JSON.stringify(body)})}
+    catch(e){if(e.name==="AbortError")throw {code:"cancelled"};throw e}
+    data=await res.json().catch(()=>({}));
+    if(res.ok||res.status===429||res.status===400&&/api key/i.test((data.error&&data.error.message)||""))break; // only fall back on model errors
+  }
   if(!res.ok){if(res.status===429)throw {code:"rate_limited"};throw new Error((data.error&&data.error.message)||("HTTP "+res.status))}
   const c=data.candidates&&data.candidates[0];
   const text=((c&&c.content&&c.content.parts)||[]).filter(p=>p.text&&!p.thought).map(p=>p.text).join("").trim();
