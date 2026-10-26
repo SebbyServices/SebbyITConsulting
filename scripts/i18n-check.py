@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PAGES = ['index.html', '404.html', 'services/index.html', 'services/shield/index.html',
          'services/care/index.html', 'services/ai-phone-agent/index.html',
-         'websites/index.html', 'contact/index.html',
+         'websites/index.html', 'contact/index.html', 'billing/index.html',
          'components/header.html', 'components/footer.html']
 ATTRS = ('aria-label', 'placeholder', 'alt', 'title')
 SKIP_TAGS = {'script', 'style', 'svg', 'head'}
